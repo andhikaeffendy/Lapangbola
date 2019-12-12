@@ -1,7 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
+import 'package:http/http.dart';
 import 'lupa_password.dart';
 import 'main.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+import 'package:lapang_bola_flutter/models/login_response.dart';
+import 'package:lapang_bola_flutter/global/global.dart' as globals;
+
 
 void main() => runApp(MyApp());
 
@@ -21,12 +29,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+
 class Login_form extends StatefulWidget {
   @override
   _Login_formState createState() => _Login_formState();
 }
 
 class _Login_formState extends State<Login_form> {
+  String url = "http://app.lapangbola.com/api/players/sign_in";
+
+  final myController = TextEditingController();
+  final myController2 = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,6 +114,7 @@ class _Login_formState extends State<Login_form> {
                               padding: const EdgeInsets.only(
                                   top: 12.0, bottom: 12.0),
                               child: TextField(
+                                controller: myController,
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(12.0),
                                     border: OutlineInputBorder(
@@ -125,6 +141,7 @@ class _Login_formState extends State<Login_form> {
                               padding: const EdgeInsets.only(
                                   top: 12.0, bottom: 12.0),
                               child: TextField(
+                                controller: myController2,
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(12.0),
                                     border: OutlineInputBorder(
@@ -164,7 +181,32 @@ class _Login_formState extends State<Login_form> {
                       width: 320.0,
                       height: 45.0,
                       child: RaisedButton(
-                        onPressed: ()=> Navigator.of(context).push(FadeRoute(page: MyStatefulWidget())),
+                        //onPressed: () => Navigator.of(context).push(FadeRoute(page: MyStatefulWidget())),
+                        //onPressed: () => _makePostRequest(url, myController.text, myController2.text),
+                        onPressed: (){
+                          FutureBuilder<LoginResponse>(
+                                future: _makePostRequest(url, myController.text, myController2.text).then((task){
+                                  print("ini asal global : " + globals.auth_token);
+                                  print("global is_login : " + globals.is_Login.toString());
+                                  if(task.status=="success"){
+                                    //respon ketika benar
+                                    globals.auth_token = task.token;
+                                    globals.is_Login = true;
+                                    Navigator.of(context).push(FadeRoute(page: MyStatefulWidget()));
+                                  }else{
+                                    //respon ketika salah
+                                    globals.is_Login = false;
+                                    Navigator.of(context).maybePop();
+                                  }
+                                }),
+                              builder: (context, snapshot){
+                                if(snapshot.data.status=="success"){
+                                  print("ini statis dari snapshoot : " + snapshot.data.status);
+                                  Navigator.of(context).push(FadeRoute(page: MyStatefulWidget()));
+                                }
+                              }
+                          );
+                        },
                         color: Colors.green,
                         shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(12.0),
@@ -177,12 +219,42 @@ class _Login_formState extends State<Login_form> {
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0),
                         ),
+
                       ),
                     ),
                   ],
                 ),
               )),
         ));
+  }
+
+  Future<LoginResponse> _makePostRequest(String url, String username, String password) async {
+    // set up POST request arguments
+    Map<String, String> headers = {"Content-type": "application/json"};
+    // String json = '{"username": "ddesantha", "password": "opwbo123"}';
+    Map<String, String> mapString = {"username": username, "password" : password};
+    String json = jsonEncode(mapString);
+    print("Ini hasil jsonEncode : " + json);
+    // make POST request
+
+    Response response = await post(url, headers: headers, body: json);
+    print("Masuk kesini");
+    print(response.body);
+    print(response.statusCode);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    // {
+    //   "title": "Hello",
+    //   "body": "body text",
+    //   "userId": 1,
+    //   "id": 101
+    // }
+    LoginResponse loginResponse = loginResponseFromJson(body);
+    print("Ini status dari response : " + loginResponse.status);
+
+    return loginResponse;
   }
 }
 

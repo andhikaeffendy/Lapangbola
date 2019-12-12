@@ -19,7 +19,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
   final _pageOption = [
-    Dashboard(),
+    Dashboard(),    
     MyMatch(),
     Profile(),
     Statistik(),
