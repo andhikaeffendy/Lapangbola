@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:http/http.dart';
+import 'package:lapang_bola_flutter/registration.dart';
 import 'lupa_password.dart';
 import 'main.dart';
 import 'package:json_annotation/json_annotation.dart';
-
+import 'registration.dart';
 import 'package:lapang_bola_flutter/models/login_response.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 
@@ -151,27 +152,56 @@ class _Login_formState extends State<Login_form> {
                                         BorderRadius.circular(15.0))),
                               ),
                             ),
-                            GestureDetector(
-                              onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                  builder: (BuildContext context) => new LupaPassword())),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 8.0, bottom: 8.0),
-                                    child: Text(
-                                      "Lupa Password?",
-                                      style: new TextStyle(
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.green,
-                                          fontFamily: "Avenir"),
-                                    ),
-                                  )
-                                ],
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                GestureDetector(
+                                  onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                                      builder: (BuildContext context) => new Registration())),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 8.0, bottom: 8.0),
+                                        child: Text(
+                                          "Register",
+                                          style: new TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.green,
+                                              fontFamily: "Avenir"),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),Padding(
+                                  padding: const EdgeInsets.only(right: 16.0),
+                                ),GestureDetector(
+                                  onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                                      builder: (BuildContext context) => new LupaPassword())),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 8.0, bottom: 8.0),
+                                        child: Text(
+                                          "Lupa Password?",
+                                          style: new TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.green,
+                                              fontFamily: "Avenir"),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
                             )
                           ],
                         )),
@@ -185,20 +215,27 @@ class _Login_formState extends State<Login_form> {
                         //onPressed: () => _makePostRequest(url, myController.text, myController2.text),
                         onPressed: (){
                           FutureBuilder<LoginResponse>(
-                                future: _makePostRequest(url, myController.text, myController2.text).then((task){
-                                  print("ini asal global : " + globals.auth_token);
-                                  print("global is_login : " + globals.is_Login.toString());
-                                  if(task.status=="success"){
-                                    //respon ketika benar
-                                    globals.auth_token = task.token;
-                                    globals.is_Login = true;
-                                    Navigator.of(context).push(FadeRoute(page: MyStatefulWidget()));
-                                  }else{
-                                    //respon ketika salah
-                                    globals.is_Login = false;
-                                    Navigator.of(context).maybePop();
-                                  }
-                                }),
+                              future: _makePostRequest(url, myController.text, myController2.text).then((task){
+                                print("ini asal global : " + globals.auth_token);
+                                print("global is_login : " + globals.is_Login.toString());
+                                if(task.status=="success"){
+                                  //respon ketika benar
+                                  globals.auth_token = task.token;
+                                  globals.is_Login = true;
+                                  new AlertDialog(
+                                    content: new Text(task.message),
+                                  );
+                                  Navigator.of(context).push(FadeRoute(page: MyStatefulWidget()));
+                                }else{
+                                  //respon ketika salah
+                                  globals.is_Login = false;
+                                  showDialog(context: context, child:
+                                  new AlertDialog(
+                                    content: new Text(task.message),
+                                  )
+                                  );
+                                }
+                              }),
                               builder: (context, snapshot){
                                 if(snapshot.data.status=="success"){
                                   print("ini statis dari snapshoot : " + snapshot.data.status);

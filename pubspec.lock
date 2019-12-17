@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.1"
+  archive:
+    dependency: transitive
+    description:
+      name: archive
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.10"
   args:
     dependency: transitive
     description:
@@ -77,7 +84,7 @@ packages:
       name: build_runner_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.0"
+    version: "4.3.0"
   built_collection:
     dependency: transitive
     description:
@@ -219,7 +226,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: dc52ada854eee3ff6ee2ca26a9eaa9c651faa1f7
+      resolved-ref: "77b8fa5eba87db88b0841e802282b36e9a33174f"
       url: "git://github.com/tinylife-io/flutter_verification_code_input.git"
     source: git
     version: "0.1.2"
@@ -272,13 +279,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.3"
+  image:
+    dependency: transitive
+    description:
+      name: image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.4"
   image_picker:
     dependency: "direct main"
     description:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.2+1"
+    version: "0.6.2+3"
   io:
     dependency: transitive
     description:
@@ -521,7 +535,7 @@ packages:
       name: universal_html
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.6"
+    version: "1.1.8"
   universal_io:
     dependency: transitive
     description:
@@ -573,4 +587,4 @@ packages:
     version: "0.1.1"
 sdks:
   dart: ">=2.4.0 <3.0.0"
-  flutter: ">=1.5.0 <2.0.0"
+  flutter: ">=1.10.0 <2.0.0"

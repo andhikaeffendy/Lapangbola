@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lapang_bola_flutter/profile_desc.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -239,6 +240,28 @@ class _ProfileState extends State<Profile> {
                       )),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
+                  ),Padding(
+                    padding: const EdgeInsets.all(8.0),
+                  ),SizedBox(
+                    width: 320.0,
+                    height: 45.0,
+                    child: RaisedButton(
+                      onPressed: (){},
+                      color: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(12.0),
+                        side: BorderSide(color: Colors.green),
+                      ),
+                      child: Text(
+                        "SIMPAN",
+                        style: new TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0),
+                      ),
+                    ),
+                  ),Padding(
+                    padding: const EdgeInsets.all(8.0),
                   )
                 ],
               ),

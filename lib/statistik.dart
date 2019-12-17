@@ -32,7 +32,6 @@ class _StatistikState extends State<Statistik> {
                   padding: const EdgeInsets.all(16.0),
                   margin: EdgeInsets.only(top: 20.0),
                   height: 180.0,
-                  width: 360.0,
                   decoration: new BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(

@@ -29,7 +29,6 @@ class _PertandinganState extends State<Pertandingan> {
                 Container(
                   margin: EdgeInsets.only(top: 20.0),
                   height: 180.0,
-                  width: 360.0,
                   decoration: new BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(

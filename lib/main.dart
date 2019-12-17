@@ -6,6 +6,7 @@ import 'my_match.dart';
 import 'profile.dart';
 import 'statistik.dart';
 import 'pertandingan.dart';
+import 'profile_desc.dart';
 
 class MyStatefulWidget extends StatefulWidget {
   MyStatefulWidget({Key key}) : super(key: key);
@@ -21,7 +22,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final _pageOption = [
     Dashboard(),    
     MyMatch(),
-    Profile(),
+    Profile_Desc(),
     Statistik(),
     Pertandingan()
   ];
@@ -39,7 +40,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         child: _pageOption.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xffEFFFF0),
         animationCurve: Curves.fastOutSlowIn,
         height: 60.0,
 
