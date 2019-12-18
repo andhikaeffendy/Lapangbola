@@ -1,5 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import'package:flutter_verification_code_input/flutter_verification_code_input.dart';
+import 'package:http/http.dart';
+import 'package:lapang_bola_flutter/login_form.dart';
+import 'models/activation_response.dart';
+import 'package:lapang_bola_flutter/global/global.dart' as globals;
 
 class VerificationCode extends StatefulWidget {
   @override
@@ -7,6 +13,15 @@ class VerificationCode extends StatefulWidget {
 }
 
 class _VerificationCodeState extends State<VerificationCode> {
+  String url = 'http://app.lapangbola.com/api/players/activate_account';
+  String verificationNumber = "";
+
+  final verifNumEditText1 = TextEditingController();
+  final verifNumEditText2 = TextEditingController();
+  final verifNumEditText3 = TextEditingController();
+  final verifNumEditText4 = TextEditingController();
+  final verifNumEditText5 = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,6 +119,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                                     ),
                                   ),
                                   child: new TextField(
+                                    controller: verifNumEditText1,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     decoration: new InputDecoration(
@@ -124,6 +140,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                                     ),
                                   ),
                                   child: new TextField(
+                                    controller: verifNumEditText2,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     decoration: new InputDecoration(
@@ -144,6 +161,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                                     ),
                                   ),
                                   child: new TextField(
+                                    controller: verifNumEditText3,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     decoration: new InputDecoration(
@@ -164,6 +182,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                                     ),
                                   ),
                                   child: new TextField(
+                                    controller: verifNumEditText4,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     decoration: new InputDecoration(
@@ -184,6 +203,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                                     ),
                                   ),
                                   child: new TextField(
+                                    controller: verifNumEditText5,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     decoration: new InputDecoration(
@@ -205,7 +225,41 @@ class _VerificationCodeState extends State<VerificationCode> {
                     width: 320.0,
                     height: 45.0,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        verificationNumber = verifNumEditText1.text +
+                            verifNumEditText2.text +
+                            verifNumEditText3.text +
+                            verifNumEditText4.text +
+                            verifNumEditText5.text;
+                        FutureBuilder<ActivationResponse>(
+                            // ignore: missing_return
+                            future: _makePostRequest(url, globals.phone_number, verificationNumber).then((task){
+                              print("global phonenumber : " + globals.phone_number);
+                              if(task.status=="success"){
+                                //respon ketika benar
+                                globals.phone_number = "";
+                                new AlertDialog(
+                                  content: new Text(task.message),
+                                );
+
+                                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Login_form()));
+                              }else{
+                                //respon ketika salah
+                                showDialog(context: context, child:
+                                new AlertDialog(
+                                  content: new Text(task.message),
+                                )
+                                );
+                              }
+                            }),
+                            // ignore: missing_return
+                            builder: (context, snapshot){
+                              if(snapshot.data.status=="success"){
+                                print("ini statis dari snapshoot : " + snapshot.data.status);
+                              }
+                            }
+                        );
+                      },
                       color: Colors.green,
                       shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(12.0),
@@ -225,5 +279,33 @@ class _VerificationCodeState extends State<VerificationCode> {
             )
         )
     );
+  }
+  Future<ActivationResponse> _makePostRequest(String url, String phoneNumber, String activationNumber) async {
+    // set up POST request arguments
+    Map<String, String> headers = {"Content-type": "application/json"};
+    // String json = '{"username": "ddesantha", "password": "opwbo123"}';
+    Map<String, String> mapString = {"phone_number": phoneNumber, "activation_number" : activationNumber};
+    String json = jsonEncode(mapString);
+    print("Ini hasil jsonEncode : " + json);
+    // make POST request
+
+    Response response = await post(url, headers: headers, body: json);
+    print("Masuk kesini");
+    print(response.body);
+    print(response.statusCode);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    // {
+    //   "title": "Hello",
+    //   "body": "body text",
+    //   "userId": 1,
+    //   "id": 101
+    // }
+    ActivationResponse loginResponse = activationResponseFromJson(body);
+    print("Ini status dari response : " + loginResponse.status);
+
+    return loginResponse;
   }
 }

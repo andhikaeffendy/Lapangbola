@@ -6,3 +6,6 @@ String name = "";
 String email = "";
 String gender = "";
 String phone_number = "";
+String photoUrl = "";
+
+int playerID = 0;

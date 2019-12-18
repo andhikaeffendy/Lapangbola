@@ -215,6 +215,7 @@ class _Login_formState extends State<Login_form> {
                         //onPressed: () => _makePostRequest(url, myController.text, myController2.text),
                         onPressed: (){
                           FutureBuilder<LoginResponse>(
+                              // ignore: missing_return
                               future: _makePostRequest(url, myController.text, myController2.text).then((task){
                                 print("ini asal global : " + globals.auth_token);
                                 print("global is_login : " + globals.is_Login.toString());
@@ -222,6 +223,11 @@ class _Login_formState extends State<Login_form> {
                                   //respon ketika benar
                                   globals.auth_token = task.token;
                                   globals.is_Login = true;
+                                  globals.phone_number = task.phoneNumber;
+                                  globals.email = task.email;
+                                  globals.name = task.name;
+                                  globals.photoUrl = task.photoUrl;
+                                  globals.playerID = task.playerId;
                                   new AlertDialog(
                                     content: new Text(task.message),
                                   );

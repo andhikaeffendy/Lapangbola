@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:lapang_bola_flutter/models/registration_response.dart';
 import 'package:lapang_bola_flutter/verification_code.dart';
 import 'verification_code.dart';
+import 'package:lapang_bola_flutter/global/global.dart' as globals;
 
 class Registration extends StatefulWidget {
   @override
@@ -8,6 +13,15 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
+  String url = 'http://app.lapangbola.com/api/players';
+
+  final nameEditText = TextEditingController();
+  final emailEditText = TextEditingController();
+  final userNameEditText = TextEditingController();
+  final passEditText = TextEditingController();
+  final passConfirmEditText = TextEditingController();
+  final phoneNumberEditText = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +82,7 @@ class _RegistrationState extends State<Registration> {
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
                                 Text(
-                                  "Email",
+                                  "Full Name",
                                   style: new TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.black,
@@ -80,6 +94,62 @@ class _RegistrationState extends State<Registration> {
                               padding: const EdgeInsets.only(
                                   top: 12.0, bottom: 12.0),
                               child: TextField(
+                                controller: nameEditText,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(12.0),
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black26, width: 1.0),
+                                        borderRadius:
+                                        BorderRadius.circular(15.0))),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Text(
+                                  "Username",
+                                  style: new TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.black,
+                                      fontFamily: "Avenir"),
+                                )
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 12.0, bottom: 12.0),
+                              child: TextField(
+                                controller: userNameEditText,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(12.0),
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black26, width: 1.0),
+                                        borderRadius:
+                                        BorderRadius.circular(15.0))),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  "Email",
+                                  style: new TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.black,
+                                      fontFamily: "Avenir"),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 12.0, bottom: 12.0),
+                              child: TextField(
+                                controller: emailEditText,
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(12.0),
                                     border: OutlineInputBorder(
@@ -106,6 +176,7 @@ class _RegistrationState extends State<Registration> {
                               padding: const EdgeInsets.only(
                                   top: 12.0, bottom: 12.0),
                               child: TextField(
+                                controller: passEditText,
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(12.0),
                                     border: OutlineInputBorder(
@@ -132,6 +203,35 @@ class _RegistrationState extends State<Registration> {
                               padding: const EdgeInsets.only(
                                   top: 12.0, bottom: 12.0),
                               child: TextField(
+                                controller: passConfirmEditText,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(12.0),
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black26, width: 1.0),
+                                        borderRadius:
+                                        BorderRadius.circular(15.0))),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Text(
+                                  "Phone Number",
+                                  style: new TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.black,
+                                      fontFamily: "Avenir"),
+                                )
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 12.0, bottom: 12.0),
+                              child: TextField(
+                                controller: phoneNumberEditText,
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(12.0),
                                     border: OutlineInputBorder(
@@ -149,8 +249,37 @@ class _RegistrationState extends State<Registration> {
                       width: 320.0,
                       height: 45.0,
                       child: RaisedButton(
-                        onPressed: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                            builder: (BuildContext context) => new VerificationCode())),
+                        //onPressed: ()=> Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new VerificationCode())),
+                        onPressed: (){
+                          FutureBuilder<RegistrationReponse>(
+                              future: _makePostRequest(url,userNameEditText.text,passEditText.text,
+                              nameEditText.text,phoneNumberEditText.text,passConfirmEditText.text,
+                              emailEditText.text).then((task){
+                                print("ini asal global : " + globals.auth_token);
+                                print("global is_login : " + globals.is_Login.toString());
+                                if(task.status=="success"){
+                                  //respon ketika benar
+                                  globals.phone_number = phoneNumberEditText.text;
+                                  new AlertDialog(
+                                    content: new Text(task.message),
+                                  );
+                                  Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new VerificationCode()));
+                                }else{
+                                  //respon ketika salah
+                                  showDialog(context: context, child:
+                                  new AlertDialog(
+                                    content: new Text(task.message),
+                                  )
+                                  );
+                                }
+                              }),
+                              builder: (context, snapshot){
+                                if(snapshot.data.status=="success"){
+                                  print("ini statis dari snapshoot : " + snapshot.data.status);
+                                }
+                              }
+                          );
+                        },
                         color: Colors.green,
                         shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(12.0),
@@ -170,5 +299,40 @@ class _RegistrationState extends State<Registration> {
               )),
         )
     );
+  }
+  Future<RegistrationReponse> _makePostRequest(String url, String username, String password,
+      String name, String phoneNumber, String confirmPassword, String email) async {
+    // set up POST request arguments
+    Map<String, String> headers = {"Content-type": "application/json"};
+    // String json = '{"username": "ddesantha", "password": "opwbo123"}';
+    Map<String, String> mapString = {
+      "username": username,
+      "password" : password,
+      "name" : name,
+      "phone_number" : phoneNumber,
+      "password_confirmation" : confirmPassword,
+      "email" : email};
+    String json = jsonEncode(mapString);
+    print("Ini hasil jsonEncode : " + json);
+    // make POST request
+
+    Response response = await post(url, headers: headers, body: json);
+    print("Masuk kesini");
+    print(response.body);
+    print(response.statusCode);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    // {
+    //   "title": "Hello",
+    //   "body": "body text",
+    //   "userId": 1,
+    //   "id": 101
+    // }
+    RegistrationReponse loginResponse = registrationReponseFromJson(body);
+    print("Ini status dari response : " + loginResponse.status);
+
+    return loginResponse;
   }
 }
