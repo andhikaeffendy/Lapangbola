@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'pertandingan.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -164,60 +165,64 @@ class _DashboardState extends State<Dashboard> {
               Container(
                 width: 250.0,
                 color: Color(0xffffffff),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        ),
-                        ImageIcon(
-                          AssetImage("assets/Lokasi.png"),
-                          color: Colors.green,
-                        ),
-                        Text("Lapangan Padjajaran",
-                            style: new TextStyle(
-                                fontSize: 12.0, fontFamily: "Avenir")),
-                        new Container(
-                          margin: const EdgeInsets.all(8.0),
-                          padding:
-                              const EdgeInsets.fromLTRB(18.0, 4.0, 18.0, 4.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.lightBlueAccent),
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.lightBlueAccent,
-                          ),
-                          child: Text(
-                            "45'",
-                            style: new TextStyle(
-                                fontSize: 12.0, fontFamily: "Avenir"),
-                          ),
-                        )
-                      ],
-                    ),
-                    Card(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: GestureDetector(
+                  onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new Pertandingan())),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          new _listPertandingan(
-                            gambar:
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
-                            nama: "Meteor FC",
-                            skor: "1",
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           ),
-                          new _listPertandingan(
-                            gambar:
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
-                            nama: "Prima FC",
-                            skor: "0",
+                          ImageIcon(
+                            AssetImage("assets/Lokasi.png"),
+                            color: Colors.green,
+                          ),
+                          Text("Lapangan Padjajaran",
+                              style: new TextStyle(
+                                  fontSize: 12.0, fontFamily: "Avenir")),
+                          new Container(
+                            margin: const EdgeInsets.all(8.0),
+                            padding:
+                            const EdgeInsets.fromLTRB(18.0, 4.0, 18.0, 4.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.lightBlueAccent),
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Colors.lightBlueAccent,
+                            ),
+                            child: Text(
+                              "45'",
+                              style: new TextStyle(
+                                  fontSize: 12.0, fontFamily: "Avenir"),
+                            ),
                           )
                         ],
                       ),
-                    )
-                  ],
+                      Card(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            new _listPertandingan(
+                              gambar:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
+                              nama: "Meteor FC",
+                              skor: "1",
+                            ),
+                            new _listPertandingan(
+                              gambar:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
+                              nama: "Prima FC",
+                              skor: "0",
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               Padding(
@@ -226,60 +231,64 @@ class _DashboardState extends State<Dashboard> {
               Container(
                 width: 250.0,
                 color: Color(0xffffffff),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        ),
-                        ImageIcon(
-                          AssetImage("assets/Lokasi.png"),
-                          color: Colors.green,
-                        ),
-                        Text("Lapangan Padjajaran",
-                            style: new TextStyle(
-                                fontSize: 12.0, fontFamily: "Avenir")),
-                        new Container(
-                          margin: const EdgeInsets.all(8.0),
-                          padding:
-                              const EdgeInsets.fromLTRB(6.0, 4.0, 6.0, 4.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.yellowAccent),
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.yellowAccent,
-                          ),
-                          child: Text(
-                            "FULL TIME",
-                            style: new TextStyle(
-                                fontSize: 12.0, fontFamily: "Avenir"),
-                          ),
-                        )
-                      ],
-                    ),
-                    Card(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: GestureDetector(
+                  onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new Pertandingan())),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          new _listPertandingan(
-                            gambar:
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
-                            nama: "Meteor FC",
-                            skor: "1",
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           ),
-                          new _listPertandingan(
-                            gambar:
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
-                            nama: "Prima FC",
-                            skor: "0",
+                          ImageIcon(
+                            AssetImage("assets/Lokasi.png"),
+                            color: Colors.green,
+                          ),
+                          Text("Lapangan Padjajaran",
+                              style: new TextStyle(
+                                  fontSize: 12.0, fontFamily: "Avenir")),
+                          new Container(
+                            margin: const EdgeInsets.all(8.0),
+                            padding:
+                            const EdgeInsets.fromLTRB(6.0, 4.0, 6.0, 4.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.yellowAccent),
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Colors.yellowAccent,
+                            ),
+                            child: Text(
+                              "FULL TIME",
+                              style: new TextStyle(
+                                  fontSize: 12.0, fontFamily: "Avenir"),
+                            ),
                           )
                         ],
                       ),
-                    )
-                  ],
+                      Card(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            new _listPertandingan(
+                              gambar:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
+                              nama: "Meteor FC",
+                              skor: "1",
+                            ),
+                            new _listPertandingan(
+                              gambar:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
+                              nama: "Prima FC",
+                              skor: "0",
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               Padding(

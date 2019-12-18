@@ -49,6 +49,7 @@ class _Login_formState extends State<Login_form> {
         backgroundColor: Color(0xffEFFFF0),
         body: Center(
           child: Container(
+            margin: EdgeInsets.only(top: 40.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -103,7 +104,7 @@ class _Login_formState extends State<Login_form> {
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
                                 Text(
-                                  "Email",
+                                  "Username / Email",
                                   style: new TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.black,
@@ -143,6 +144,8 @@ class _Login_formState extends State<Login_form> {
                                   top: 12.0, bottom: 12.0),
                               child: TextField(
                                 controller: myController2,
+                                keyboardType: TextInputType.visiblePassword,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(12.0),
                                     border: OutlineInputBorder(

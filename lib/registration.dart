@@ -13,6 +13,14 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
+  bool _isHidePassword = true;
+
+  void _tooglePasswordVisible(){
+    setState(() {
+      _isHidePassword = !_isHidePassword;
+    });
+  }
+
   String url = 'http://app.lapangbola.com/api/players';
 
   final nameEditText = TextEditingController();
@@ -28,6 +36,7 @@ class _RegistrationState extends State<Registration> {
         backgroundColor: Color(0xffEFFFF0),
         body: Center(
           child: Container(
+            margin: EdgeInsets.only(top: 40.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -150,6 +159,7 @@ class _RegistrationState extends State<Registration> {
                                   top: 12.0, bottom: 12.0),
                               child: TextField(
                                 controller: emailEditText,
+                                keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(12.0),
                                     border: OutlineInputBorder(
@@ -177,13 +187,22 @@ class _RegistrationState extends State<Registration> {
                                   top: 12.0, bottom: 12.0),
                               child: TextField(
                                 controller: passEditText,
+                                keyboardType: TextInputType.visiblePassword,
+                                obscureText: _isHidePassword,
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(12.0),
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.black26, width: 1.0),
                                         borderRadius:
-                                        BorderRadius.circular(15.0))),
+                                        BorderRadius.circular(15.0)),
+                                suffixIcon: GestureDetector(
+                                  onTap: (){_tooglePasswordVisible();},
+                                  child: Icon(
+                                    _isHidePassword ? Icons.visibility_off : Icons.visibility,
+                                    color: _isHidePassword ? Colors.green : Colors.greenAccent,
+                                  ),
+                                ),),
                               ),
                             ),
                             Row(
@@ -204,13 +223,22 @@ class _RegistrationState extends State<Registration> {
                                   top: 12.0, bottom: 12.0),
                               child: TextField(
                                 controller: passConfirmEditText,
+                                obscureText: _isHidePassword,
+                                keyboardType: TextInputType.visiblePassword,
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(12.0),
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.black26, width: 1.0),
                                         borderRadius:
-                                        BorderRadius.circular(15.0))),
+                                        BorderRadius.circular(15.0)),
+                                    suffixIcon: GestureDetector(
+                                      onTap: (){_tooglePasswordVisible();},
+                                      child: Icon(
+                                        _isHidePassword ? Icons.visibility_off : Icons.visibility,
+                                        color: _isHidePassword ? Colors.green : Colors.greenAccent,
+                                      ),
+                                    )),
                               ),
                             ),
                             Row(
@@ -232,6 +260,7 @@ class _RegistrationState extends State<Registration> {
                                   top: 12.0, bottom: 12.0),
                               child: TextField(
                                 controller: phoneNumberEditText,
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(12.0),
                                     border: OutlineInputBorder(

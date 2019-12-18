@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:lapang_bola_flutter/pertandingan.dart';
+import 'pertandingan.dart';
 
 class MyMatch extends StatefulWidget {
   @override
@@ -155,46 +157,57 @@ class _listMatch extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8.0),
       margin: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Text(
-            namaSatu,
-            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,
-                fontFamily: "Avenir"),
-          ),
-          Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 30.0,
-                height: 30.0,
-                decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: new DecorationImage(
-                        fit: BoxFit.fill, image: new NetworkImage(gambarSatu))),
-              )),
-          Text(
-            waktu,
-            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
-                fontFamily: "Avenir"),
-          ),
-          Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 30.0,
-                height: 30.0,
-                decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: new DecorationImage(
-                        fit: BoxFit.fill, image: new NetworkImage(gambardua))),
-              )),
-          Text(
-            namaDua,
-            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,
-                fontFamily: "Avenir"),
-          ),
-        ],
-      ),
+      child: GestureDetector(
+        onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+            builder: (BuildContext context) => new Pertandingan())),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text(
+              namaSatu,
+              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,
+                  fontFamily: "Avenir"),
+            ),
+            Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  width: 30.0,
+                  height: 30.0,
+                  decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: new DecorationImage(
+                          fit: BoxFit.fill, image: new NetworkImage(gambarSatu))),
+                )),
+            Text(
+              waktu,
+              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
+                  fontFamily: "Avenir"),
+            ),
+            Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  width: 30.0,
+                  height: 30.0,
+                  decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: new DecorationImage(
+                          fit: BoxFit.fill, image: new NetworkImage(gambardua))),
+                )),
+            Text(
+              namaDua,
+              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,
+                  fontFamily: "Avenir"),
+            ),Container(
+              child: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.green,
+                size: 15.0,
+              ),
+            )
+
+          ],
+        ),
+      )
     );
   }
 }

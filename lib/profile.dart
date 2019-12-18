@@ -180,64 +180,6 @@ class _ProfileState extends State<Profile> {
                           )
                         ],
                       )),
-                  Container(
-                      padding: const EdgeInsets.all(16.0),
-                      color: Colors.white,
-                      width: 300.0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "Jenis Kelamin",
-                                style: new TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.black,
-                                    fontFamily: "Avenir"
-                                ),
-                              ),
-                              Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
-                                  child: Text(
-                                    "*Harus Diisi",
-                                    style: new TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.green,
-                                        fontFamily: "Avenir"
-                                    ),
-                                  ))
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Checkbox(
-                                value: _pria,
-                                onChanged: _priaChanged,
-                                checkColor: Colors.white,
-                                activeColor: Colors.greenAccent,
-                              ),
-                              Text("Pria",
-                                  style: new TextStyle(fontSize: 14.0,
-                                      fontFamily: "Avenir")),
-                              Checkbox(
-                                value: _wanita,
-                                onChanged: _wanitaChanged,
-                                checkColor: Colors.white,
-                                activeColor: Colors.greenAccent,
-                              ),
-                              Text("Wanita",
-                                  style: new TextStyle(fontSize: 14.0,
-                                      fontFamily: "Avenir"))
-                            ],
-                          )
-                        ],
-                      )),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                   ),Padding(

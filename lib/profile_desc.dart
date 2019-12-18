@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lapang_bola_flutter/profile.dart';
+import 'package:lapang_bola_flutter/statistik.dart';
 import 'profile.dart';
+import 'statistik.dart';
 
 class Profile_Desc extends StatefulWidget {
   @override
@@ -32,10 +34,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                 ),
                 Container(
                   width: 320.0,
-                  child: GestureDetector(
-                    onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (BuildContext context) => new Profile())),
-                    child: Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -58,15 +57,19 @@ class _Profile_DescState extends State<Profile_Desc> {
                             right: 0,
                             child: Align(
                                 alignment: Alignment.bottomLeft,
-                                child: Container(
-                                  width: 30.0,
-                                  height: 30.0,
-                                  decoration: new BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: new DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: new AssetImage(
-                                              "assets/Register.png"))),
+                                child: GestureDetector(
+                                  onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                                      builder: (BuildContext context) => new Profile())),
+                                  child: Container(
+                                    width: 30.0,
+                                    height: 30.0,
+                                    decoration: new BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: new DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: new AssetImage(
+                                                "assets/Register.png"))),
+                                  ),
                                 )),
                           )
                         ],
@@ -93,14 +96,12 @@ class _Profile_DescState extends State<Profile_Desc> {
                               style: new TextStyle(
                                   fontSize: 18.0,
                                   color: Colors.black,
-                                  fontWeight: FontWeight.bold,
                                   fontFamily: "Avenir"),
                             ),
                           ),
                         ],
                       )
                     ],
-                  ),
                   ),
                 ),
                 Container(
@@ -194,13 +195,16 @@ class _Profile_DescState extends State<Profile_Desc> {
                               fontWeight: FontWeight.bold,
                               fontFamily: "Avenir"),
                         ),
-                      ),Text(
-                        "Bhineka FC",
-                        style: new TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Avenir"),
+                      ),GestureDetector(
+                        onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) => new Statistik())),
+                        child: Text(
+                          "Bhineka FC",
+                          style: new TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.black,
+                              fontFamily: "Avenir"),
+                        ),
                       ),Padding(
                         padding: const EdgeInsets.only(top: 16.0),
                         child: Text(
@@ -216,7 +220,6 @@ class _Profile_DescState extends State<Profile_Desc> {
                         style: new TextStyle(
                             fontSize: 18.0,
                             color: Colors.black,
-                            fontWeight: FontWeight.bold,
                             fontFamily: "Avenir"),
                       ),Padding(
                         padding: const EdgeInsets.only(top: 16.0),
@@ -233,7 +236,6 @@ class _Profile_DescState extends State<Profile_Desc> {
                         style: new TextStyle(
                             fontSize: 18.0,
                             color: Colors.black,
-                            fontWeight: FontWeight.bold,
                             fontFamily: "Avenir"),
                       ),
                     ],
@@ -245,7 +247,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                   width: 320.0,
                   height: 45.0,
                   child: RaisedButton(
-                    onPressed: (){},
+                    onPressed: (){_showDialog(context);},
                     color: Colors.green,
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(12.0),
@@ -268,4 +270,32 @@ class _Profile_DescState extends State<Profile_Desc> {
 
     );
   }
+}
+
+void _showDialog(BuildContext context) {
+  // flutter defined function
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // return object of type Dialog
+      return AlertDialog(
+        title: new Text("Logout"),
+        content: new Text("Apakah anda yakin ingin keluar?"),
+        actions: <Widget>[
+          // usually buttons at the bottom of the dialog
+          new FlatButton(
+            child: new Text("Tidak"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),new FlatButton(
+            child: new Text("Ya"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

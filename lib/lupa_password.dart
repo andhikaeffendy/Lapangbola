@@ -77,7 +77,7 @@ class _LupaPasswordState extends State<LupaPassword> {
                                     Padding(
                                       padding: const EdgeInsets.only(bottom: 8.0, top: 12.0),
                                       child: Text(
-                                        "Lupa password anda? masukkan alamat email anda dan kami akan mengirimkan intruksi pemulihan password anda",
+                                        "Lupa password anda? masukkan nomor telepon anda dan kami akan mengirimkan intruksi pemulihan password anda",
                                         style: new TextStyle(
                                             fontSize: 12.0, color: Colors.black38,
                                             fontFamily: "Avenir"),
@@ -90,7 +90,7 @@ class _LupaPasswordState extends State<LupaPassword> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     Text(
-                                      "Email",
+                                      "Nomor Telepon",
                                       style: new TextStyle(
                                           fontSize: 16.0, color: Colors.black,
                                           fontFamily: "Avenir"),
