@@ -226,7 +226,7 @@ class _Login_formState extends State<Login_form> {
                                   //respon ketika benar
                                   globals.auth_token = task.token;
                                   globals.is_Login = true;
-                                  globals.phone_number = task.phoneNumber;
+                                  globals.phone_number = "082114882718";
                                   globals.email = task.email;
                                   globals.name = task.name;
                                   globals.photoUrl = task.photoUrl;
