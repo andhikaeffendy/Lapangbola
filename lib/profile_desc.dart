@@ -1,9 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:lapang_bola_flutter/models/logout_response.dart';
 import 'package:lapang_bola_flutter/profile.dart';
 import 'package:lapang_bola_flutter/statistik.dart';
+import 'login_form.dart';
 import 'profile.dart';
 import 'statistik.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
+import 'package:progress_dialog/progress_dialog.dart';
+
+ProgressDialog pr;
+
 
 class Profile_Desc extends StatefulWidget {
   @override
@@ -274,6 +283,11 @@ class _Profile_DescState extends State<Profile_Desc> {
 }
 
 void _showDialog(BuildContext context) {
+  String url = "http://app.lapangbola.com/api/players/sign_out";
+
+  pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
+
+  pr.style(message: 'Logout...');
   // flutter defined function
   showDialog(
     context: context,
@@ -286,17 +300,74 @@ void _showDialog(BuildContext context) {
           // usually buttons at the bottom of the dialog
           new FlatButton(
             child: new Text("Tidak"),
-            onPressed: () {
+            onPressed: (){
               Navigator.of(context).pop();
-            },
-          ),new FlatButton(
+            }
+          ),
+          new FlatButton(
             child: new Text("Ya"),
             onPressed: () {
-              Navigator.of(context).pop();
+                _makePostRequest(url, context).then((task){
+                  if(task.status=="success"){
+                    pr.hide();
+                    globals.auth_token = "";
+                    globals.email = "";
+                    globals.phone_number = "";
+                    globals.name = "";
+                    globals.phone_number = "";
+                    globals.is_Login = false;
+                    globals.myMatchResponse = null;
+                    globals.photoUrl = "";
+                    globals.playerID = 0;
+                    globals.gender = "";
+
+                    showDialog(context: context, child:
+                    new AlertDialog(
+                      content: new Text("Has Been Logout"),
+                    )
+                    );
+
+                    Navigator.of(context).push(FadeRoute(page: Login_form()));
+                  }
+                }
+                );
+
+
+
             },
           ),
         ],
       );
     },
   );
+}
+
+Future<LogoutResponse> _makePostRequest(String url, context) async {
+  // set up POST request arguments
+  pr.show();
+  Map<String, String> headers = {"Content-type": "application/json"};
+  // String json = '{"username": "ddesantha", "password": "opwbo123"}';
+  Map<String, String> mapString = {"auth_token" : globals.auth_token};
+  String json = jsonEncode(mapString);
+  print("Ini hasil jsonEncode : " + json);
+  // make POST request
+
+  Response response = await post(url, headers: headers, body: json);
+  print("Masuk kesini");
+  print(response.body);
+  print(response.statusCode);
+  // check the status code for the result
+  int statusCode = response.statusCode;
+  // this API passes back the id of the new item added to the body
+  String body = response.body;
+  // {
+  //   "title": "Hello",
+  //   "body": "body text",
+  //   "userId": 1,
+  //   "id": 101
+  // }
+  LogoutResponse loginResponse = logoutResponseFromJson(body);
+  print("Ini status dari response : " + loginResponse.status);
+
+  return loginResponse;
 }

@@ -44,32 +44,38 @@ class _MyMatchState extends State<MyMatch> {
                 child: FutureBuilder(
                   future: _makePostRequest(masterUrl, globals.phone_number),
                   builder: (context, snapshot){
-                    return ListView.builder(
-                      itemCount: snapshot.data.data.length,
-                      itemBuilder: (context, index) {
-                        Datum project = snapshot.data.data[index];
-                        return Column(
-                          children: <Widget>[
-                            Card(
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      new _listMatch(
-                                        namaSatu: project.homeName,
-                                        gambarSatu: project.homeImage,
-                                        scoreHome: project.homeScore,
-                                        scoreAway: project.awayScore,
-                                        gambardua: project.awayImage,
-                                        namaDua: project.awayName,
-                                      ),
-                                      new CustomPaint(painter: Drawhorizontalline(),)]
-                                )
-                            ),// Widget to display the list of project
-                          ],
-                        );
-                      },
-                    );
+                    if (!snapshot.hasData || snapshot.data == null) {
+                      return Center(child: CircularProgressIndicator());
+                    }else{
+                      return ListView.builder(
+                        itemCount: snapshot.data.data.length,
+                        itemBuilder: (context, index) {
+                          Datum project = snapshot.data.data[index];
+                          globals.myMatchResponse = snapshot.data;
+                          return Column(
+                            children: <Widget>[
+                              Card(
+                                  child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        new _listMatch(
+                                          namaSatu: project.homeName,
+                                          gambarSatu: project.homeImage,
+                                          scoreHome: project.homeScore,
+                                          scoreAway: project.awayScore,
+                                          gambardua: project.awayImage,
+                                          namaDua: project.awayName,
+                                        ),
+                                        new CustomPaint(painter: Drawhorizontalline(),)]
+                                  )
+                              ),// Widget to display the list of project
+                            ],
+                          );
+                        },
+                      );
+                    }
+
                   },
                 ),
               ),
@@ -82,6 +88,9 @@ class _MyMatchState extends State<MyMatch> {
 
   Future<MyMatchResponse> _makePostRequest(String mainUrl, phoneNumber) async {
     // set up POST request arguments
+    if(globals.myMatchResponse!=null){
+      return globals.myMatchResponse;
+    }
     String url = mainUrl +"?phone_number="+globals.phone_number;
     Map<String, String> headers = {"Content-type": "application/json"};
     // String json = '{"username": "ddesantha", "password": "opwbo123"}';

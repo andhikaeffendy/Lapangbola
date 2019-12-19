@@ -10,7 +10,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'registration.dart';
 import 'package:lapang_bola_flutter/models/login_response.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
-
+import 'package:progress_dialog/progress_dialog.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,6 +45,9 @@ class _Login_formState extends State<Login_form> {
 
   @override
   Widget build(BuildContext context) {
+    ProgressDialog pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
+
+    pr.style(message: 'Login...');
     return Scaffold(
         backgroundColor: Color(0xffEFFFF0),
         body: Center(
@@ -217,9 +220,11 @@ class _Login_formState extends State<Login_form> {
                         //onPressed: () => Navigator.of(context).push(FadeRoute(page: MyStatefulWidget())),
                         //onPressed: () => _makePostRequest(url, myController.text, myController2.text),
                         onPressed: (){
+                          pr.show();
                           FutureBuilder<LoginResponse>(
                               // ignore: missing_return
                               future: _makePostRequest(url, myController.text, myController2.text).then((task){
+                                pr.hide();
                                 print("ini asal global : " + globals.auth_token);
                                 print("global is_login : " + globals.is_Login.toString());
                                 if(task.status=="success"){
@@ -276,6 +281,7 @@ class _Login_formState extends State<Login_form> {
 
   Future<LoginResponse> _makePostRequest(String url, String username, String password) async {
     // set up POST request arguments
+
     Map<String, String> headers = {"Content-type": "application/json"};
     // String json = '{"username": "ddesantha", "password": "opwbo123"}';
     Map<String, String> mapString = {"username": username, "password" : password};
