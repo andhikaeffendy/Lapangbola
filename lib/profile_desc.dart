@@ -3,6 +3,7 @@ import 'package:lapang_bola_flutter/profile.dart';
 import 'package:lapang_bola_flutter/statistik.dart';
 import 'profile.dart';
 import 'statistik.dart';
+import 'package:lapang_bola_flutter/global/global.dart' as globals;
 
 class Profile_Desc extends StatefulWidget {
   @override
@@ -82,7 +83,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                           Padding(
                             padding: const EdgeInsets.only(left: 20.0),
                             child: Text(
-                              "Nama Lengkap",
+                              globals.name,
                               style: new TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.black,
@@ -92,7 +93,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                           ),Padding(
                             padding: const EdgeInsets.only(left: 20.0),
                             child: Text(
-                              "Email@gmail.com",
+                              globals.email,
                               style: new TextStyle(
                                   fontSize: 18.0,
                                   color: Colors.black,

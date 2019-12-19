@@ -329,6 +329,7 @@ class _RegistrationState extends State<Registration> {
         )
     );
   }
+  
   Future<RegistrationReponse> _makePostRequest(String url, String username, String password,
       String name, String phoneNumber, String confirmPassword, String email) async {
     // set up POST request arguments

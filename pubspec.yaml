@@ -31,6 +31,8 @@ dependencies:
   fancy_bottom_navigation: ^0.1.0
   curved_navigation_bar: ^0.3.1
   carousel_slider: ^1.3.0
+  intl: ^0.16.0
+  indonesia: ^1.0.1
   http: ^0.12.0+2
 
 
