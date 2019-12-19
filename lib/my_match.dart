@@ -24,7 +24,7 @@ class _MyMatchState extends State<MyMatch> {
       body: Container(
           child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(
@@ -39,72 +39,39 @@ class _MyMatchState extends State<MyMatch> {
                 )),
             Expanded(
               child:
-              FutureBuilder(
-                future: _makePostRequest(masterUrl, globals.phone_number),
-                builder: (context, snapshot){
-                  return ListView.builder(
-                    itemCount: snapshot.data.data.length,
-                    itemBuilder: (context, index) {
-                      Datum project = snapshot.data.data[index];
-                      return Column(
-                        children: <Widget>[
-                          Card(
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    new _listMatch(
-                                      namaSatu: project.homeName,
-                                      gambarSatu: project.homeImage,
-                                      waktu: "1 - 0",
-                                      gambardua: project.awayImage,
-                                      namaDua: project.awayName,
-                                    ),]
-                              )
-                          ),// Widget to display the list of project
-                        ],
-                      );
-                    },
-                  );
-
-                    /*ListView(
-                      children: <Widget>[
-                        Card(
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  new _listMatch(
-                                    namaSatu: "Meteor FC",
-                                    gambarSatu:
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
-                                    waktu: "1 - 0",
-                                    gambardua:
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
-                                    namaDua: "Prima FC",
-                                  ),]
-                            )
-                        ),
-                        Card(
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  new _listMatch(
-                                    namaSatu: "Meteor FC",
-                                    gambarSatu:
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
-                                    waktu: "1 - 0",
-                                    gambardua:
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
-                                    namaDua: "Prima FC",
-                                  ),
-                                ]
-                            )
-                        )
-                      ]
-                  );*/
-                },
+              Container(
+                margin: EdgeInsets.all(16.0),
+                child: FutureBuilder(
+                  future: _makePostRequest(masterUrl, globals.phone_number),
+                  builder: (context, snapshot){
+                    return ListView.builder(
+                      itemCount: snapshot.data.data.length,
+                      itemBuilder: (context, index) {
+                        Datum project = snapshot.data.data[index];
+                        return Column(
+                          children: <Widget>[
+                            Card(
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      new _listMatch(
+                                        namaSatu: project.homeName,
+                                        gambarSatu: project.homeImage,
+                                        scoreHome: project.homeScore,
+                                        scoreAway: project.awayScore,
+                                        gambardua: project.awayImage,
+                                        namaDua: project.awayName,
+                                      ),
+                                      new CustomPaint(painter: Drawhorizontalline(),)]
+                                )
+                            ),// Widget to display the list of project
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             )
           ],
@@ -148,15 +115,16 @@ class _listMatch extends StatelessWidget {
   _listMatch(
       {this.namaSatu,
       this.gambarSatu,
-      this.waktu,
+      this.scoreHome,
+        this.scoreAway,
       this.gambardua,
       this.namaDua});
   String namaSatu;
   String gambarSatu;
-  String waktu;
+  int scoreHome;
+  int scoreAway;
   String gambardua;
   String namaDua;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -168,10 +136,14 @@ class _listMatch extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text(
-              namaSatu,
-              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,
-                  fontFamily: "Avenir"),
+            Container(
+              margin: EdgeInsets.only(right: 8.0),
+              width: 80,
+              child: Text(
+                namaSatu,
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,
+                    fontFamily: "Avenir"),
+              ),
             ),
             Align(
                 alignment: Alignment.topCenter,
@@ -183,10 +155,26 @@ class _listMatch extends StatelessWidget {
                       image: new DecorationImage(
                           fit: BoxFit.fill, image: new NetworkImage(gambarSatu))),
                 )),
-            Text(
-              waktu,
+            Container(
+              margin: EdgeInsets.only(left: 8.0),
+              width: 15.0,
+              child: Text(
+                scoreHome.toString(),
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
+                    fontFamily: "Avenir"),
+              ),
+            ),Text(
+              " - ",
               style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
                   fontFamily: "Avenir"),
+            ),Container(
+              margin: EdgeInsets.only(right: 8.0),
+              width: 15.0,
+              child: Text(
+                scoreAway.toString(),
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
+                    fontFamily: "Avenir"),
+              ),
             ),
             Align(
                 alignment: Alignment.topCenter,
@@ -198,10 +186,14 @@ class _listMatch extends StatelessWidget {
                       image: new DecorationImage(
                           fit: BoxFit.fill, image: new NetworkImage(gambardua))),
                 )),
-            Text(
-              namaDua,
-              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,
-                  fontFamily: "Avenir"),
+            Container(
+              margin: EdgeInsets.only(left: 12.0),
+              width: 70,
+              child: Text(
+                namaDua,
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,
+                    fontFamily: "Avenir"),
+              ),
             ),
             Container(
               child: Icon(
@@ -227,8 +219,8 @@ class Drawhorizontalline extends CustomPainter {
 
   Drawhorizontalline() {
     _paint = Paint()
-      ..color = Colors.black12
-      ..strokeWidth = 1
+      ..color = Colors.black38
+      ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
   }
 

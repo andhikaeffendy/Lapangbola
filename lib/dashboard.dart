@@ -211,12 +211,12 @@ class _DashboardState extends State<Dashboard> {
                       onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
                           builder: (BuildContext context) => new Pertandingan())),
                       child: Column(
-
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -225,13 +225,17 @@ class _DashboardState extends State<Dashboard> {
                                 AssetImage("assets/Lokasi.png"),
                                 color: Colors.green,
                               ),
-                              Text(matchName,
-                                  style: new TextStyle(
-                                      fontSize: 12.0, fontFamily: "Avenir")),
+                              Container(
+                                width: 120.0,
+                                margin: EdgeInsets.only(left: 8.0),
+                                child: Text(matchName,
+                                    style: new TextStyle(
+                                        fontSize: 12.0, fontFamily: "Avenir")),
+                              ),
                               new Container(
                                 margin: const EdgeInsets.all(8.0),
                                 padding:
-                                const EdgeInsets.fromLTRB(18.0, 4.0, 18.0, 4.0),
+                                const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.lightBlueAccent),
                                   borderRadius: BorderRadius.circular(20.0),
@@ -307,6 +311,7 @@ class _DashboardState extends State<Dashboard> {
                         children: <Widget>[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -315,13 +320,17 @@ class _DashboardState extends State<Dashboard> {
                                 AssetImage("assets/Lokasi.png"),
                                 color: Colors.green,
                               ),
-                              Text(matchName,
-                                  style: new TextStyle(
-                                      fontSize: 12.0, fontFamily: "Avenir")),
+                              Container(
+                                width: 120.0,
+                                margin: EdgeInsets.only(left: 8.0),
+                                child: Text(matchName,
+                                    style: new TextStyle(
+                                        fontSize: 12.0, fontFamily: "Avenir")),
+                              ),
                               new Container(
-                                margin: const EdgeInsets.all(8.0),
+                                margin: const EdgeInsets.only(top:8.0, right: 8.0, bottom: 8.0),
                                 padding:
-                                const EdgeInsets.fromLTRB(18.0, 4.0, 18.0, 4.0),
+                                const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.lightBlueAccent),
                                   borderRadius: BorderRadius.circular(20.0),
@@ -338,7 +347,7 @@ class _DashboardState extends State<Dashboard> {
                           Card(
                             child:
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 new _listPertandingan(
                                   gambar:homeImage,
@@ -429,11 +438,14 @@ class _listPertandingan extends StatelessWidget {
                       image: new DecorationImage(
                           fit: BoxFit.fill, image: new NetworkImage(gambar))),
                 )),
-            Text(nama,
-                style: new TextStyle(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Avenir")),
+            Container(
+              width: 120.0,
+              child: Text(nama,
+                  style: new TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Avenir")),
+            ),
             Text(skor,
                 style: new TextStyle(
                     fontSize: 12.0,
