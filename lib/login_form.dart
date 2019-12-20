@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
@@ -43,240 +44,267 @@ class _Login_formState extends State<Login_form> {
   final myController = TextEditingController();
   final myController2 = TextEditingController();
 
+  Future<bool> _onWillPop() {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Are you sure?'),
+        content: Text('Do you want to exit an App'),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('No'),
+          ),
+          FlatButton(
+            onPressed: () => exit(0),
+            /*Navigator.of(context).pop(true)*/
+            child: Text('Yes'),
+          ),
+        ],
+      ),
+    ) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
     ProgressDialog pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
 
     pr.style(message: 'Login...');
-    return Scaffold(
-        backgroundColor: Color(0xffEFFFF0),
-        body: Center(
-          child: Container(
-            margin: EdgeInsets.only(top: 40.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          width: 210.0,
-                          height: 35.0,
-                          margin: const EdgeInsets.only(top: 8.0),
-                          decoration: new BoxDecoration(
-                              image: new DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: new AssetImage("assets/Logo.png"))),
-                        )),
-                    Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          width: 140.0,
-                          height: 140.0,
-                          margin: const EdgeInsets.only(top: 40.0),
-                          decoration: new BoxDecoration(
-                              image: new DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: new AssetImage("assets/Sign_in.png"))),
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40.0),
-                    ),
-                    Text(
-                      "Login",
-                      style: new TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Avenir"),
-                    ),
-                    Container(
-                        margin: const EdgeInsets.all(12.0),
-                        padding: const EdgeInsets.all(16.0),
-                        color: Colors.white,
-                        width: 320.0,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: <Widget>[
-                                Text(
-                                  "Username / Email",
-                                  style: new TextStyle(
-                                      fontSize: 16.0,
-                                      color: Colors.black,
-                                      fontFamily: "Avenir"),
-                                )
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 12.0, bottom: 12.0),
-                              child: TextField(
-                                controller: myController,
-                                decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(12.0),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.black26, width: 1.0),
-                                        borderRadius:
-                                        BorderRadius.circular(15.0))),
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  "Password",
-                                  style: new TextStyle(
-                                      fontSize: 16.0,
-                                      color: Colors.black,
-                                      fontFamily: "Avenir"),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 12.0, bottom: 12.0),
-                              child: TextField(
-                                controller: myController2,
-                                keyboardType: TextInputType.visiblePassword,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(12.0),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.black26, width: 1.0),
-                                        borderRadius:
-                                        BorderRadius.circular(15.0))),
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                GestureDetector(
-                                  onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                      builder: (BuildContext context) => new Registration())),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 8.0, bottom: 8.0),
-                                        child: Text(
-                                          "Register",
-                                          style: new TextStyle(
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.green,
-                                              fontFamily: "Avenir"),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),Padding(
-                                  padding: const EdgeInsets.only(right: 16.0),
-                                ),GestureDetector(
-                                  onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                      builder: (BuildContext context) => new LupaPassword())),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 8.0, bottom: 8.0),
-                                        child: Text(
-                                          "Lupa Password?",
-                                          style: new TextStyle(
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.green,
-                                              fontFamily: "Avenir"),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                    ),SizedBox(
-                      width: 320.0,
-                      height: 45.0,
-                      child: RaisedButton(
-                        //onPressed: () => Navigator.of(context).push(FadeRoute(page: MyStatefulWidget())),
-                        //onPressed: () => _makePostRequest(url, myController.text, myController2.text),
-                        onPressed: (){
-                          pr.show();
-                          FutureBuilder<LoginResponse>(
-                              // ignore: missing_return
-                              future: _makePostRequest(url, myController.text, myController2.text).then((task){
-                                pr.hide();
-                                print("ini asal global : " + globals.auth_token);
-                                print("global is_login : " + globals.is_Login.toString());
-                                if(task.status=="success"){
-                                  //respon ketika benar
-                                  globals.auth_token = task.token;
-                                  globals.is_Login = true;
-                                  globals.phone_number = "082114882718";
-                                  globals.email = task.email;
-                                  globals.name = task.name;
-                                  globals.photoUrl = task.photoUrl;
-                                  globals.playerID = task.playerId;
-                                  new AlertDialog(
-                                    content: new Text(task.message),
-                                  );
-                                  Navigator.of(context).push(FadeRoute(page: MyStatefulWidget()));
-                                }else{
-                                  //respon ketika salah
-                                  globals.is_Login = false;
-                                  showDialog(context: context, child:
-                                  new AlertDialog(
-                                    content: new Text(task.message),
-                                  )
-                                  );
-                                }
-                              }),
-                              builder: (context, snapshot){
-                                if(snapshot.data.status=="success"){
-                                  print("ini statis dari snapshoot : " + snapshot.data.status);
-                                  Navigator.of(context).push(FadeRoute(page: MyStatefulWidget()));
-                                }
-                              }
-                          );
-                        },
-                        color: Colors.green,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(12.0),
-                          side: BorderSide(color: Colors.green),
-                        ),
-                        child: Text(
-                          "LOGIN",
-                          style: new TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0),
-                        ),
-
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+          backgroundColor: Color(0xffEFFFF0),
+          body: Center(
+            child: Container(
+                margin: EdgeInsets.only(top: 40.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                            width: 210.0,
+                            height: 35.0,
+                            margin: const EdgeInsets.only(top: 8.0),
+                            decoration: new BoxDecoration(
+                                image: new DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: new AssetImage("assets/Logo.png"))),
+                          )),
+                      Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                            width: 140.0,
+                            height: 140.0,
+                            margin: const EdgeInsets.only(top: 40.0),
+                            decoration: new BoxDecoration(
+                                image: new DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: new AssetImage("assets/Sign_in.png"))),
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40.0),
                       ),
-                    ),
-                  ],
-                ),
-              )),
-        ));
+                      Text(
+                        "Login",
+                        style: new TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Avenir"),
+                      ),
+                      Container(
+                          margin: const EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.all(16.0),
+                          color: Colors.white,
+                          width: 320.0,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  Text(
+                                    "Username / Email",
+                                    style: new TextStyle(
+                                        fontSize: 16.0,
+                                        color: Colors.black,
+                                        fontFamily: "Avenir"),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 12.0, bottom: 12.0),
+                                child: TextField(
+                                  controller: myController,
+                                  decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(12.0),
+                                      border: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.black26, width: 1.0),
+                                          borderRadius:
+                                          BorderRadius.circular(15.0))),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    "Password",
+                                    style: new TextStyle(
+                                        fontSize: 16.0,
+                                        color: Colors.black,
+                                        fontFamily: "Avenir"),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 12.0, bottom: 12.0),
+                                child: TextField(
+                                  controller: myController2,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(12.0),
+                                      border: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.black26, width: 1.0),
+                                          borderRadius:
+                                          BorderRadius.circular(15.0))),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  GestureDetector(
+                                    onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                                        builder: (BuildContext context) => new Registration())),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 8.0, bottom: 8.0),
+                                          child: Text(
+                                            "Register",
+                                            style: new TextStyle(
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.green,
+                                                fontFamily: "Avenir"),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),Padding(
+                                    padding: const EdgeInsets.only(right: 16.0),
+                                  ),GestureDetector(
+                                    onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                                        builder: (BuildContext context) => new LupaPassword())),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 8.0, bottom: 8.0),
+                                          child: Text(
+                                            "Lupa Password?",
+                                            style: new TextStyle(
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.green,
+                                                fontFamily: "Avenir"),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                      ),SizedBox(
+                        width: 320.0,
+                        height: 45.0,
+                        child: RaisedButton(
+                          //onPressed: () => Navigator.of(context).push(FadeRoute(page: MyStatefulWidget())),
+                          //onPressed: () => _makePostRequest(url, myController.text, myController2.text),
+                          onPressed: (){
+                            pr.show();
+                            FutureBuilder<LoginResponse>(
+                              // ignore: missing_return
+                                future: _makePostRequest(url, myController.text, myController2.text).then((task){
+                                  pr.hide();
+                                  print("ini asal global : " + globals.auth_token);
+                                  print("global is_login : " + globals.is_Login.toString());
+                                  if(task.status=="success"){
+                                    //respon ketika benar
+                                    globals.auth_token = task.token;
+                                    globals.is_Login = true;
+                                    globals.phone_number = "082114882718";
+                                    globals.email = task.email;
+                                    globals.name = task.name;
+                                    globals.photoUrl = task.photoUrl;
+                                    globals.playerID = task.playerId;
+                                    new AlertDialog(
+                                      content: new Text(task.message),
+                                    );
+                                    Navigator.of(context).push(FadeRoute(page: MyStatefulWidget()));
+                                  }else{
+                                    //respon ketika salah
+                                    globals.is_Login = false;
+                                    showDialog(context: context, child:
+                                    new AlertDialog(
+                                      content: new Text(task.message),
+                                    )
+                                    );
+                                  }
+                                }),
+                                builder: (context, snapshot){
+                                  if(snapshot.data.status=="success"){
+                                    print("ini statis dari snapshoot : " + snapshot.data.status);
+                                    Navigator.of(context).push(FadeRoute(page: MyStatefulWidget()));
+                                  }
+                                }
+                            );
+                          },
+                          color: Colors.green,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(12.0),
+                            side: BorderSide(color: Colors.green),
+                          ),
+                          child: Text(
+                            "LOGIN",
+                            style: new TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0),
+                          ),
+
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+
+          )),
+    );
+
   }
 
   Future<LoginResponse> _makePostRequest(String url, String username, String password) async {
