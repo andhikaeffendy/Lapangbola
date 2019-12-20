@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -54,26 +55,50 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      backgroundColor: Color(0xffEFFFF0),
-      body: Container(
-        padding: const EdgeInsets.only(top: 45.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    width: 140.0,
-                    height: 25.0,
-                    padding: const EdgeInsets.only(top: 8.0),
-                    decoration: new BoxDecoration(
-                        image: new DecorationImage(
-                            fit: BoxFit.fill,
-                            image: new AssetImage("assets/Logo.png"))),
-                  )),
+    Future<bool> _onWillPop() {
+      return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Are you sure?'),
+          content: Text('Do you want to exit an App'),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('No'),
+            ),
+            FlatButton(
+              onPressed: () => exit(0),
+              /*Navigator.of(context).pop(true)*/
+              child: Text('Yes'),
+            ),
+          ],
+        ),
+      ) ??
+          false;
+    }
+
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        backgroundColor: Color(0xffEFFFF0),
+        body: Container(
+          padding: const EdgeInsets.only(top: 45.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      width: 140.0,
+                      height: 25.0,
+                      padding: const EdgeInsets.only(top: 8.0),
+                      decoration: new BoxDecoration(
+                          image: new DecorationImage(
+                              fit: BoxFit.fill,
+                              image: new AssetImage("assets/Logo.png"))),
+                    )),
 //              Text(
 //                "Lapangbola",
 //                style: new TextStyle(
@@ -82,70 +107,70 @@ class _DashboardState extends State<Dashboard> {
 //                    fontWeight: FontWeight.bold,
 //                    fontFamily: "Avenir_bold"),
 //              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-              ),
-              Text(
-                "Good Afternoon, " + globals.name + "!",
-                style: new TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.amber,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Avenir"),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
-              ),
-              carouselSlider = CarouselSlider(
-                enlargeCenterPage: true,
-                autoPlay: false,
-                reverse: false,
-                autoPlayInterval: Duration(seconds: 2),
-                autoPlayAnimationDuration: Duration(milliseconds: 1300),
-                pauseAutoPlayOnTouch: Duration(seconds: 2),
-                enableInfiniteScroll: true,
-                scrollDirection: Axis.horizontal,
-                height: 160.0,
-                initialPage: 0,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
-                items: listGambar.map((imgUrl) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 12.0),
-                          child: ClipRRect(
-                            borderRadius: new BorderRadius.circular(15.0),
-                            child: Image.network(
-                              imgUrl,
-                              fit: BoxFit.fill,
-                            ),
-                          ));
-                    },
-                  );
-                }).toList(),
-              ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                ),
+                Text(
+                  "Good Afternoon, " + globals.name + "!",
+                  style: new TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.amber,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Avenir"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+                ),
+                carouselSlider = CarouselSlider(
+                  enlargeCenterPage: true,
+                  autoPlay: false,
+                  reverse: false,
+                  autoPlayInterval: Duration(seconds: 2),
+                  autoPlayAnimationDuration: Duration(milliseconds: 1300),
+                  pauseAutoPlayOnTouch: Duration(seconds: 2),
+                  enableInfiniteScroll: true,
+                  scrollDirection: Axis.horizontal,
+                  height: 160.0,
+                  initialPage: 0,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                  items: listGambar.map((imgUrl) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: EdgeInsets.symmetric(horizontal: 12.0),
+                            child: ClipRRect(
+                              borderRadius: new BorderRadius.circular(15.0),
+                              child: Image.network(
+                                imgUrl,
+                                fit: BoxFit.fill,
+                              ),
+                            ));
+                      },
+                    );
+                  }).toList(),
+                ),
 //              SizedBox(
 //                height: 10.0,
 //                width: 10.0,
 //              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                      icon: Image.asset("assets/tombol_slider_kiri.png"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    IconButton(
+                        icon: Image.asset("assets/tombol_slider_kiri.png"),
+                        iconSize: 40.0,
+                        onPressed: goToPreviousImage),
+                    IconButton(
+                      icon: Image.asset("assets/tombol_slider_kanan.png"),
+                      onPressed: goToNextImage,
                       iconSize: 40.0,
-                      onPressed: goToPreviousImage),
-                  IconButton(
-                    icon: Image.asset("assets/tombol_slider_kanan.png"),
-                    onPressed: goToNextImage,
-                    iconSize: 40.0,
-                  ),
+                    ),
 //                  OutlineButton(
 //                      onPressed: goToPreviousImage,
 //                      child: Text(
@@ -159,229 +184,230 @@ class _DashboardState extends State<Dashboard> {
 //                      style: new TextStyle(fontSize: 16.0),
 //                    ),
 //                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(6.0),
-              ),
-              Text(
-                "Hasil Pertandingan Pekan ke-2",
-                style: new TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-                    fontFamily: "Avenir"),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  ImageIcon(
-                    AssetImage("assets/Kalender.png"),
-                    color: Colors.amber,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 12.0, 0, 12.0),
-                    child: getDate(),
-                  ),
-                ],
-              ),
-              FutureBuilder(
-                future: _makePostRequest(url),
-                builder: (context, snapshot){
-                  if (!snapshot.hasData || snapshot.data == null) {
-                    return Center(child: CircularProgressIndicator());
-                  }else{
-                    Datum tempData = snapshot.data.data[3];
-                    String homeName = "-", awayName = "-", homeScore = "-" , awayScore = "-" ,
-                        matchTime = "-" , matchName = "-", homeImage = "-", awayImage = "-";
-                    if(tempData.matchesCollection == null){
-                      print("matches null");
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(6.0),
+                ),
+                Text(
+                  "Hasil Pertandingan Pekan ke-2",
+                  style: new TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      fontFamily: "Avenir"),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    ImageIcon(
+                      AssetImage("assets/Kalender.png"),
+                      color: Colors.amber,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 12.0, 0, 12.0),
+                      child: getDate(),
+                    ),
+                  ],
+                ),
+                FutureBuilder(
+                  future: _makePostRequest(url),
+                  builder: (context, snapshot){
+                    if (!snapshot.hasData || snapshot.data == null) {
+                      return Center(child: CircularProgressIndicator());
                     }else{
-                      matchName = tempData.matchesCollection[0].stadium;
-                      homeName = tempData.matchesCollection[0].homeName;
-                      awayName = tempData.matchesCollection[0].awayName;
-                      homeScore = tempData.matchesCollection[0].homeScore.toString();
-                      awayScore = tempData.matchesCollection[0].awayScore.toString();
-                      matchName = tempData.matchesCollection[0].stadium;
-                      matchTime = tempData.matchesCollection[0].minute;
-                      homeImage = tempData.matchesCollection[0].homeImage;
-                      awayImage = tempData.matchesCollection[0].awayImage;
-                    }
-                    return Container(
-                      width: 250.0,
-                      color: Color(0xffffffff),
-                      child: GestureDetector(
-                        onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                            builder: (BuildContext context) => new Pertandingan())),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                ),
-                                ImageIcon(
-                                  AssetImage("assets/Lokasi.png"),
-                                  color: Colors.green,
-                                ),
-                                Container(
-                                  width: 120.0,
-                                  margin: EdgeInsets.only(left: 8.0),
-                                  child: Text(matchName,
-                                      style: new TextStyle(
-                                          fontSize: 12.0, fontFamily: "Avenir")),
-                                ),
-                                new Container(
-                                  margin: const EdgeInsets.all(8.0),
-                                  padding:
-                                  const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.lightBlueAccent),
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    color: Colors.lightBlueAccent,
-                                  ),
-                                  child: Text(
-                                    matchTime,
-                                    style: new TextStyle(
-                                        fontSize: 12.0, fontFamily: "Avenir"),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Card(
-                              child:
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      Datum tempData = snapshot.data.data[3];
+                      String homeName = "-", awayName = "-", homeScore = "-" , awayScore = "-" ,
+                          matchTime = "-" , matchName = "-", homeImage = "-", awayImage = "-";
+                      if(tempData.matchesCollection == null){
+                        print("matches null");
+                      }else{
+                        matchName = tempData.matchesCollection[0].stadium;
+                        homeName = tempData.matchesCollection[0].homeName;
+                        awayName = tempData.matchesCollection[0].awayName;
+                        homeScore = tempData.matchesCollection[0].homeScore.toString();
+                        awayScore = tempData.matchesCollection[0].awayScore.toString();
+                        matchName = tempData.matchesCollection[0].stadium;
+                        matchTime = tempData.matchesCollection[0].minute;
+                        homeImage = tempData.matchesCollection[0].homeImage;
+                        awayImage = tempData.matchesCollection[0].awayImage;
+                      }
+                      return Container(
+                        width: 250.0,
+                        color: Color(0xffffffff),
+                        child: GestureDetector(
+                          onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                              builder: (BuildContext context) => new Pertandingan())),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  new _listPertandingan(
-                                    gambar:
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
-                                    nama: homeName,
-                                    skor: homeScore,
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                   ),
-                                  new _listPertandingan(
-                                    gambar:
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
-                                    nama: awayName,
-                                    skor: awayScore,
+                                  ImageIcon(
+                                    AssetImage("assets/Lokasi.png"),
+                                    color: Colors.green,
+                                  ),
+                                  Container(
+                                    width: 120.0,
+                                    margin: EdgeInsets.only(left: 8.0),
+                                    child: Text(matchName,
+                                        style: new TextStyle(
+                                            fontSize: 12.0, fontFamily: "Avenir")),
+                                  ),
+                                  new Container(
+                                    margin: const EdgeInsets.all(8.0),
+                                    padding:
+                                    const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.lightBlueAccent),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      color: Colors.lightBlueAccent,
+                                    ),
+                                    child: Text(
+                                      matchTime,
+                                      style: new TextStyle(
+                                          fontSize: 12.0, fontFamily: "Avenir"),
+                                    ),
                                   )
                                 ],
                               ),
-                            )
-                          ],
+                              Card(
+                                child:
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new _listPertandingan(
+                                      gambar:
+                                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
+                                      nama: homeName,
+                                      skor: homeScore,
+                                    ),
+                                    new _listPertandingan(
+                                      gambar:
+                                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
+                                      nama: awayName,
+                                      skor: awayScore,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-
-                },
-              ),
-
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-              ),
-              FutureBuilder(
-                future: _makePostRequest(url),
-                builder: (context, snapshot){
-                  if (!snapshot.hasData || snapshot.data == null) {
-                    return Center(child: CircularProgressIndicator());
-                  }else{
-                    Datum tempData = snapshot.data.data[4];
-                    String homeName = "-", awayName = "-", homeScore = "-" , awayScore = "-" ,
-                        matchTime = "-" , matchName = "-", homeImage = "-", awayImage = "-";
-                    if(tempData.matchesCollection == null){
-                      print("matches null");
-                    }else{
-                      matchName = tempData.matchesCollection[0].stadium;
-                      homeName = tempData.matchesCollection[0].homeName;
-                      awayName = tempData.matchesCollection[0].awayName;
-                      homeScore = tempData.matchesCollection[0].homeScore.toString();
-                      awayScore = tempData.matchesCollection[0].awayScore.toString();
-                      matchName = tempData.matchesCollection[0].stadium;
-                      matchTime = tempData.matchesCollection[0].minute;
-                      homeImage = "http://liga.lapangbola.com" + tempData.matchesCollection[0].homeImage;
-                      awayImage = "http://liga.lapangbola.com" + tempData.matchesCollection[0].awayImage;
+                      );
                     }
-                    return Container(
-                      width: 250.0,
-                      color: Color(0xffffffff),
-                      child: GestureDetector(
-                        onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                            builder: (BuildContext context) => new Pertandingan())),
-                        child: Column(
 
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                ),
-                                ImageIcon(
-                                  AssetImage("assets/Lokasi.png"),
-                                  color: Colors.green,
-                                ),
-                                Container(
-                                  width: 120.0,
-                                  margin: EdgeInsets.only(left: 8.0),
-                                  child: Text(matchName,
-                                      style: new TextStyle(
-                                          fontSize: 12.0, fontFamily: "Avenir")),
-                                ),
-                                new Container(
-                                  margin: const EdgeInsets.only(top:8.0, right: 8.0, bottom: 8.0),
-                                  padding:
-                                  const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.lightBlueAccent),
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    color: Colors.lightBlueAccent,
-                                  ),
-                                  child: Text(
-                                    matchTime,
-                                    style: new TextStyle(
-                                        fontSize: 12.0, fontFamily: "Avenir"),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Card(
-                              child:
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                  },
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                ),
+                FutureBuilder(
+                  future: _makePostRequest(url),
+                  builder: (context, snapshot){
+                    if (!snapshot.hasData || snapshot.data == null) {
+                      return Center(child: CircularProgressIndicator());
+                    }else{
+                      Datum tempData = snapshot.data.data[4];
+                      String homeName = "-", awayName = "-", homeScore = "-" , awayScore = "-" ,
+                          matchTime = "-" , matchName = "-", homeImage = "-", awayImage = "-";
+                      if(tempData.matchesCollection == null){
+                        print("matches null");
+                      }else{
+                        matchName = tempData.matchesCollection[0].stadium;
+                        homeName = tempData.matchesCollection[0].homeName;
+                        awayName = tempData.matchesCollection[0].awayName;
+                        homeScore = tempData.matchesCollection[0].homeScore.toString();
+                        awayScore = tempData.matchesCollection[0].awayScore.toString();
+                        matchName = tempData.matchesCollection[0].stadium;
+                        matchTime = tempData.matchesCollection[0].minute;
+                        homeImage = "http://liga.lapangbola.com" + tempData.matchesCollection[0].homeImage;
+                        awayImage = "http://liga.lapangbola.com" + tempData.matchesCollection[0].awayImage;
+                      }
+                      return Container(
+                        width: 250.0,
+                        color: Color(0xffffffff),
+                        child: GestureDetector(
+                          onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                              builder: (BuildContext context) => new Pertandingan())),
+                          child: Column(
+
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  new _listPertandingan(
-                                    gambar:homeImage,
-                                    nama: homeName,
-                                    skor: homeScore,
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                   ),
-                                  new _listPertandingan(
-                                    gambar:awayImage,
-                                    nama: awayName,
-                                    skor: awayScore,
+                                  ImageIcon(
+                                    AssetImage("assets/Lokasi.png"),
+                                    color: Colors.green,
+                                  ),
+                                  Container(
+                                    width: 120.0,
+                                    margin: EdgeInsets.only(left: 8.0),
+                                    child: Text(matchName,
+                                        style: new TextStyle(
+                                            fontSize: 12.0, fontFamily: "Avenir")),
+                                  ),
+                                  new Container(
+                                    margin: const EdgeInsets.only(top:8.0, right: 8.0, bottom: 8.0),
+                                    padding:
+                                    const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.lightBlueAccent),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      color: Colors.lightBlueAccent,
+                                    ),
+                                    child: Text(
+                                      matchTime,
+                                      style: new TextStyle(
+                                          fontSize: 12.0, fontFamily: "Avenir"),
+                                    ),
                                   )
                                 ],
                               ),
-                            )
-                          ],
+                              Card(
+                                child:
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    new _listPertandingan(
+                                      gambar:homeImage,
+                                      nama: homeName,
+                                      skor: homeScore,
+                                    ),
+                                    new _listPertandingan(
+                                      gambar:awayImage,
+                                      nama: awayName,
+                                      skor: awayScore,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
+                      );
+                    }
 
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-              )
-            ],
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                )
+              ],
+            ),
           ),
         ),
       ),

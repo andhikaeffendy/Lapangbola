@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
@@ -17,72 +18,97 @@ class MyMatch extends StatefulWidget {
 class _MyMatchState extends State<MyMatch> {
   String masterUrl = "https://liga.lapangbola.com/api/player_matches";
 
+  Future<bool> _onWillPop() {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Are you sure?'),
+        content: Text('Do you want to exit an App'),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('No'),
+          ),
+          FlatButton(
+            onPressed: () => exit(0),
+            /*Navigator.of(context).pop(true)*/
+            child: Text('Yes'),
+          ),
+        ],
+      ),
+    ) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xffEFFFF0),
-      body: Container(
-          child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 0),
-                child: Text(
-                  "My Match",
-                  style: new TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
-                      fontFamily: "Avenir"),
-                )),
-            Expanded(
-              child:
-              Container(
-                margin: EdgeInsets.all(16.0),
-                child: FutureBuilder(
-                  future: _makePostRequest(masterUrl, globals.phone_number),
-                  builder: (context, snapshot){
-                    if (!snapshot.hasData || snapshot.data == null) {
-                      return Center(child: CircularProgressIndicator());
-                    }else{
-                      return ListView.builder(
-                        itemCount: snapshot.data.data.length,
-                        itemBuilder: (context, index) {
-                          Datum project = snapshot.data.data[index];
-                          globals.myMatchResponse = snapshot.data;
-                          return Column(
-                            children: <Widget>[
-                              Card(
-                                  child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        new _listMatch(
-                                          namaSatu: project.homeName,
-                                          gambarSatu: project.homeImage,
-                                          scoreHome: project.homeScore,
-                                          scoreAway: project.awayScore,
-                                          gambardua: project.awayImage,
-                                          namaDua: project.awayName,
-                                        ),
-                                        new CustomPaint(painter: Drawhorizontalline(),)]
-                                  )
-                              ),// Widget to display the list of project
-                            ],
-                          );
-                        },
-                      );
-                    }
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        backgroundColor: Color(0xffEFFFF0),
+        body: Container(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 0),
+                      child: Text(
+                        "My Match",
+                        style: new TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                            fontFamily: "Avenir"),
+                      )),
+                  Expanded(
+                    child:
+                    Container(
+                      margin: EdgeInsets.all(16.0),
+                      child: FutureBuilder(
+                        future: _makePostRequest(masterUrl, globals.phone_number),
+                        builder: (context, snapshot){
+                          if (!snapshot.hasData || snapshot.data == null) {
+                            return Center(child: CircularProgressIndicator());
+                          }else{
+                            return ListView.builder(
+                              itemCount: snapshot.data.data.length,
+                              itemBuilder: (context, index) {
+                                Datum project = snapshot.data.data[index];
+                                globals.myMatchResponse = snapshot.data;
+                                return Column(
+                                  children: <Widget>[
+                                    Card(
+                                        child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              new _listMatch(
+                                                namaSatu: project.homeName,
+                                                gambarSatu: project.homeImage,
+                                                scoreHome: project.homeScore,
+                                                scoreAway: project.awayScore,
+                                                gambardua: project.awayImage,
+                                                namaDua: project.awayName,
+                                              ),
+                                              new CustomPaint(painter: Drawhorizontalline(),)]
+                                        )
+                                    ),// Widget to display the list of project
+                                  ],
+                                );
+                              },
+                            );
+                          }
 
-                  },
-                ),
+                        },
+                      ),
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
-      )),
+            )),
+      ),
     );
   }
 
