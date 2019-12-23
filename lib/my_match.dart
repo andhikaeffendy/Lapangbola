@@ -164,7 +164,6 @@ class _listMatch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8.0),
-      margin: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
             builder: (BuildContext context) => new Pertandingan())),
@@ -173,7 +172,7 @@ class _listMatch extends StatelessWidget {
           children: <Widget>[
             Container(
               margin: EdgeInsets.only(right: 8.0),
-              width: 80,
+              width: 60,
               child: Text(
                 namaSatu,
                 style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,
@@ -223,7 +222,7 @@ class _listMatch extends StatelessWidget {
                 )),
             Container(
               margin: EdgeInsets.only(left: 12.0),
-              width: 70,
+              width: 60,
               child: Text(
                 namaDua,
                 style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,
@@ -231,6 +230,7 @@ class _listMatch extends StatelessWidget {
               ),
             ),
             Container(
+              width: 15.0,
               child: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.green,
@@ -261,7 +261,7 @@ class Drawhorizontalline extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawLine(Offset(-175.0, 0.0), Offset(175.0, 0.0), _paint);
+    canvas.drawLine(Offset(-160.0, 0.0), Offset(160.0, 0.0), _paint);
   }
 
   @override

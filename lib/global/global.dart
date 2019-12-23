@@ -2,6 +2,7 @@ library LapangBola.global;
 
 import 'package:lapang_bola_flutter/models/myMatch_response.dart';
 import 'package:lapang_bola_flutter/my_match.dart';
+import 'dart:io';
 
 String auth_token = "";
 bool is_Login = false;
@@ -10,6 +11,7 @@ String email = "";
 String gender = "";
 String phone_number = "";
 String photoUrl = "";
+File tempPicture = null;
 
 int playerID = 0;
 

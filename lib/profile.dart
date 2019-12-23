@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lapang_bola_flutter/change_profile_picture.dart';
 import 'package:lapang_bola_flutter/profile_desc.dart';
+import 'change_profile_picture.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -47,6 +49,22 @@ class _ProfileState extends State<Profile> {
                                 image:
                                     AssetImage("assets/Grafis_profile.png"))),
                       )),
+                  FlatButton.icon(
+                    color: Colors.green,
+                    onPressed: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (BuildContext context) => new ChangeProfilePicture())),
+                    icon: Icon(
+                      Icons.edit,
+                      color: Colors.white,
+                      size: 15.0,
+                    ),
+                    label: Text("Edit Foto Profile",
+                        style: new TextStyle(
+                            fontSize: 12.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Avenir")),
+                  ),
                   Text(
                     "Buat akun baru",
                     style: new TextStyle(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lapang_bola_flutter/pilih_foto.dart';
+import 'pilih_foto.dart';
 
 class Pertandingan extends StatefulWidget {
   @override
@@ -18,94 +20,116 @@ class _PertandinganState extends State<Pertandingan> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  "Pertandingan",
-                  style: new TextStyle(
-                      fontSize: 24.0,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Avenir"),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20.0),
-                  height: 180.0,
-                  decoration: new BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            'http://www.staradmiral.com/wp-content/uploads/2017/01/Empat-Macam-Lapangan-Futsal.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height: 70.0,
-                      padding: EdgeInsets.all(8.0),
-                      color: Colors.black54,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Container(
-                                width: 50.0,
-                                height: 50.0,
-                                decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: new DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: new NetworkImage(
-                                            "http://pluspng.com/img-png/circle-png-white-circle-icon-512.png"))),
-                              )),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    "Lap. Batununggal, Bandung",
-                                    style: new TextStyle(
-                                        fontSize: 12.0,
-                                        color: Colors.white,
-                                        fontFamily: "Avenir"),
-                                  ),
-                                ),Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    "24 Nov 2019",
-                                    style: new TextStyle(
-                                        fontSize: 14.0,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "Avenir"),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Align(
-                              alignment: Alignment.bottomRight,
-                              child: Container(
-                                width: 50.0,
-                                height: 50.0,
-                                decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: new DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: new NetworkImage(
-                                            "http://pluspng.com/img-png/circle-png-white-circle-icon-512.png"))),
-                              )),
-                        ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 250.0,
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        "Pertandingan",
+                        style: new TextStyle(
+                            fontSize: 24.0,
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Avenir"),
                       ),
                     ),
-                  )
+                    Container(
+                      margin: EdgeInsets.only(left: 40.0),
+                      child: IconButton(
+                        icon: Icon(Icons.directions),
+                        color: Colors.yellow,
+                        iconSize: 30.0,
+                        alignment: Alignment.centerRight,
+                        onPressed: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) => new Pilih_Foto())),
+                      ),
+                    ),
+                  ],
                 ),
                 Container(
+                    margin: EdgeInsets.only(top: 20.0),
+                    height: 180.0,
+                    decoration: new BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              'http://www.staradmiral.com/wp-content/uploads/2017/01/Empat-Macam-Lapangan-Futsal.jpg'),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: 70.0,
+                        padding: EdgeInsets.all(8.0),
+                        color: Colors.black54,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Container(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  decoration: new BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: new DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: new NetworkImage(
+                                              "http://pluspng.com/img-png/circle-png-white-circle-icon-512.png"))),
+                                )),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      "Lap. Batununggal, Bandung",
+                                      style: new TextStyle(
+                                          fontSize: 12.0,
+                                          color: Colors.white,
+                                          fontFamily: "Avenir"),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      "24 Nov 2019",
+                                      style: new TextStyle(
+                                          fontSize: 14.0,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Align(
+                                alignment: Alignment.bottomRight,
+                                child: Container(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  decoration: new BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: new DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: new NetworkImage(
+                                              "http://pluspng.com/img-png/circle-png-white-circle-icon-512.png"))),
+                                )),
+                          ],
+                        ),
+                      ),
+                    )),
+                Container(
                   color: Colors.green,
-                  padding: EdgeInsets.only(top: 12.0, bottom: 12.0, left: 24.0, right: 24.0),
+                  padding: EdgeInsets.only(
+                      top: 12.0, bottom: 12.0, left: 24.0, right: 24.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -178,7 +202,8 @@ class _PertandinganState extends State<Pertandingan> {
                         child: CustomPaint(
                           painter: Drawhorizontalline(),
                         ),
-                      ),Row(
+                      ),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
@@ -192,14 +217,16 @@ class _PertandinganState extends State<Pertandingan> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Avenir"),
                             ),
-                          ),Text(
+                          ),
+                          Text(
                             "Possesions %",
                             style: new TextStyle(
                                 fontSize: 12.0,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Avenir"),
-                          ),Padding(
+                          ),
+                          Padding(
                             padding: const EdgeInsets.only(right: 24.0),
                             child: Text(
                               "59,5",
@@ -211,12 +238,14 @@ class _PertandinganState extends State<Pertandingan> {
                             ),
                           )
                         ],
-                      ),Padding(
+                      ),
+                      Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: CustomPaint(
                           painter: Drawhorizontalline(),
                         ),
-                      ),Row(
+                      ),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
@@ -230,14 +259,16 @@ class _PertandinganState extends State<Pertandingan> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Avenir"),
                             ),
-                          ),Text(
+                          ),
+                          Text(
                             "Shoots On Target",
                             style: new TextStyle(
                                 fontSize: 12.0,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Avenir"),
-                          ),Padding(
+                          ),
+                          Padding(
                             padding: const EdgeInsets.only(right: 24.0),
                             child: Text(
                               "5",
@@ -249,12 +280,14 @@ class _PertandinganState extends State<Pertandingan> {
                             ),
                           )
                         ],
-                      ),Padding(
+                      ),
+                      Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: CustomPaint(
                           painter: Drawhorizontalline(),
                         ),
-                      ),Row(
+                      ),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
@@ -268,14 +301,16 @@ class _PertandinganState extends State<Pertandingan> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Avenir"),
                             ),
-                          ),Text(
+                          ),
+                          Text(
                             "Shoots",
                             style: new TextStyle(
                                 fontSize: 12.0,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Avenir"),
-                          ),Padding(
+                          ),
+                          Padding(
                             padding: const EdgeInsets.only(right: 24.0),
                             child: Text(
                               "11",
@@ -287,12 +322,14 @@ class _PertandinganState extends State<Pertandingan> {
                             ),
                           )
                         ],
-                      ),Padding(
+                      ),
+                      Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: CustomPaint(
                           painter: Drawhorizontalline(),
                         ),
-                      ),Row(
+                      ),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
@@ -306,14 +343,16 @@ class _PertandinganState extends State<Pertandingan> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Avenir"),
                             ),
-                          ),Text(
+                          ),
+                          Text(
                             "Touches",
                             style: new TextStyle(
                                 fontSize: 12.0,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Avenir"),
-                          ),Padding(
+                          ),
+                          Padding(
                             padding: const EdgeInsets.only(right: 24.0),
                             child: Text(
                               "782",
@@ -325,12 +364,14 @@ class _PertandinganState extends State<Pertandingan> {
                             ),
                           )
                         ],
-                      ),Padding(
+                      ),
+                      Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: CustomPaint(
                           painter: Drawhorizontalline(),
                         ),
-                      ),Row(
+                      ),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
@@ -344,14 +385,16 @@ class _PertandinganState extends State<Pertandingan> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Avenir"),
                             ),
-                          ),Text(
+                          ),
+                          Text(
                             "Passes",
                             style: new TextStyle(
                                 fontSize: 12.0,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Avenir"),
-                          ),Padding(
+                          ),
+                          Padding(
                             padding: const EdgeInsets.only(right: 24.0),
                             child: Text(
                               "582",

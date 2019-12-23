@@ -43,9 +43,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         height: 60.0,
 
         items: <Widget>[
-          Icon(Icons.dashboard, size: 40,color: Colors.white),
-          Icon(Icons.score, size: 40,color: Colors.white),
-          Icon(Icons.person, size: 40,color: Colors.white),
+          Icon(Icons.dashboard, size: 35,color: Colors.white),
+          Icon(Icons.score, size: 35,color: Colors.white),
+          Icon(Icons.person, size: 35,color: Colors.white),
         ],
         onTap: (index) {
           setState(() {

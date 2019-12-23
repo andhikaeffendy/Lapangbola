@@ -20,6 +20,7 @@ dependencies:
   json_annotation: ^2.0.0
   flutter:
     sdk: flutter
+  file_picker: ^1.2.0
   carousel_pro: ^0.0.13
   flutter_verification_code_input:
     git:
@@ -35,6 +36,7 @@ dependencies:
   indonesia: ^1.0.1
   progress_dialog: ^1.2.0
   http: ^0.12.0+2
+  flutter_share_me: ^0.1.3
 
 
 
@@ -78,6 +80,16 @@ flutter:
     - assets/Register.png
     - assets/Hide.png
     - assets/User.png
+    - assets/Camera.png
+    - assets/Drive.png
+    - assets/File_manager.png
+    - assets/Files.png
+    - assets/Gallery.png
+    - assets/Photo.png
+    - assets/Profile_pict.png
+    - assets/Share_me.png
+    - assets/WA.png
+    - assets/Lapangbola_share.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
