@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:lapang_bola_flutter/models/logout_response.dart';
+import 'package:lapang_bola_flutter/pilih_foto.dart';
 import 'package:lapang_bola_flutter/profile.dart';
 import 'package:lapang_bola_flutter/statistik.dart';
+import 'change_profile_picture.dart';
 import 'login_form.dart';
 import 'profile.dart';
 import 'statistik.dart';
@@ -95,7 +97,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                     alignment: Alignment.bottomLeft,
                                     child: GestureDetector(
                                       onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                          builder: (BuildContext context) => new Profile())),
+                                          builder: (BuildContext context) => new ChangeProfilePicture())),
                                       child: Container(
                                         width: 30.0,
                                         height: 30.0,

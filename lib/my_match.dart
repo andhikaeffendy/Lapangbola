@@ -91,6 +91,8 @@ class _MyMatchState extends State<MyMatch> {
                                                 scoreAway: project.awayScore,
                                                 gambardua: project.awayImage,
                                                 namaDua: project.awayName,
+                                                id: project.id,
+                                                match: project,
                                               ),
                                               new CustomPaint(painter: Drawhorizontalline(),)]
                                         )
@@ -153,20 +155,24 @@ class _listMatch extends StatelessWidget {
       this.scoreHome,
         this.scoreAway,
       this.gambardua,
-      this.namaDua});
+      this.namaDua,
+      this.id,
+      this.match});
   String namaSatu;
   String gambarSatu;
   int scoreHome;
   int scoreAway;
   String gambardua;
   String namaDua;
+  int id;
+  Datum match;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-            builder: (BuildContext context) => new Pertandingan())),
+            builder: (BuildContext context) => new Pertandingan(matchID: match))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
