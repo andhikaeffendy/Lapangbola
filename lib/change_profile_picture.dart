@@ -1,6 +1,13 @@
+import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:async/async.dart';
 import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:lapang_bola_flutter/global/global.dart' as globals;
+
+
 
 class ChangeProfilePicture extends StatefulWidget {
   @override
@@ -9,15 +16,17 @@ class ChangeProfilePicture extends StatefulWidget {
 
 class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
   Future<File> imageFile;
+  File imageFile2;
 
-  _openGallery(ImageSource src) {
+
+  _openGallery(ImageSource src, BuildContext context) {
     setState(() {
       imageFile = ImagePicker.pickImage(source: src);
     });
     Navigator.of(context).pop();
   }
 
-  _openCamera(ImageSource src) async {
+  _openCamera(ImageSource src, BuildContext context) async {
     setState(() {
       imageFile = ImagePicker.pickImage(source: src);
     });
@@ -47,7 +56,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        _openCamera(ImageSource.camera);
+                        _openCamera(ImageSource.camera, context);
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -82,7 +91,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        _openGallery(ImageSource.gallery);
+                        _openGallery(ImageSource.gallery, context);
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -154,6 +163,8 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
             ),
           );
         });
+
+
   }
 
   Widget pic() {
@@ -161,6 +172,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
       future: imageFile,
       builder: (BuildContext context, AsyncSnapshot<File> s) {
         if (s.connectionState == ConnectionState.done && s.data != null) {
+          imageFile2 = s.data;
           return Align(
               alignment: Alignment.topCenter,
               child: Container(
@@ -196,6 +208,8 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
 
   @override
   Widget build(BuildContext context) {
+    print("photo url : "+globals.photoUrl);
+
     return Scaffold(
       backgroundColor: Color(0xffEFFFF0),
       body: Container(
@@ -236,7 +250,9 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
               width: 140.0,
               height: 45.0,
               child: RaisedButton(
-                onPressed: (){},
+                onPressed: (){
+                  // upload disini
+                },
                 color: Colors.green,
                 shape: RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(12.0),
@@ -255,5 +271,38 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
         ),
       ),
     );
+  }
+
+  upload(File imageFile) async {
+    //url
+    var url = "https://app.lapangbola.com/api/players/"+globals.playerID.toString();
+
+    // open a bytestream
+    var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    // get file length
+    var length = await imageFile.length();
+
+    // string to uri
+    //var uri = Uri.parse("http://ip:8082/composer/predict");
+    var uri = Uri.parse(url);
+
+    // create multipart request
+    var request = new http.MultipartRequest("PUT", uri);
+
+    // multipart that takes file
+    var multipartFile = new http.MultipartFile('file', stream, length,
+        filename: basename(imageFile.path));
+
+    // add file to multipart
+    request.files.add(multipartFile);
+
+    // send
+    var response = await request.send();
+    print(response.statusCode);
+
+    // listen for response
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+    });
   }
 }

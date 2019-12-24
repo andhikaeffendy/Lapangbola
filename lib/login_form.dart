@@ -254,6 +254,7 @@ class _Login_formState extends State<Login_form> {
                                   print("global is_login : " + globals.is_Login.toString());
                                   if(task.status=="success"){
                                     //respon ketika benar
+
                                     globals.auth_token = task.token;
                                     globals.is_Login = true;
                                     globals.phone_number = "082114882718";

@@ -42,6 +42,8 @@ class _MyMatchState extends State<MyMatch> {
 
   @override
   Widget build(BuildContext context) {
+    print("Player ID : "+globals.playerID.toString());
+    print("Player ID : "+globals.auth_token.toString());
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
