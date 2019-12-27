@@ -1,3 +1,4 @@
+import 'package:http/http.dart';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -251,7 +252,8 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
               height: 45.0,
               child: RaisedButton(
                 onPressed: (){
-                  // upload disini
+                  //upload disini
+                  getUploadImg(imageFile2);
                 },
                 color: Colors.green,
                 shape: RoundedRectangleBorder(
@@ -273,36 +275,45 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
     );
   }
 
-  upload(File imageFile) async {
-    //url
-    var url = "https://app.lapangbola.com/api/players/"+globals.playerID.toString();
+  _makePutRequest(Image imageFile) async {
+    // set up PUT request arguments
+    String url = 'https://app.lapangbola.com/api/players/'+globals.playerID.toString();
+    Map<String, String> headers = {"Content-type": "application/json"};
 
-    // open a bytestream
-    var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-    // get file length
-    var length = await imageFile.length();
+    Map<String, String> mapString = {"auth_token": globals.auth_token, "photo" : "photo"};
+    String json = jsonEncode(mapString);
+    // make PUT request
+    Response response = await put(url, headers: headers, body: json);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    // this API passes back the updated item with the id added
+    String body = response.body;
+    // {
+    //   "title": "Hello",
+    //   "body": "body text",
+    //   "userId": 1,
+    //   "id": 1
+    // }
+  }
 
-    // string to uri
-    //var uri = Uri.parse("http://ip:8082/composer/predict");
-    var uri = Uri.parse(url);
+  Future getUploadImg(File _image) async {
 
-    // create multipart request
-    var request = new http.MultipartRequest("PUT", uri);
+    print("auth token = " + globals.auth_token);
+    print("getUploadImg jalan . . .");
+    print("Ini image = " + _image.path);
 
-    // multipart that takes file
-    var multipartFile = new http.MultipartFile('file', stream, length,
-        filename: basename(imageFile.path));
+    String apiUrl = 'https://app.lapangbola.com/api/players/'+globals.playerID.toString();
 
-    // add file to multipart
-    request.files.add(multipartFile);
+    final length = await _image.length();
+    Map<String, String> headers = { "auth_token": globals.auth_token};
+    final multipartRequest = new http.MultipartRequest('PUT', Uri.parse(apiUrl));
+    multipartRequest.fields['auth_token'] = globals.auth_token;
+    multipartRequest.files.add(await http.MultipartFile.fromPath("photo", _image.path));
 
-    // send
-    var response = await request.send();
-    print(response.statusCode);
+    http.Response response = await http.Response.fromStream(await multipartRequest.send());
 
-    // listen for response
-    response.stream.transform(utf8.decoder).listen((value) {
-      print(value);
-    });
+    print("ini response upload " + response.body);
+
+    return jsonDecode(response.body);
   }
 }
