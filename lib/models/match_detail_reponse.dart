@@ -10,6 +10,7 @@ String matchDetailResponseToJson(MatchDetailResponse data) => json.encode(data.t
 
 class MatchDetailResponse {
   int id;
+  String matchDate;
   String homeClubName;
   String awayClubName;
   int homeScore;
@@ -49,6 +50,7 @@ class MatchDetailResponse {
 
   MatchDetailResponse({
     this.id,
+    this.matchDate,
     this.homeClubName,
     this.awayClubName,
     this.homeScore,
@@ -89,6 +91,7 @@ class MatchDetailResponse {
 
   factory MatchDetailResponse.fromJson(Map<String, dynamic> json) => MatchDetailResponse(
     id: json["id"],
+    matchDate: json["match_date"],
     homeClubName: json["home_club_name"],
     awayClubName: json["away_club_name"],
     homeScore: json["home_score"],
@@ -129,6 +132,7 @@ class MatchDetailResponse {
 
   Map<String, dynamic> toJson() => {
     "id": id,
+    "match_date": matchDate,
     "home_club_name": homeClubName,
     "away_club_name": awayClubName,
     "home_score": homeScore,

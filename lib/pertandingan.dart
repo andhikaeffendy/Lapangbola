@@ -123,7 +123,7 @@ class _PertandinganState extends State<Pertandingan> {
                                           Align(
                                             alignment: Alignment.bottomCenter,
                                             child: Text(
-                                              "24 Nov 2019",
+                                              matchDetail.matchDate,
                                               style: new TextStyle(
                                                   fontSize: 14.0,
                                                   color: Colors.white,
