@@ -15,6 +15,7 @@ import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:progress_dialog/progress_dialog.dart';
 
 ProgressDialog pr;
+String imageUrl = "http://app.lapangbola.com";
 
 
 class Profile_Desc extends StatefulWidget {
@@ -87,8 +88,8 @@ class _Profile_DescState extends State<Profile_Desc> {
                                         shape: BoxShape.circle,
                                         image: new DecorationImage(
                                             fit: BoxFit.fill,
-                                            image: new AssetImage(
-                                                "assets/User.png"))),
+                                            image: new NetworkImage(
+                                                imageUrl+globals.photoUrl))),
                                   )),
                               Positioned(
                                 bottom: 0,
