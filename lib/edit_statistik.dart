@@ -50,12 +50,13 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
 //      setState(() {
 //        _imageFile = filePath as File;
 //      });
-      print(filePath);
+
+      print("file path = " + filePath);
       final String dir = (await getApplicationDocumentsDirectory()).path;
       String BASE64_IMAGE = filePath;
       ByteData bytes = await rootBundle.load(BASE64_IMAGE);
 //      final String path = {'$dir/':filePath} as String;
-      Share.file('esys image', filePath, bytes.buffer.asUint8List(), 'img/jpg',text: 'sdasd');
+      Share.file('esys image', 'esys.jpg', bytes.buffer.asUint8List(), 'img/jpg');
     }catch(e){
       print('d');
     }

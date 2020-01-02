@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:lapang_bola_flutter/models/myMatch_response.dart' as myMatch;
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_pro/carousel_pro.dart';
@@ -217,6 +219,18 @@ class _DashboardState extends State<Dashboard> {
                       return Center(child: CircularProgressIndicator());
                     }else{
                       Datum tempData = snapshot.data.data[3];
+
+                      myMatch.Datum passData = new myMatch.Datum();
+                      passData.stadium = tempData.matchesCollection[0].stadium;
+                      passData.id = tempData.matchesCollection[0].id;
+                      passData.homeName = tempData.matchesCollection[0].homeName;
+                      passData.homeImage = tempData.matchesCollection[0].homeImage;
+                      passData.homeScore = tempData.matchesCollection[0].homeScore;
+                      passData.awayScore = tempData.matchesCollection[0].awayScore;
+                      passData.awayName = tempData.matchesCollection[0].awayName;
+                      passData.awayImage = tempData.matchesCollection[0].awayImage;
+                      passData.shareableStatus = 0;
+
                       String homeName = "-", awayName = "-", homeScore = "-" , awayScore = "-" ,
                           matchTime = "-" , matchName = "-", homeImage = "-", awayImage = "-";
                       if(tempData.matchesCollection == null){
@@ -237,7 +251,7 @@ class _DashboardState extends State<Dashboard> {
                         color: Color(0xffffffff),
                         child: GestureDetector(
                           onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (BuildContext context) => new Pertandingan())),
+                              builder: (BuildContext context) => new Pertandingan(matchID: passData))),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -316,6 +330,16 @@ class _DashboardState extends State<Dashboard> {
                       return Center(child: CircularProgressIndicator());
                     }else{
                       Datum tempData = snapshot.data.data[4];
+                      myMatch.Datum passData = new myMatch.Datum();
+                      passData.stadium = tempData.matchesCollection[0].stadium;
+                      passData.id = tempData.matchesCollection[0].id;
+                      passData.homeName = tempData.matchesCollection[0].homeName;
+                      passData.homeImage = tempData.matchesCollection[0].homeImage;
+                      passData.homeScore = tempData.matchesCollection[0].homeScore;
+                      passData.awayScore = tempData.matchesCollection[0].awayScore;
+                      passData.awayName = tempData.matchesCollection[0].awayName;
+                      passData.awayImage = tempData.matchesCollection[0].awayImage;
+                      passData.shareableStatus = 0;
                       String homeName = "-", awayName = "-", homeScore = "-" , awayScore = "-" ,
                           matchTime = "-" , matchName = "-", homeImage = "-", awayImage = "-";
                       if(tempData.matchesCollection == null){
@@ -336,7 +360,7 @@ class _DashboardState extends State<Dashboard> {
                         color: Color(0xffffffff),
                         child: GestureDetector(
                           onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (BuildContext context) => new Pertandingan())),
+                              builder: (BuildContext context) => new Pertandingan(matchID: passData))),
                           child: Column(
 
                             mainAxisAlignment: MainAxisAlignment.start,
