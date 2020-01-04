@@ -43,17 +43,17 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
       ui.Image image = await boundary.toImage();
       ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
-      var filePath = await ImagePickerSaver.saveFile(fileData: byteData.buffer.asUint8List());
+//      var filePath = await ImagePickerSaver.saveFile(fileData: byteData.buffer.asUint8List());
 //      setState(() {
 //        _imageFile = filePath as File;
 //      });
 
-      print("file path = " + filePath);
-      final String dir = (await getApplicationDocumentsDirectory()).path;
-      String BASE64_IMAGE = filePath;
-      ByteData bytes = await rootBundle.load(BASE64_IMAGE);
+//      print("file path = " + filePath);
+//      final String dir = (await getApplicationDocumentsDirectory()).path;
+//      String BASE64_IMAGE = filePath;
+//      ByteData bytes = await rootBundle.load(BASE64_IMAGE);
 //      final String path = {'$dir/':filePath} as String;
-      Share.file('Lapang Bola', 'LapangBola.jpg', bytes.buffer.asUint8List(), 'img/jpg');
+      Share.file('Lapang Bola', 'LapangBola.jpg', byteData.buffer.asUint8List(), 'img/jpg');
     }catch(e){
       print(e.toString());
     }
