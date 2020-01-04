@@ -6,12 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_share_file/flutter_share_file.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 
 class Edit_Statistik extends StatefulWidget {
@@ -56,7 +53,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
       String BASE64_IMAGE = filePath;
       ByteData bytes = await rootBundle.load(BASE64_IMAGE);
 //      final String path = {'$dir/':filePath} as String;
-      Share.file('esys image', 'esys.jpg', bytes.buffer.asUint8List(), 'img/jpg');
+      Share.file('Lapang Bola', 'LapangBola.jpg', bytes.buffer.asUint8List(), 'img/jpg');
     }catch(e){
       print(e.toString());
     }
@@ -564,15 +561,15 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                             teksJenis3 = playerData.totalDribbleSuccess.toString()+" DRIBLE SUCCES";
                             teksJenis4 = playerData.totalShootOnTarget.toString()+" SHOOTS ON TARGET";
                           } else if (index == 2) {
-                            teksJenis1 = playerData.totalTackle.toString()+" TACKLE";
-                            teksJenis2 = playerData.totalTackle.toString()+" SLIDING";
-                            teksJenis3 = playerData.totalBlockCross.toString()+" BODY";
-                            teksJenis4 = playerData.totalSave.toString()+" SAVE";
+                            teksJenis1 = playerData.totalTackle.toString()+" OOAL";
+                            teksJenis2 = playerData.totalTackle.toString()+" ASSIST";
+                            teksJenis3 = playerData.totalBlockCross.toString()+" TACKLE";
+                            teksJenis4 = playerData.totalSave.toString()+" INTERCEPT";
                           } else if (index == 3) {
-                            teksJenis1 = playerData.totalTackle.toString()+" TACKLE";
-                            teksJenis2 = playerData.totalTackle.toString()+" SLIDING";
-                            teksJenis3 = playerData.totalTackle.toString()+" GATAU";
-                            teksJenis4 = playerData.totalTackle.toString()+" JAGA ORANG";
+                            teksJenis1 = playerData.totalTackle.toString()+" CLEARENCE";
+                            teksJenis2 = playerData.totalTackle.toString()+" TACKLE";
+                            teksJenis3 = playerData.totalTackle.toString()+" INTERCEPT";
+                            teksJenis4 = playerData.totalTackle.toString()+" FOUL";
                           } else if (index == 4) {
                             teksJenis1 = playerData.totalSave.toString()+" SAVE";
                             teksJenis2 = playerData.totalBlockCross.toString()+" BLOCK CROSS";

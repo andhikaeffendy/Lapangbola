@@ -153,7 +153,7 @@ class _PertandinganState extends State<Pertandingan> {
                         Container(
                           color: Colors.green,
                           padding: EdgeInsets.only(
-                              top: 12.0, bottom: 12.0, left: 24.0, right: 24.0),
+                              top: 12.0, bottom: 12.0, left: 8.0, right: 8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -162,6 +162,7 @@ class _PertandinganState extends State<Pertandingan> {
                                 width: 100.0,
                                 child: Text(
                                   matchData.homeName,
+                                  textAlign: TextAlign.center,
                                   style: new TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.white,
@@ -180,6 +181,7 @@ class _PertandinganState extends State<Pertandingan> {
                                 width: 100.0,
                                 child: Text(
                                   matchData.awayName,
+                                  textAlign: TextAlign.center,
                                   style: new TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.white,

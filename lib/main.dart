@@ -1,21 +1,20 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'dashboard.dart';
 import 'my_match.dart';
-import 'profile.dart';
-import 'statistik.dart';
-import 'pertandingan.dart';
 import 'profile_desc.dart';
+import 'login_form.dart';
 
-class MyStatefulWidget extends StatefulWidget {
-  MyStatefulWidget({Key key}) : super(key: key);
+void main() => runApp(LoginForm());
+
+class Main extends StatefulWidget {
+  Main({Key key}) : super(key: key);
 
   @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+  _MainState createState() => _MainState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _MainState extends State<Main> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 16, fontWeight: FontWeight.bold);

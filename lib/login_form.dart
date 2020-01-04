@@ -13,10 +13,10 @@ import 'package:lapang_bola_flutter/models/login_response.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:progress_dialog/progress_dialog.dart';
 
-void main() => runApp(MyApp());
+
 
 /// This Widget is the main application widget.
-class MyApp extends StatelessWidget {
+class LoginForm extends StatelessWidget {
   static const String _title = 'Lapangbola';
   static const BgColors = const Color(0xffEFFFF0);
   @override
@@ -265,7 +265,7 @@ class _Login_formState extends State<Login_form> {
                                     new AlertDialog(
                                       content: new Text(task.message),
                                     );
-                                    Navigator.of(context).push(FadeRoute(page: MyStatefulWidget()));
+                                    Navigator.of(context).push(FadeRoute(page: Main()));
                                   }else{
                                     //respon ketika salah
                                     globals.is_Login = false;
@@ -279,7 +279,7 @@ class _Login_formState extends State<Login_form> {
                                 builder: (context, snapshot){
                                   if(snapshot.data.status=="success"){
                                     print("ini statis dari snapshoot : " + snapshot.data.status);
-                                    Navigator.of(context).push(FadeRoute(page: MyStatefulWidget()));
+                                    Navigator.of(context).push(FadeRoute(page: Main()));
                                   }
                                 }
                             );
