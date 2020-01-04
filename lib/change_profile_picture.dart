@@ -1,4 +1,8 @@
+import 'package:dio/dio.dart' as dios;
+
 import 'package:http/http.dart';
+import 'package:lapang_bola_flutter/models/upload_response.dart';
+import 'package:lapang_bola_flutter/profile_desc.dart';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,6 +11,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
+import 'package:progress_dialog/progress_dialog.dart';
 
 
 
@@ -18,6 +23,8 @@ class ChangeProfilePicture extends StatefulWidget {
 class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
   Future<File> imageFile;
   File imageFile2;
+  dios.Dio dio = new dios.Dio();
+  ProgressDialog pr;
 
 
   _openGallery(ImageSource src, BuildContext context) {
@@ -35,6 +42,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
   }
 
   void _settingModalBottomSheet(context) {
+
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {
@@ -169,6 +177,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
   }
 
   Widget pic() {
+
     return FutureBuilder<File>(
       future: imageFile,
       builder: (BuildContext context, AsyncSnapshot<File> s) {
@@ -210,6 +219,9 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
   @override
   Widget build(BuildContext context) {
     print("photo url : "+globals.photoUrl);
+
+    pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
+    pr.style(message: "Uploading...");
 
     return Scaffold(
       backgroundColor: Color(0xffEFFFF0),
@@ -253,7 +265,10 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
               child: RaisedButton(
                 onPressed: (){
                   //upload disini
-                  getUploadImg(imageFile2);
+                  pr.show();
+                  getUploadImg(imageFile2).then((temp){
+                    Navigator.of(context).pop();
+                  });
                 },
                 color: Colors.green,
                 shape: RoundedRectangleBorder(
@@ -283,11 +298,11 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
     Map<String, String> mapString = {"auth_token": globals.auth_token, "photo" : "photo"};
     String json = jsonEncode(mapString);
     // make PUT request
-    Response response = await put(url, headers: headers, body: json);
+    //Response response = await put(url, headers: headers, body: json);
     // check the status code for the result
-    int statusCode = response.statusCode;
+    //int statusCode = response.statusCode;
     // this API passes back the updated item with the id added
-    String body = response.body;
+    //String body = response.body;
     // {
     //   "title": "Hello",
     //   "body": "body text",
@@ -304,16 +319,30 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
 
     String apiUrl = 'https://app.lapangbola.com/api/players/'+globals.playerID.toString();
 
-    final length = await _image.length();
-    Map<String, String> headers = { "auth_token": globals.auth_token};
+    dios.FormData formData = new dios.FormData.fromMap({
+      "auth_token" : globals.auth_token,
+      "photo" : await dios.MultipartFile.fromFile(_image.path)
+    });
+
+    /*final length = await _image.length();
+    Map<String, String> token = { "auth_token": globals.auth_token};
     final multipartRequest = new http.MultipartRequest('PUT', Uri.parse(apiUrl));
-    multipartRequest.fields['auth_token'] = globals.auth_token;
+    multipartRequest.fields["token"] = token as String;
+    multipartRequest.fields["auth_token"] = globals.auth_token;
     multipartRequest.files.add(await http.MultipartFile.fromPath("photo", _image.path));
 
     http.Response response = await http.Response.fromStream(await multipartRequest.send());
+    */
 
-    print("ini response upload " + response.body);
+    dios.Response response = await dio.put(apiUrl, data: formData);
 
-    return jsonDecode(response.body);
+    print("ini response upload dio " + response.toString());
+
+    UploadReponse uploadReponse = uploadReponseFromJson(response.toString());
+
+    globals.photoUrl = uploadReponse.photoUrl;
+    pr.hide();
+
+    return uploadReponse;
   }
 }

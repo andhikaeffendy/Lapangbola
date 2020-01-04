@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:lapang_bola_flutter/models/club_response.dart';
 import 'package:lapang_bola_flutter/models/myMatch_response.dart' as myMatch;
 
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:http/http.dart';
 import 'package:lapang_bola_flutter/models/live_response.dart';
+import 'package:lapang_bola_flutter/models/playerDetail_reponse.dart';
 import 'pertandingan.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:intl/intl.dart';
@@ -21,6 +23,8 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   String url = "https://liga.lapangbola.com/api/lives";
+
+
 
   CarouselSlider carouselSlider;
   int _currentIndex = 0;
@@ -56,6 +60,8 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+
+    getPlayeDetailRequest();
 
     Future<bool> _onWillPop() {
       return showDialog(
@@ -446,8 +452,8 @@ class _DashboardState extends State<Dashboard> {
 
     Response response = await get(url);
     print("Masuk kesini");
-    print(response.body);
-    print(response.statusCode);
+    //print(response.body);
+    //print(response.statusCode);
     // check the status code for the result
     int statusCode = response.statusCode;
     // this API passes back the id of the new item added to the body
@@ -459,9 +465,35 @@ class _DashboardState extends State<Dashboard> {
     //   "id": 101
     // }
     LiveResponse loginResponse = liveResponseFromJson(body);
-    print("Ini status dari response : " + loginResponse.status);
+    //print("Ini status dari response : " + loginResponse.status);
 
     return loginResponse;
+  }
+
+  Future getPlayeDetailRequest() async{
+    String apiUrl = "https://liga.lapangbola.com/api/players/detail?phone_number="+globals.phone_number;
+
+    Map<String, String> headers = {"Content-type": "application/json"};
+    Map<String, String> mapString = {"phone_number": globals.phone_number};
+    String json = jsonEncode(mapString);
+
+    Response response = await get(apiUrl, headers: headers);
+
+    PlayerDetailReponse playerDetailReponse = playerDetailReponseFromJson(response.body);
+
+    String clubUrl = "https://liga.lapangbola.com/api/clubs/" + playerDetailReponse.clubId.toString();
+    Response httpClubResponse = await get(clubUrl, headers: headers);
+
+    ClubResponse clubResponse = clubResponseFromJson(httpClubResponse.body);
+
+    globals.clubResponse = clubResponse;
+    globals.playerDetailReponse = playerDetailReponse;
+
+    print("Player Detail Request Donee");
+    print("Player Detail Request games = " + globals.playerDetailReponse.games.toString());
+    print("Club Name = " + globals.clubResponse.clubName);
+
+    return playerDetailReponse;
   }
 
   goToPreviousImage() {

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
+import 'package:lapang_bola_flutter/global/global.dart' as globals;
+
 class Statistik extends StatefulWidget {
   @override
   _StatistikState createState() => _StatistikState();
@@ -9,6 +12,8 @@ class Statistik extends StatefulWidget {
 class _StatistikState extends State<Statistik> {
   @override
   Widget build(BuildContext context) {
+    var data = globals.clubResponse;
+
     return Scaffold(
       backgroundColor: Color(0xffEFFFF0),
       body: Container(
@@ -55,7 +60,7 @@ class _StatistikState extends State<Statistik> {
                       Padding(
                         padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                         child: Text(
-                          "Meteor FC",
+                          data.clubName,
                           style: new TextStyle(
                             fontSize: 24.0,
                             color: Colors.amber,
@@ -143,7 +148,7 @@ class _StatistikState extends State<Statistik> {
                             ),
                           ),
                           Text(
-                            "34",
+                            data.totalGoal.toString(),
                             style: new TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.black,
@@ -171,7 +176,7 @@ class _StatistikState extends State<Statistik> {
                             ),
                           ),
                           Text(
-                            "165",
+                            (data.totalShootOffTarget+data.totalShootOnTarget).toString(),
                             style: new TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.black,
@@ -199,7 +204,7 @@ class _StatistikState extends State<Statistik> {
                             ),
                           ),
                           Text(
-                            "96",
+                            data.totalShootOnTarget.toString(),
                             style: new TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.black,
@@ -260,7 +265,7 @@ class _StatistikState extends State<Statistik> {
                             ),
                           ),
                           Text(
-                            "66",
+                            data.totalPassing.toString(),
                             style: new TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.black,
@@ -288,7 +293,7 @@ class _StatistikState extends State<Statistik> {
                             ),
                           ),
                           Text(
-                            "30",
+                            data.totalBlockCross.toString(),
                             style: new TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.black,

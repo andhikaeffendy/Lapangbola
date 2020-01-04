@@ -164,7 +164,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "Avenir"),
                               ),Text(
-                                "8",
+                                globals.playerDetailReponse.games.toString(),
                                 style: new TextStyle(
                                     fontSize: 24.0,
                                     color: Colors.white,
@@ -184,7 +184,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "Avenir"),
                               ),Text(
-                                "6",
+                                globals.playerDetailReponse.games.toString(),
                                 style: new TextStyle(
                                     fontSize: 24.0,
                                     color: Colors.white,
@@ -204,7 +204,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "Avenir"),
                               ),Text(
-                                "14",
+                                globals.playerDetailReponse.totalSave.toString(),
                                 style: new TextStyle(
                                     fontSize: 24.0,
                                     color: Colors.white,
@@ -238,7 +238,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                             onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
                                 builder: (BuildContext context) => new Statistik())),
                             child: Text(
-                              "Bhineka FC",
+                              globals.clubResponse.clubName,
                               style: new TextStyle(
                                   fontSize: 18.0,
                                   color: Colors.black,
@@ -271,7 +271,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                   fontFamily: "Avenir"),
                             ),
                           ),Text(
-                            "Goal Keeper",
+                            globals.playerDetailReponse.positionName,
                             style: new TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.black,
