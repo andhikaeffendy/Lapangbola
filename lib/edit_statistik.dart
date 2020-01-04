@@ -58,7 +58,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
 //      final String path = {'$dir/':filePath} as String;
       Share.file('esys image', 'esys.jpg', bytes.buffer.asUint8List(), 'img/jpg');
     }catch(e){
-      print('d');
+      print(e.toString());
     }
   }
 
