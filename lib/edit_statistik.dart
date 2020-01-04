@@ -226,6 +226,9 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
 
   @override
   Widget build(BuildContext context) {
+    var playerData = globals.playerDetailReponse;
+    var clubData = globals.clubResponse;
+
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: 40.0),
@@ -314,7 +317,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                               Padding(
                                 padding: EdgeInsets.only(left: 12.0),
                                 child: Text(
-                                  "ALI",
+                                  playerData.playerName,
                                   style: new TextStyle(
                                       fontSize: 14.0,
                                       color: (enable ? warna : warna),
@@ -325,7 +328,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                               Padding(
                                 padding: EdgeInsets.only(left: 12.0),
                                 child: Text(
-                                  "Right Wing Back",
+                                  playerData.positionName,
                                   style: new TextStyle(
                                       fontSize: 12.0,
                                       color: (enable ? warna : warna),
@@ -336,7 +339,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                               Padding(
                                 padding: EdgeInsets.only(left: 12.0),
                                 child: Text(
-                                  "FC Bimasakti",
+                                  clubData.clubName,
                                   style: new TextStyle(
                                       fontSize: 12.0,
                                       color: (enable ? warna : warna),
@@ -551,30 +554,30 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                         setState(() {
                           currentIndex = index;
                           if (index == 0) {
-                            teksJenis1 = "1 GOAL";
-                            teksJenis2 = "2 ASSIST";
-                            teksJenis3 = "4 CROSSING";
-                            teksJenis4 = "2 SHOOTS ON GOAL";
+                            teksJenis1 = playerData.totalGoal.toString()+" GOAL";
+                            teksJenis2 = playerData.totalAssist.toString()+" ASSIST";
+                            teksJenis3 = playerData.totalBlockCross.toString()+" CROSSING";
+                            teksJenis4 = playerData.totalGoal.toString()+" SHOOTS ON GOAL";
                           } else if (index == 1) {
-                            teksJenis1 = "1 GOAL";
-                            teksJenis2 = "2 ASSIST";
-                            teksJenis3 = "4 DRIBLE SUCCES";
-                            teksJenis4 = "2 SHOOTS ON TARGER";
+                            teksJenis1 = playerData.totalGoal.toString()+" GOAL";
+                            teksJenis2 = playerData.totalAssist.toString()+" ASSIST";
+                            teksJenis3 = playerData.totalDribbleSuccess.toString()+" DRIBLE SUCCES";
+                            teksJenis4 = playerData.totalShootOnTarget.toString()+" SHOOTS ON TARGET";
                           } else if (index == 2) {
-                            teksJenis1 = "1 TACLE";
-                            teksJenis2 = "2 SLIDING";
-                            teksJenis3 = "4 BODY";
-                            teksJenis4 = "2 SAVE";
+                            teksJenis1 = playerData.totalTackle.toString()+" TACKLE";
+                            teksJenis2 = playerData.totalTackle.toString()+" SLIDING";
+                            teksJenis3 = playerData.totalBlockCross.toString()+" BODY";
+                            teksJenis4 = playerData.totalSave.toString()+" SAVE";
                           } else if (index == 3) {
-                            teksJenis1 = "1 TACLE";
-                            teksJenis2 = "2 SLIDING";
-                            teksJenis3 = "4 GATAU";
-                            teksJenis4 = "2 JAGA ORANG";
+                            teksJenis1 = playerData.totalTackle.toString()+" TACKLE";
+                            teksJenis2 = playerData.totalTackle.toString()+" SLIDING";
+                            teksJenis3 = playerData.totalTackle.toString()+" GATAU";
+                            teksJenis4 = playerData.totalTackle.toString()+" JAGA ORANG";
                           } else if (index == 4) {
-                            teksJenis1 = "1 SAVE";
-                            teksJenis2 = "2 BLOCK CROSS";
-                            teksJenis3 = "4 ASSIST";
-                            teksJenis4 = "2 GOAL";
+                            teksJenis1 = playerData.totalSave.toString()+" SAVE";
+                            teksJenis2 = playerData.totalBlockCross.toString()+" BLOCK CROSS";
+                            teksJenis3 = playerData.totalAssist.toString()+" ASSIST";
+                            teksJenis4 = playerData.totalGoal.toString()+" GOAL";
                           }
                         });
                       },
