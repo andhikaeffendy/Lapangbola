@@ -592,7 +592,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                   width: 300.0,
                   height: 50.0,
                   child: RaisedButton(
-                    onPressed: (){_settingModalBottomSheet(context);},
+                    onPressed: (){ScreenShot();},
                     color: Colors.green,
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(10.0),

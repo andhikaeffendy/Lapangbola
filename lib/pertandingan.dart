@@ -158,12 +158,15 @@ class _PertandinganState extends State<Pertandingan> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Text(
-                                matchData.homeName,
-                                style: new TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                    fontFamily: "Avenir"),
+                              Container(
+                                width: 100.0,
+                                child: Text(
+                                  matchData.homeName,
+                                  style: new TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.white,
+                                      fontFamily: "Avenir"),
+                                ),
                               ),
                               Text(
                                 matchData.homeScore.toString() + " - " + matchData.awayScore.toString(),
@@ -173,12 +176,15 @@ class _PertandinganState extends State<Pertandingan> {
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "Avenir"),
                               ),
-                              Text(
-                                matchData.awayName,
-                                style: new TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                    fontFamily: "Avenir"),
+                              Container(
+                                width: 100.0,
+                                child: Text(
+                                  matchData.awayName,
+                                  style: new TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.white,
+                                      fontFamily: "Avenir"),
+                                ),
                               ),
                             ],
                           ),
@@ -208,15 +214,65 @@ class _PertandinganState extends State<Pertandingan> {
                                     color: Colors.amberAccent,
                                     size: 30.0,
                                   ),
+                                  Text(
+                                    "Match Stats",
+                                    style: new TextStyle(
+                                        fontSize: 18.0,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Avenir"),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Text(
-                                      "Match Stats",
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.possHome.toString() + "%",
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Possesions %",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.possAway.toString() + "%",
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
                                     ),
                                   )
                                 ],
@@ -233,74 +289,44 @@ class _PertandinganState extends State<Pertandingan> {
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.only(left: 24.0),
-                                    child: Text(
-                                      matchDetail.possHome.toString() + "%",
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.shootonHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    "Possesions %",
-                                    style: new TextStyle(
-                                        fontSize: 12.0,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "Avenir"),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 24.0),
-                                    child: Text(
-                                      matchDetail.possAway.toString() + "%",
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: CustomPaint(
-                                  painter: Drawhorizontalline(),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 24.0),
-                                    child: Text(
-                                      matchDetail.shootonHome.toString(),
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Shoots On Target",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    "Shoots On Target",
-                                    style: new TextStyle(
-                                        fontSize: 12.0,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "Avenir"),
-                                  ),
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 24.0),
-                                    child: Text(
-                                      matchDetail.shootonAway.toString(),
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.shootonAway.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir",),
+                                      ),
                                     ),
                                   )
                                 ],
@@ -317,74 +343,44 @@ class _PertandinganState extends State<Pertandingan> {
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.only(left: 24.0),
-                                    child: Text(
-                                      matchDetail.shootoffHome.toString(),
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.shootoffHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    "Shoots",
-                                    style: new TextStyle(
-                                        fontSize: 12.0,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "Avenir"),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 24.0),
-                                    child: Text(
-                                      matchDetail.shootoffAway.toString(),
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: CustomPaint(
-                                  painter: Drawhorizontalline(),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 24.0),
-                                    child: Text(
-                                      matchDetail.interceptHome.toString(),
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Shoots",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    "Touches",
-                                    style: new TextStyle(
-                                        fontSize: 12.0,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "Avenir"),
-                                  ),
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 24.0),
-                                    child: Text(
-                                      matchDetail.interceptAway.toString(),
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.shootoffAway.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
                                     ),
                                   )
                                 ],
@@ -401,32 +397,98 @@ class _PertandinganState extends State<Pertandingan> {
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.only(left: 24.0),
-                                    child: Text(
-                                      matchDetail.passHome.toString(),
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.interceptHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    "Passes",
-                                    style: new TextStyle(
-                                        fontSize: 12.0,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "Avenir"),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Touches",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 24.0),
-                                    child: Text(
-                                      matchDetail.passAway.toString(),
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.interceptAway.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.passHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Passes",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.passAway.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
                                     ),
                                   ),
                                 ],
