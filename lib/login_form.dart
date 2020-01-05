@@ -257,11 +257,13 @@ class _Login_formState extends State<Login_form> {
 
                                     globals.auth_token = task.token;
                                     globals.is_Login = true;
-                                    globals.phone_number = "082114882718";
+                                    globals.phone_number = "0" + task.phoneNumber.substring(3);
                                     globals.email = task.email;
                                     globals.name = task.name;
                                     globals.photoUrl = task.photoUrl;
                                     globals.playerID = task.playerId;
+
+                                    print("phone number = " + task.phoneNumber + " to " + globals.phone_number);
                                     new AlertDialog(
                                       content: new Text(task.message),
                                     );

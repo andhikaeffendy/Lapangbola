@@ -75,7 +75,7 @@ class _StatistikState extends State<Statistik> {
                             ],),
                         ),
                       ),Text(
-                        "Bandung",
+                        globals.playerDetailReponse.city,
                         style: new TextStyle(
                           fontSize: 18.0,
                           color: Colors.white,
@@ -148,7 +148,7 @@ class _StatistikState extends State<Statistik> {
                             ),
                           ),
                           Text(
-                            data.totalGoal.toString(),
+                            globals.playerDetailReponse.totalGoal.toString(),
                             style: new TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.black,

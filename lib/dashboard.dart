@@ -198,7 +198,7 @@ class _DashboardState extends State<Dashboard> {
                   padding: const EdgeInsets.all(6.0),
                 ),
                 Text(
-                  "Hasil Pertandingan Pekan ke-2",
+                  "Live Matches",
                   style: new TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
