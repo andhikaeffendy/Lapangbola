@@ -40,7 +40,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
   ScreenShot() async{
     try{
       RenderRepaintBoundary boundary = screen.currentContext.findRenderObject();
-      ui.Image image = await boundary.toImage();
+      ui.Image image = await boundary.toImage(pixelRatio: 2);
       ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
 //      var filePath = await ImagePickerSaver.saveFile(fileData: byteData.buffer.asUint8List());
