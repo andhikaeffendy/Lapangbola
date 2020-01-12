@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
-import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 
@@ -40,7 +39,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
   ScreenShot() async{
     try{
       RenderRepaintBoundary boundary = screen.currentContext.findRenderObject();
-      ui.Image image = await boundary.toImage(pixelRatio: 2);
+      ui.Image image = await boundary.toImage(pixelRatio: 3);
       ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
 //      var filePath = await ImagePickerSaver.saveFile(fileData: byteData.buffer.asUint8List());
@@ -251,7 +250,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                   key: screen,
                   child: new Container(
                     width: 300.0,
-                    height: 350.0,
+                    height: 300.0,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: new FileImage(globals.tempPicture),
@@ -262,7 +261,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                       children: <Widget>[
                         Container(
                           width: 300.0,
-                          height: 200.0,
+                          height: 150.0,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -396,7 +395,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
+                  padding: EdgeInsets.only(top: 24.0, bottom: 12.0),
                   child: Text(
                     "Change Color",
                     style: new TextStyle(

@@ -5,7 +5,7 @@ import 'my_match.dart';
 import 'profile_desc.dart';
 import 'login_form.dart';
 
-void main() => runApp(LoginForm());
+void main() async => runApp(LoginForm());
 
 class Main extends StatefulWidget {
   Main({Key key}) : super(key: key);
@@ -17,12 +17,8 @@ class Main extends StatefulWidget {
 class _MainState extends State<Main> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
-  final _pageOption = [
-    Dashboard(),    
-    MyMatch(),
-    Profile_Desc()
-  ];
+      TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
+  final _pageOption = [Dashboard(), MyMatch(), Profile_Desc()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -40,11 +36,10 @@ class _MainState extends State<Main> {
         backgroundColor: Color(0xffEFFFF0),
         animationCurve: Curves.fastOutSlowIn,
         height: 60.0,
-
         items: <Widget>[
-          Icon(Icons.dashboard, size: 35,color: Colors.white),
-          Icon(Icons.score, size: 35,color: Colors.white),
-          Icon(Icons.person, size: 35,color: Colors.white),
+          Icon(Icons.dashboard, size: 35, color: Colors.white),
+          Icon(Icons.score, size: 35, color: Colors.white),
+          Icon(Icons.person, size: 35, color: Colors.white),
         ],
         onTap: (index) {
           setState(() {
