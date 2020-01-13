@@ -16,13 +16,13 @@ class MyMatchResponse {
   MyMatchResponse({
     this.status,
     this.message,
-    this.data,
+    this.data ,
   });
 
   factory MyMatchResponse.fromJson(Map<String, dynamic> json) => MyMatchResponse(
     status: json["status"],
     message: json["message"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    //data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {

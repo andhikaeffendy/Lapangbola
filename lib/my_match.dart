@@ -71,9 +71,18 @@ class _MyMatchState extends State<MyMatch> {
                       child: FutureBuilder(
                         future: _makePostRequest(masterUrl, globals.phone_number),
                         builder: (context, snapshot){
-                          if (!snapshot.hasData || snapshot.data == null) {
+                          MyMatchResponse myMatchResponse = snapshot.data;
+                          if (snapshot.data == null) {
+                            //print("snapshot child kesini + " + snapshot.data.message);
                             return Center(child: CircularProgressIndicator());
-                          }else{
+                          }
+                          else if(snapshot.data.status=="Fail"){
+                            print("snapshot child kesini");
+                            return Center(child: Text(snapshot.data.message,
+                              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
+                                  fontFamily: "Avenir"), textAlign: TextAlign.center,));
+                          }
+                          else{
                             return ListView.builder(
                               itemCount: snapshot.data.data.length,
                               itemBuilder: (context, index) {
@@ -132,21 +141,13 @@ class _MyMatchState extends State<MyMatch> {
     Response response = await get(url, headers: headers);
     print("Masuk kesini");
     print(response.body);
-    print(response.statusCode);
-    // check the status code for the result
-    int statusCode = response.statusCode;
-    // this API passes back the id of the new item added to the body
-    String body = response.body;
-    // {
-    //   "title": "Hello",
-    //   "body": "body text",
-    //   "userId": 1,
-    //   "id": 101
-    // }
-    MyMatchResponse loginResponse = myMatchResponseFromJson(body);
-    print("Ini status dari response : " + loginResponse.status);
 
-    return loginResponse;
+    MyMatchResponse matchResponse = myMatchResponseFromJson(response.body);
+
+    print("Ini status dari response : " + matchResponse.message);
+    print("a");
+
+    return matchResponse;
   }
 }
 

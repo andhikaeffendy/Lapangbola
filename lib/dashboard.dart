@@ -251,6 +251,7 @@ class _DashboardState extends State<Dashboard> {
                         matchTime = tempData.matchesCollection[0].minute;
                         homeImage = tempData.matchesCollection[0].homeImage;
                         awayImage = tempData.matchesCollection[0].awayImage;
+                        print(homeImage);
                       }
                       return Container(
                         width: 250.0,
@@ -358,8 +359,9 @@ class _DashboardState extends State<Dashboard> {
                         awayScore = tempData.matchesCollection[0].awayScore.toString();
                         matchName = tempData.matchesCollection[0].stadium;
                         matchTime = tempData.matchesCollection[0].minute;
-                        homeImage = "http://liga.lapangbola.com" + tempData.matchesCollection[0].homeImage;
-                        awayImage = "http://liga.lapangbola.com" + tempData.matchesCollection[0].awayImage;
+                        homeImage = tempData.matchesCollection[0].homeImage;
+                        awayImage = tempData.matchesCollection[0].awayImage;
+                        print(homeImage);
                       }
                       return Container(
                         width: 250.0,
@@ -451,7 +453,7 @@ class _DashboardState extends State<Dashboard> {
     // make POST request
 
     Response response = await get(url);
-    print("Masuk kesini");
+    print("Masuk kesiniaaaa");
     //print(response.body);
     //print(response.statusCode);
     // check the status code for the result
@@ -471,6 +473,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future getPlayeDetailRequest() async{
+
+
     String apiUrl = "https://liga.lapangbola.com/api/players/detail?phone_number="+globals.phone_number;
 
     Map<String, String> headers = {"Content-type": "application/json"};
@@ -482,16 +486,19 @@ class _DashboardState extends State<Dashboard> {
     PlayerDetailReponse playerDetailReponse = playerDetailReponseFromJson(response.body);
 
     String clubUrl = "https://liga.lapangbola.com/api/clubs/" + playerDetailReponse.clubId.toString();
+
     Response httpClubResponse = await get(clubUrl, headers: headers);
+    globals.playerDetailReponse = playerDetailReponse;
+    print("Player Detail Message " + globals.playerDetailReponse.message);
 
     ClubResponse clubResponse = clubResponseFromJson(httpClubResponse.body);
 
     globals.clubResponse = clubResponse;
-    globals.playerDetailReponse = playerDetailReponse;
+
 
     print("Player Detail Request Donee");
-    print("Player Detail Request games = " + globals.playerDetailReponse.games.toString());
-    print("Club Name = " + globals.clubResponse.clubName);
+
+    print("Club Message " + globals.clubResponse.message);
 
     return playerDetailReponse;
   }
