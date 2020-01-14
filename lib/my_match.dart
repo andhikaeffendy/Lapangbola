@@ -72,15 +72,15 @@ class _MyMatchState extends State<MyMatch> {
                         future: _makePostRequest(masterUrl, globals.phone_number),
                         builder: (context, snapshot){
                           MyMatchResponse myMatchResponse = snapshot.data;
-                          if (snapshot.data == null) {
-                            //print("snapshot child kesini + " + snapshot.data.message);
-                            return Center(child: CircularProgressIndicator());
-                          }
-                          else if(snapshot.data.status=="Fail"){
+
+                          if(globals.playerDetailReponse.status=="Fail"){
                             print("snapshot child kesini");
-                            return Center(child: Text(snapshot.data.message,
+                            return Center(child: Text(globals.playerDetailReponse.message,
                               style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
                                   fontFamily: "Avenir"), textAlign: TextAlign.center,));
+                          }else if (snapshot.data == null) {
+                            //print("snapshot child kesini + " + snapshot.data.message);
+                            return Center(child: CircularProgressIndicator());
                           }
                           else{
                             return ListView.builder(

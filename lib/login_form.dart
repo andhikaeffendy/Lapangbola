@@ -250,6 +250,7 @@ class _Login_formState extends State<Login_form> {
                               // ignore: missing_return
                                 future: _makePostRequest(url, myController.text, myController2.text).then((task){
                                   pr.hide();
+                                  pr.dismiss();
                                   print("ini asal global : " + globals.auth_token);
                                   print("global is_login : " + globals.is_Login.toString());
                                   if(task.status=="success"){

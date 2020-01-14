@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lapang_bola_flutter/global/global.dart' as globals;
+import 'package:dio/dio.dart' as dios;
+import 'package:lapang_bola_flutter/models/update_password_response.dart';
+import 'package:progress_dialog/progress_dialog.dart';
+
 
 class Edit_Password extends StatefulWidget {
   @override
@@ -8,6 +13,7 @@ class Edit_Password extends StatefulWidget {
 class _Edit_PasswordState extends State<Edit_Password> {
 
   bool _isHidePassword = true;
+  ProgressDialog pr;
 
   void _tooglePasswordVisible(){
     setState(() {
@@ -17,6 +23,15 @@ class _Edit_PasswordState extends State<Edit_Password> {
 
   @override
   Widget build(BuildContext context) {
+
+    final newPasswordEditText = TextEditingController();
+    final confirmPasswordEditText = TextEditingController();
+    final currentPasswordEditText = TextEditingController();
+
+    pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
+    pr.style(message: "Changing Password...");
+
+
     return Scaffold(
         backgroundColor: Color(0xffEFFFF0),
         body: Center(
@@ -87,6 +102,7 @@ class _Edit_PasswordState extends State<Edit_Password> {
                                   padding: const EdgeInsets.only(
                                       top: 12.0, bottom: 12.0),
                                   child: TextField(
+                                    controller: newPasswordEditText,
                                     obscureText: _isHidePassword,
                                     keyboardType: TextInputType.visiblePassword,
                                     decoration: InputDecoration(
@@ -121,6 +137,7 @@ class _Edit_PasswordState extends State<Edit_Password> {
                                   padding: const EdgeInsets.only(
                                       top: 12.0, bottom: 12.0),
                                   child: TextField(
+                                    controller: confirmPasswordEditText,
                                     obscureText: _isHidePassword,
                                     keyboardType: TextInputType.visiblePassword,
                                     decoration: InputDecoration(
@@ -155,6 +172,7 @@ class _Edit_PasswordState extends State<Edit_Password> {
                                   padding: const EdgeInsets.only(
                                       top: 12.0, bottom: 12.0),
                                   child: TextField(
+                                    controller: currentPasswordEditText,
                                     obscureText: _isHidePassword,
                                     keyboardType: TextInputType.visiblePassword,
                                     decoration: InputDecoration(
@@ -181,7 +199,13 @@ class _Edit_PasswordState extends State<Edit_Password> {
                           width: 320.0,
                           height: 45.0,
                           child: RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              pr.show();
+                              updatePasswordRequest(newPasswordEditText.text,
+                                  confirmPasswordEditText.text, confirmPasswordEditText.text).then((temp){
+                                    Navigator.of(context).pop();
+                              });
+                            },
                             color: Colors.green,
                             shape: RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(12.0),
@@ -201,5 +225,31 @@ class _Edit_PasswordState extends State<Edit_Password> {
                   )
               )),
         ));
+  }
+
+  Future updatePasswordRequest(String newPassword, String confirmPassword, String currentPassword) async {
+
+    dios.Dio dio = new dios.Dio();
+
+    print("auth token = " + globals.auth_token);
+    print("Edit Password jalan . . .");
+
+    String apiUrl = 'http://app.lapangbola.com/api/players/update_password';
+
+    dios.FormData formData = new dios.FormData.fromMap({
+      "auth_token" : globals.auth_token,
+      "password" : newPassword,
+      "password_confirmation" : confirmPassword,
+      "current_password" : currentPassword,
+    });
+
+    dios.Response response = await dio.put(apiUrl, data: formData);
+
+    print("ini response upload dio " + response.toString());
+
+    UpdatePasswordResponse updatePasswordResponse = updatePasswordResponseFromJson(response.toString());
+
+    pr.hide();
+    return updatePasswordResponse;
   }
 }
