@@ -13,6 +13,7 @@ import 'profile.dart';
 import 'statistik.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:progress_dialog/progress_dialog.dart';
+import 'edit_password.dart';
 
 ProgressDialog pr;
 String imageUrl = "http://app.lapangbola.com";
@@ -60,7 +61,7 @@ class _Profile_DescState extends State<Profile_Desc> {
               child: SingleChildScrollView(
                   child: Center(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
@@ -73,12 +74,38 @@ class _Profile_DescState extends State<Profile_Desc> {
                         ),Padding(
                           padding: const EdgeInsets.all(18.0),
                         ),
-                        Center(child: Text(globals.playerDetailReponse.message,
-                          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
-                              fontFamily: "Avenir"), textAlign: TextAlign.center,))
+                        Container(
+                          height: 350.0,
+                         child: Center(
+                           child: Text(globals.playerDetailReponse.message,
+                             style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
+                                 fontFamily: "Avenir"), textAlign: TextAlign.center,),
+                         ),
+                        )
+                        ,
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                        ),SizedBox(
+                          width: 320.0,
+                          height: 45.0,
+                          child: RaisedButton(
+                            onPressed: (){_showDialog(context);},
+                            color: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(12.0),
+                              side: BorderSide(color: Colors.green),
+                            ),
+                            child: Text(
+                              "LOG OUT",
+                              style: new TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0),
+                            ),
+                          ),
+                        )
                       ]),
                   ),
-
               ),
             ),
           )
@@ -202,7 +229,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                   ),Text(
                                     globals.playerDetailReponse.games.toString(),
                                     style: new TextStyle(
-                                        fontSize: 24.0,
+                                        fontSize: 18.0,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontFamily: "Avenir"),
@@ -222,7 +249,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                   ),Text(
                                     globals.playerDetailReponse.games.toString(),
                                     style: new TextStyle(
-                                        fontSize: 24.0,
+                                        fontSize: 18.0,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontFamily: "Avenir"),
@@ -242,7 +269,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                   ),Text(
                                     globals.playerDetailReponse.totalSave.toString(),
                                     style: new TextStyle(
-                                        fontSize: 24.0,
+                                        fontSize: 18.0,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontFamily: "Avenir"),
@@ -253,7 +280,6 @@ class _Profile_DescState extends State<Profile_Desc> {
                           ),
                         ),Container(
                           width: 320.0,
-                          height: 250.0,
                           padding: const EdgeInsets.only(top: 8.0, left: 16.0),
                           color: Colors.white,
                           child: Column(
@@ -276,14 +302,14 @@ class _Profile_DescState extends State<Profile_Desc> {
                                 child: Text(
                                   globals.clubResponse.clubName,
                                   style: new TextStyle(
-                                      fontSize: 18.0,
+                                      fontSize: 16.0,
                                       color: Colors.black,
                                       fontFamily: "Avenir"),
                                 ),
                               ),Padding(
-                                padding: const EdgeInsets.only(top: 16.0),
+                                padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
-                                  "City",
+                                  "Nationality",
                                   style: new TextStyle(
                                       fontSize: 12.0,
                                       color: Colors.black,
@@ -291,15 +317,15 @@ class _Profile_DescState extends State<Profile_Desc> {
                                       fontFamily: "Avenir"),
                                 ),
                               ),Text(
-                                "Bandung",
+                                "IDN",
                                 style: new TextStyle(
-                                    fontSize: 18.0,
+                                    fontSize: 16.0,
                                     color: Colors.black,
                                     fontFamily: "Avenir"),
                               ),Padding(
-                                padding: const EdgeInsets.only(top: 16.0),
+                                padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
-                                  "Position",
+                                  "Date of Birth",
                                   style: new TextStyle(
                                       fontSize: 12.0,
                                       color: Colors.black,
@@ -307,9 +333,58 @@ class _Profile_DescState extends State<Profile_Desc> {
                                       fontFamily: "Avenir"),
                                 ),
                               ),Text(
-                                globals.playerDetailReponse.positionName,
+                                "08/12/1986",
                                 style: new TextStyle(
-                                    fontSize: 18.0,
+                                    fontSize: 16.0,
+                                    color: Colors.black,
+                                    fontFamily: "Avenir"),
+                              ),Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  "Age",
+                                  style: new TextStyle(
+                                      fontSize: 12.0,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Avenir"),
+                                ),
+                              ),Text(
+                                "33",
+                                style: new TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.black,
+                                    fontFamily: "Avenir"),
+                              ),Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  "Height",
+                                  style: new TextStyle(
+                                      fontSize: 12.0,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Avenir"),
+                                ),
+                              ),Text(
+                                "174.0 Cm",
+                                style: new TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.black,
+                                    fontFamily: "Avenir"),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  "Weight",
+                                  style: new TextStyle(
+                                      fontSize: 12.0,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Avenir"),
+                                ),
+                              ),Text(
+                                "75.0 Kg",
+                                style: new TextStyle(
+                                    fontSize: 16.0,
                                     color: Colors.black,
                                     fontFamily: "Avenir"),
                               ),
@@ -317,7 +392,29 @@ class _Profile_DescState extends State<Profile_Desc> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(8.0),
+                        ),SizedBox(
+                          width: 320.0,
+                          height: 45.0,
+                          child: RaisedButton(
+                            onPressed: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                                builder: (BuildContext context) => new Edit_Password())),
+                            color: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(12.0),
+                              side: BorderSide(color: Colors.green),
+                            ),
+                            child: Text(
+                              "Edit Password",
+                              style: new TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
                         ),SizedBox(
                           width: 320.0,
                           height: 45.0,
@@ -336,6 +433,9 @@ class _Profile_DescState extends State<Profile_Desc> {
                                   fontSize: 18.0),
                             ),
                           ),
+                        ),SizedBox(
+                          width: 100.0,
+                          height: 100.0,
                         )
                       ],
                     ),

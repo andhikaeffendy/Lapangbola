@@ -227,64 +227,152 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
       backgroundColor: Color(0xffEFFFF0),
       body: Container(
         padding: EdgeInsets.only(top: 40.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Change Profile Picture",
-              style: new TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Avenir"),
-            ),
-            pic(),
-            FlatButton.icon(
-              color: Colors.green,
-              onPressed: () {
-                _settingModalBottomSheet(context);
-              },
-              icon: Icon(
-                Icons.edit,
-                color: Colors.white,
-                size: 15.0,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "Edit Profile",
+                style: new TextStyle(
+                    fontSize: 24.0,
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Avenir"),
               ),
-              label: Text("Edit Foto Profile",
-                  style: new TextStyle(
-                      fontSize: 12.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Avenir")),
-            ),Padding(
-              padding: const EdgeInsets.all(16.0),
-            ),SizedBox(
-              width: 140.0,
-              height: 45.0,
-              child: RaisedButton(
-                onPressed: (){
-                  //upload disini
-                  pr.show();
-                  getUploadImg(imageFile2).then((temp){
-                    Navigator.of(context).pop();
-                  });
-                },
+              pic(),
+              FlatButton.icon(
                 color: Colors.green,
-                shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(12.0),
-                  side: BorderSide(color: Colors.green),
+                onPressed: () {
+                  _settingModalBottomSheet(context);
+                },
+                icon: Icon(
+                  Icons.edit,
+                  color: Colors.white,
+                  size: 15.0,
                 ),
-                child: Text(
-                  "SIMPAN",
-                  style: new TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0),
+                label: Text("Edit Foto Profile",
+                    style: new TextStyle(
+                        fontSize: 12.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Avenir")),
+              ),Padding(
+                padding: const EdgeInsets.all(8.0),
+              ),Container(
+                  margin: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(16.0),
+                  color: Colors.white,
+                  width: 300.0,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Weight",
+                            style: new TextStyle(
+                                fontSize: 16.0, color: Colors.black,
+                                fontFamily: "Avenir"),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding:
+                        const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                        child: TextField(
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(12.0),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black26, width: 1.0),
+                                  borderRadius:
+                                  BorderRadius.circular(15.0))),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Height",
+                            style: new TextStyle(
+                                fontSize: 16.0, color: Colors.black,
+                                fontFamily: "Avenir"),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding:
+                        const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                        child: TextField(
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(12.0),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black26, width: 1.0),
+                                  borderRadius:
+                                  BorderRadius.circular(15.0))),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "National",
+                            style: new TextStyle(
+                                fontSize: 16.0, color: Colors.black,
+                                fontFamily: "Avenir"),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding:
+                        const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                        child: TextField(
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(12.0),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black26, width: 1.0),
+                                  borderRadius:
+                                  BorderRadius.circular(15.0))),
+                        ),
+                      ),
+                    ],
+                  ))
+              ,SizedBox(
+                width: 140.0,
+                height: 45.0,
+                child: RaisedButton(
+                  onPressed: (){
+                    //upload disini
+                    pr.show();
+                    getUploadImg(imageFile2).then((temp){
+                      Navigator.of(context).pop();
+                    });
+                  },
+                  color: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(12.0),
+                    side: BorderSide(color: Colors.green),
+                  ),
+                  child: Text(
+                    "SIMPAN",
+                    style: new TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0),
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
