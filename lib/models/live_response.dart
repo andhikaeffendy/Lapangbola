@@ -35,7 +35,7 @@ class LiveResponse {
 class Datum {
   int id;
   String name;
-  List<MatchesCollection> matchesCollection;
+  List<MatchesCollection> matchesCollection = null;
 
   Datum({
     this.id,
