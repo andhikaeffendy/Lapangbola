@@ -277,7 +277,7 @@ void _showDialog(BuildContext context, String response) {
           new FlatButton(
               child: new Text("Ok"),
               onPressed: (){
-                Navigator.of(context).push(FadeRoute(page: Profile_Desc()));
+                Navigator.of(context).pop();
               }
           ),
         ],
