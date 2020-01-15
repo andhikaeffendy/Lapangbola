@@ -35,7 +35,7 @@ class LiveResponse {
 class Datum {
   int id;
   String name;
-  List<MatchesCollection> matchesCollection = null;
+  List<MatchesCollection> matchesCollection;
 
   Datum({
     this.id,
@@ -46,13 +46,13 @@ class Datum {
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["id"],
     name: json["name"],
-    matchesCollection: json["matches_collection"] == null ? null : List<MatchesCollection>.from(json["matches_collection"].map((x) => MatchesCollection.fromJson(x))),
+    matchesCollection: List<MatchesCollection>.from(json["matches_collection"].map((x) => MatchesCollection.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
-    "matches_collection": matchesCollection == null ? null : List<dynamic>.from(matchesCollection.map((x) => x.toJson())),
+    "matches_collection": List<dynamic>.from(matchesCollection.map((x) => x.toJson())),
   };
 }
 
@@ -86,9 +86,9 @@ class MatchesCollection {
     matchDate: json["match_date"] == null ? null : json["match_date"],
     id: json["id"],
     homeName: json["home_name"],
-    homeImage: "http://liga.lapangbola.com"+json["home_image"],
+    homeImage: json["home_image"],
     awayName: json["away_name"],
-    awayImage: "http://liga.lapangbola.com"+json["away_image"],
+    awayImage: json["away_image"],
     homeScore: json["home_score"],
     awayScore: json["away_score"],
     minute: json["minute"],
