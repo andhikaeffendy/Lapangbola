@@ -483,7 +483,7 @@ class _DashboardState extends State<Dashboard> {
 
     Response response = await get(apiUrl, headers: headers);
 
-    PlayerDetailReponse playerDetailReponse = playerDetailReponseFromJson(response.body);
+    PlayerDetailResponse playerDetailReponse = playerDetailResponseFromJson(response.body);
 
     String clubUrl = "https://liga.lapangbola.com/api/clubs/" + playerDetailReponse.clubId.toString();
 

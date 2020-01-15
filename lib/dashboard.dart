@@ -228,11 +228,11 @@ class _DashboardState extends State<Dashboard> {
                       return Center(child: CircularProgressIndicator());
                     }else{
                       List<Datum> leagueData = snapshot.data.data;
-                      List<MatchesCollection> ligaTopScoreMatch = leagueData[0].matchesCollection; //cara manggilnya ntar kalo dah pake listview builder tuh ligaTopScoreMatch[index].homeName *misalnya
+                      //List<MatchesCollection> ligaTopScoreMatch = leagueData[0].matchesCollection; //cara manggilnya ntar kalo dah pake listview builder tuh ligaTopScoreMatch[index].homeName *misalnya
                       //List<MatchesCollection> friendlyMatch = leagueData[1].matchesCollection;
                       //List<MatchesCollection> matchGabungan = ligaTopScoreMatch+friendlyMatch;
 
-                      print("size top score = " + ligaTopScoreMatch.length.toString());
+                      //print("size top score = " + ligaTopScoreMatch.length.toString());
                       //print("size friendly = " + friendlyMatch.length.toString());
                       //print("size Gabungan = " + matchGabungan.length.toString());
 
@@ -434,14 +434,14 @@ class _DashboardState extends State<Dashboard> {
     //   "id": 101
     // }
     LiveResponse liveResponse = liveResponseFromJson(body);
-    //print("Ini status dari response : " + loginResponse.status);
+    print("Ini status dari response : " + liveResponse.status);
 
     return liveResponse;
   }
 
   Future getPlayeDetailRequest() async{
 
-
+    print("testasdqwas");
     String apiUrl = "https://liga.lapangbola.com/api/players/detail?phone_number="+globals.phone_number;
 
     Map<String, String> headers = {"Content-type": "application/json"};
@@ -450,12 +450,12 @@ class _DashboardState extends State<Dashboard> {
 
     Response response = await get(apiUrl, headers: headers);
 
-    PlayerDetailReponse playerDetailReponse = playerDetailReponseFromJson(response.body);
+    PlayerDetailResponse playerDetailResponse = playerDetailResponseFromJson(response.body);
 
-    String clubUrl = "https://liga.lapangbola.com/api/clubs/" + playerDetailReponse.clubId.toString();
+    String clubUrl = "https://liga.lapangbola.com/api/clubs/" + playerDetailResponse.clubId.toString();
 
     Response httpClubResponse = await get(clubUrl, headers: headers);
-    globals.playerDetailReponse = playerDetailReponse;
+    globals.playerDetailReponse = playerDetailResponse;
     print("Player Detail Message " + globals.playerDetailReponse.message);
 
     ClubResponse clubResponse = clubResponseFromJson(httpClubResponse.body);
@@ -467,7 +467,7 @@ class _DashboardState extends State<Dashboard> {
 
     print("Club Message " + globals.clubResponse.message);
 
-    return playerDetailReponse;
+    return playerDetailResponse;
   }
 
   goToPreviousImage() {

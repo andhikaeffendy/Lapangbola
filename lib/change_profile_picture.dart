@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart' as dios;
 
 import 'package:http/http.dart';
@@ -12,6 +14,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:progress_dialog/progress_dialog.dart';
+
+import 'models/playerDetail_reponse.dart';
 
 
 
@@ -223,6 +227,10 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
     pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
     pr.style(message: "Uploading...");
 
+    final heightEditText = TextEditingController();
+    final weightEditText = TextEditingController();
+    final nationalEditText = TextEditingController();
+
     return Scaffold(
       backgroundColor: Color(0xffEFFFF0),
       body: Container(
@@ -285,6 +293,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                         padding:
                         const EdgeInsets.only(top: 12.0, bottom: 12.0),
                         child: TextField(
+                          controller: weightEditText,
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(12.0),
                               border: OutlineInputBorder(
@@ -310,6 +319,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                         padding:
                         const EdgeInsets.only(top: 12.0, bottom: 12.0),
                         child: TextField(
+                          controller: heightEditText,
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(12.0),
                               border: OutlineInputBorder(
@@ -335,6 +345,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                         padding:
                         const EdgeInsets.only(top: 12.0, bottom: 12.0),
                         child: TextField(
+                          controller: nationalEditText,
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(12.0),
                               border: OutlineInputBorder(
@@ -353,7 +364,8 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                   onPressed: (){
                     //upload disini
                     pr.show();
-                    getUploadImg(imageFile2).then((temp){
+                    getUploadImg(imageFile2, heightEditText.text, weightEditText.text, nationalEditText.text).then((temp){
+                      getPlayeDetailRequest();
                       Navigator.of(context).pop();
                     });
                   },
@@ -399,18 +411,29 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
     // }
   }
 
-  Future getUploadImg(File _image) async {
+   getUploadImg(File _image, String height, String weight, String national) async {
 
     print("auth token = " + globals.auth_token);
     print("getUploadImg jalan . . .");
     print("Ini image = " + _image.path);
 
     String apiUrl = 'https://app.lapangbola.com/api/players/'+globals.playerID.toString();
+    String apiUrl2 = 'https://liga.lapangbola.com/api/players/update_data';
 
     dios.FormData formData = new dios.FormData.fromMap({
       "auth_token" : globals.auth_token,
       "photo" : await dios.MultipartFile.fromFile(_image.path)
     });
+
+    dios.FormData formData2 = new dios.FormData.fromMap({
+        "phone_number" : globals.phone_number,
+        "national" : national,
+        "weight" : weight,
+        "height" : height,
+        "picture" : await dios.MultipartFile.fromFile(_image.path)
+    });
+
+    print(formData2);
 
     /*final length = await _image.length();
     Map<String, String> token = { "auth_token": globals.auth_token};
@@ -423,6 +446,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
     */
 
     dios.Response response = await dio.put(apiUrl, data: formData);
+    dios.Response response2 = await dio.put(apiUrl2, data:formData2);
 
     print("ini response upload dio " + response.toString());
 
@@ -433,4 +457,28 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
 
     return uploadReponse;
   }
+}
+
+
+Future getPlayeDetailRequest() async{
+
+  print("testasdqwas");
+  String apiUrl = "https://liga.lapangbola.com/api/players/detail?phone_number="+globals.phone_number;
+
+  Map<String, String> headers = {"Content-type": "application/json"};
+  Map<String, String> mapString = {"phone_number": globals.phone_number};
+  String json = jsonEncode(mapString);
+
+  Response response = await get(apiUrl, headers: headers);
+
+  PlayerDetailResponse playerDetailResponse = playerDetailResponseFromJson(response.body);
+
+  globals.playerDetailReponse = playerDetailResponse;
+  print("Player Detail Message " + globals.playerDetailReponse.message);
+
+  print("Player Detail Request Donee");
+
+  print("Club Message " + globals.clubResponse.message);
+
+  return playerDetailResponse;
 }

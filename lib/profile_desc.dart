@@ -9,6 +9,7 @@ import 'package:lapang_bola_flutter/profile.dart';
 import 'package:lapang_bola_flutter/statistik.dart';
 import 'change_profile_picture.dart';
 import 'login_form.dart';
+import 'models/playerDetail_reponse.dart';
 import 'profile.dart';
 import 'statistik.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
@@ -50,6 +51,7 @@ class _Profile_DescState extends State<Profile_Desc> {
 
   @override
   Widget build(BuildContext context) {
+
 
     if(globals.playerDetailReponse.status=="Fail"){
         return WillPopScope(
@@ -317,7 +319,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                       fontFamily: "Avenir"),
                                 ),
                               ),Text(
-                                "IDN",
+                                globals.playerDetailReponse.national,
                                 style: new TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.black,
@@ -365,7 +367,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                       fontFamily: "Avenir"),
                                 ),
                               ),Text(
-                                "174.0 Cm",
+                                globals.playerDetailReponse.height.toString() + " cm",
                                 style: new TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.black,
@@ -382,7 +384,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                       fontFamily: "Avenir"),
                                 ),
                               ),Text(
-                                "75.0 Kg",
+                              globals.playerDetailReponse.weight.toString() + " kg",
                                 style: new TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.black,
@@ -538,3 +540,4 @@ Future<LogoutResponse> _makePostRequest(String url, context) async {
 
   return loginResponse;
 }
+

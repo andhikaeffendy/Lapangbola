@@ -18,5 +18,5 @@ File tempPicture = null;
 int playerID = 0;
 
 MyMatchResponse myMatchResponse;
-PlayerDetailReponse playerDetailReponse;
+PlayerDetailResponse playerDetailReponse;
 ClubResponse clubResponse;
