@@ -68,9 +68,10 @@ class _Login_formState extends State<Login_form> {
 
   @override
   Widget build(BuildContext context) {
-    ProgressDialog pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
 
-    pr.style(message: 'Login...');
+    ProgressDialog pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
+    pr.style(message: 'Please Wait...');
+
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(

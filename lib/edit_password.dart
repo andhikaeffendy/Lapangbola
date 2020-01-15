@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:dio/dio.dart' as dios;
 import 'package:lapang_bola_flutter/models/update_password_response.dart';
+import 'package:lapang_bola_flutter/profile_desc.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+
+import 'login_form.dart';
+
+
 
 
 class Edit_Password extends StatefulWidget {
@@ -13,7 +18,7 @@ class Edit_Password extends StatefulWidget {
 class _Edit_PasswordState extends State<Edit_Password> {
 
   bool _isHidePassword = true;
-  ProgressDialog pr;
+
 
   void _tooglePasswordVisible(){
     setState(() {
@@ -27,9 +32,8 @@ class _Edit_PasswordState extends State<Edit_Password> {
     final newPasswordEditText = TextEditingController();
     final confirmPasswordEditText = TextEditingController();
     final currentPasswordEditText = TextEditingController();
-
-    pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
-    pr.style(message: "Changing Password...");
+    ProgressDialog progressDialog;
+    progressDialog = new ProgressDialog(context,type: ProgressDialogType.Download);
 
 
     return Scaffold(
@@ -200,10 +204,10 @@ class _Edit_PasswordState extends State<Edit_Password> {
                           height: 45.0,
                           child: RaisedButton(
                             onPressed: () {
-                              pr.show();
+                              progressDialog.show();
                               updatePasswordRequest(newPasswordEditText.text,
-                                  confirmPasswordEditText.text, confirmPasswordEditText.text).then((temp){
-                                    Navigator.of(context).pop();
+                                  confirmPasswordEditText.text, confirmPasswordEditText.text, progressDialog).then((temp){
+                                    _showDialog(context, temp.message);
                               });
                             },
                             color: Colors.green,
@@ -227,7 +231,7 @@ class _Edit_PasswordState extends State<Edit_Password> {
         ));
   }
 
-  Future updatePasswordRequest(String newPassword, String confirmPassword, String currentPassword) async {
+  Future updatePasswordRequest(String newPassword, String confirmPassword, String currentPassword, ProgressDialog progressDialog) async {
 
     dios.Dio dio = new dios.Dio();
 
@@ -249,7 +253,35 @@ class _Edit_PasswordState extends State<Edit_Password> {
 
     UpdatePasswordResponse updatePasswordResponse = updatePasswordResponseFromJson(response.toString());
 
-    pr.hide();
+    progressDialog.hide();
     return updatePasswordResponse;
   }
+}
+
+void _showDialog(BuildContext context, String response) {
+  String url = "http://app.lapangbola.com/api/players/sign_out";
+
+  pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
+
+  pr.style(message: 'Logout...');
+  // flutter defined function
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // return object of type Dialog
+      return AlertDialog(
+        title: new Text("Change Password"),
+        content: new Text(response),
+        actions: <Widget>[
+          // usually buttons at the bottom of the dialog
+          new FlatButton(
+              child: new Text("Ok"),
+              onPressed: (){
+                Navigator.of(context).push(FadeRoute(page: Profile_Desc()));
+              }
+          ),
+        ],
+      );
+    },
+  );
 }
