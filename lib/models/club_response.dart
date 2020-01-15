@@ -11,7 +11,7 @@ String clubResponseToJson(ClubResponse data) => json.encode(data.toJson());
 class ClubResponse {
   int id;
   String clubName;
-  int games;
+  int totalPlay;
   String city;
   int totalGoal;
   int totalShootOffTarget;
@@ -25,13 +25,16 @@ class ClubResponse {
   int totalDribbleSuccess;
   int totalBlockCross;
   int totalPassing;
+  int totalWin;
+  int totalDraw;
+  int totalLose;
   String status;
   String message;
 
   ClubResponse({
     this.id,
     this.clubName,
-    this.games,
+    this.totalPlay,
     this.city,
     this.totalGoal,
     this.totalShootOffTarget,
@@ -45,6 +48,9 @@ class ClubResponse {
     this.totalDribbleSuccess,
     this.totalBlockCross,
     this.totalPassing,
+    this.totalWin,
+    this.totalDraw,
+    this.totalLose,
     this.status,
     this.message,
   });
@@ -52,7 +58,7 @@ class ClubResponse {
   factory ClubResponse.fromJson(Map<String, dynamic> json) => ClubResponse(
     id: json["id"],
     clubName: json["club_name"],
-    games: json["games"],
+    totalPlay: json["total_play"],
     city: json["city"],
     totalGoal: json["total_goal"],
     totalShootOffTarget: json["total_shoot_off_target"],
@@ -66,6 +72,9 @@ class ClubResponse {
     totalDribbleSuccess: json["total_dribble_success"],
     totalBlockCross: json["total_block_cross"],
     totalPassing: json["total_passing"],
+    totalWin: json["total_win"],
+    totalDraw: json["total_draw"],
+    totalLose: json["total_lose"],
     status: json["status"],
     message: json["message"],
   );
@@ -73,7 +82,7 @@ class ClubResponse {
   Map<String, dynamic> toJson() => {
     "id": id,
     "club_name": clubName,
-    "games": games,
+    "total_play": totalPlay,
     "city": city,
     "total_goal": totalGoal,
     "total_shoot_off_target": totalShootOffTarget,
@@ -87,6 +96,9 @@ class ClubResponse {
     "total_dribble_success": totalDribbleSuccess,
     "total_block_cross": totalBlockCross,
     "total_passing": totalPassing,
+    "total_win": totalWin,
+    "total_draw": totalDraw,
+    "total_lose": totalLose,
     "status": status,
     "message": message,
   };
