@@ -228,8 +228,13 @@ class _DashboardState extends State<Dashboard> {
                       return Center(child: CircularProgressIndicator());
                     }else{
                       List<Datum> leagueData = snapshot.data.data;
-                      List<MatchesCollection> ligaTopScoreMatch = leagueData[0].matchesCollection;
+                      List<MatchesCollection> ligaTopScoreMatch = leagueData[0].matchesCollection; //cara manggilnya ntar kalo dah pake listview builder tuh ligaTopScoreMatch[index].homeName *misalnya
                       List<MatchesCollection> friendlyMatch = leagueData[1].matchesCollection;
+                      List<MatchesCollection> matchGabungan = ligaTopScoreMatch+friendlyMatch;
+
+                      print("size top score = " + ligaTopScoreMatch.length.toString());
+                      print("size friendly = " + friendlyMatch.length.toString());
+                      print("size Gabungan = " + matchGabungan.length.toString());
 
 
 
