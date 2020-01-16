@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'desc_team.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:lapang_bola_flutter/models/logout_response.dart';
@@ -134,7 +134,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                               fontWeight: FontWeight.bold,
                               fontFamily: "Avenir"),
                         ),Padding(
-                          padding: const EdgeInsets.all(18.0),
+                          padding: const EdgeInsets.all(8.0),
                         ),
                         Container(
                           width: 320.0,
@@ -300,7 +300,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                 ),
                               ),GestureDetector(
                                 onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                    builder: (BuildContext context) => new Statistik())),
+                                    builder: (BuildContext context) => new Desc_Team())),
                                 child: Text(
                                   globals.clubResponse.clubName,
                                   style: new TextStyle(

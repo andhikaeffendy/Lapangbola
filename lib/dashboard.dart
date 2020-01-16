@@ -10,11 +10,11 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:http/http.dart';
 import 'package:lapang_bola_flutter/models/live_response.dart';
 import 'package:lapang_bola_flutter/models/playerDetail_reponse.dart';
+import 'package:lapang_bola_flutter/pilih_foto.dart';
 import 'pertandingan.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:intl/intl.dart';
 import 'package:indonesia/indonesia.dart';
-
 
 class Dashboard extends StatefulWidget {
   @override
@@ -23,8 +23,6 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   String url = "https://liga.lapangbola.com/api/lives";
-
-
 
   CarouselSlider carouselSlider;
   int _currentIndex = 0;
@@ -43,45 +41,41 @@ class _DashboardState extends State<Dashboard> {
     return result;
   }
 
-  Widget getDate(){
+  Widget getDate() {
     var date = new DateTime.now();
-    var day =  DateFormat('EEEE').format(date);
+    var day = DateFormat('EEEE').format(date);
     var fomatter = DateFormat('yMMMMEEEEd').format(date);
     var indoDate = tanggal(date);
     String realDate = fomatter.toString();
     var berlinWallFell = new DateTime.utc(1989, 11, 9);
-    var moonLanding = DateTime.parse("1969-07-20 20:18:04Z");  // 8:18pm
+    var moonLanding = DateTime.parse("1969-07-20 20:18:04Z"); // 8:18pm
 
-    return Text(
-        realDate,
-        style: new TextStyle(fontFamily: "Avenir"));
+    return Text(realDate, style: new TextStyle(fontFamily: "Avenir"));
   }
-
 
   @override
   Widget build(BuildContext context) {
-
     getPlayeDetailRequest();
 
     Future<bool> _onWillPop() {
       return showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Are you sure?'),
-          content: Text('Do you want to exit an App'),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text('No'),
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Are you sure?'),
+              content: Text('Do you want to exit an App'),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text('No'),
+                ),
+                FlatButton(
+                  onPressed: () => exit(0),
+                  /*Navigator.of(context).pop(true)*/
+                  child: Text('Yes'),
+                ),
+              ],
             ),
-            FlatButton(
-              onPressed: () => exit(0),
-              /*Navigator.of(context).pop(true)*/
-              child: Text('Yes'),
-            ),
-          ],
-        ),
-      ) ??
+          ) ??
           false;
     }
 
@@ -213,21 +207,29 @@ class _DashboardState extends State<Dashboard> {
                       color: Colors.amber,
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(8.0, 12.0, 0, 12.0),
+                      padding:
+                      const EdgeInsets.fromLTRB(8.0, 12.0, 0, 12.0),
                       child: getDate(),
                     ),
                   ],
                 ),
                 FutureBuilder(
                   future: _makePostRequest(url),
-                  builder: (context, snapshot){
-                    String homeName = "-", awayName = "-", homeScore = "-" , awayScore = "-" ,
-                        matchTime = "-" , matchName = "-", homeImage = "-", awayImage = "-";
+                  builder: (context, snapshot) {
+                    String homeName = "-",
+                        awayName = "-",
+                        homeScore = "-",
+                        awayScore = "-",
+                        matchTime = "-",
+                        matchName = "-",
+                        homeImage = "-",
+                        awayImage = "-";
 
                     if (!snapshot.hasData || snapshot.data == null) {
                       return Center(child: CircularProgressIndicator());
-                    }else{
+                    } else {
                       List<Datum> leagueData = snapshot.data.data;
+                      final List<String> isi = <String>['a', 'b', 'c'];
                       //List<MatchesCollection> ligaTopScoreMatch = leagueData[0].matchesCollection; //cara manggilnya ntar kalo dah pake listview builder tuh ligaTopScoreMatch[index].homeName *misalnya
                       //List<MatchesCollection> friendlyMatch = leagueData[1].matchesCollection;
                       //List<MatchesCollection> matchGabungan = ligaTopScoreMatch+friendlyMatch;
@@ -236,170 +238,105 @@ class _DashboardState extends State<Dashboard> {
                       //print("size friendly = " + friendlyMatch.length.toString());
                       //print("size Gabungan = " + matchGabungan.length.toString());
 
-
-
                       return Container(
-                        width: 250.0,
-                        color: Color(0xffffffff),
-                        child: GestureDetector(
-                          onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (BuildContext context) => new Pertandingan())),// pass data to pertandingan
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  ),
-                                  ImageIcon(
-                                    AssetImage("assets/Lokasi.png"),
-                                    color: Colors.green,
-                                  ),
-                                  Container(
-                                    width: 120.0,
-                                    margin: EdgeInsets.only(left: 8.0),
-                                    child: Text(matchName,
-                                        style: new TextStyle(
-                                            fontSize: 12.0, fontFamily: "Avenir")),
-                                  ),
-                                  new Container(
-                                    margin: const EdgeInsets.all(8.0),
-                                    padding:
-                                    const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.lightBlueAccent),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      color: Colors.lightBlueAccent,
+                        width: 320.0,
+                        child: SingleChildScrollView(
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              physics: NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.only(left: 20.0,right: 20.0,bottom: 12.0),
+                              itemCount: isi.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                                      builder: (BuildContext context) => new Pertandingan())),
+                                  child: Container(
+                                    width: 300.0,
+                                    margin: EdgeInsets.only(bottom: 16.0),
+                                    color: Color(0xffffffff),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.fromLTRB(
+                                                  0, 0, 0, 0),
+                                            ),
+                                            ImageIcon(
+                                              AssetImage("assets/Lokasi.png"),
+                                              color: Colors.green,
+                                            ),
+                                            Container(
+                                              width: 120.0,
+                                              margin: EdgeInsets.only(left: 8.0),
+                                              child: Text(matchName,
+                                                  style: new TextStyle(
+                                                      fontSize: 12.0,
+                                                      fontFamily: "Avenir")),
+                                            ),
+                                            new Container(
+                                              margin: const EdgeInsets.all(8.0),
+                                              padding: const EdgeInsets.fromLTRB(
+                                                  16.0, 4.0, 16.0, 4.0),
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color:
+                                                    Colors.lightBlueAccent),
+                                                borderRadius:
+                                                BorderRadius.circular(20.0),
+                                                color: Colors.lightBlueAccent,
+                                              ),
+                                              child: Text(
+                                                matchTime,
+                                                style: new TextStyle(
+                                                    fontSize: 12.0,
+                                                    fontFamily: "Avenir"),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Card(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                            children: <Widget>[
+                                              new _listPertandingan(
+                                                gambar:
+                                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
+                                                nama: "Test daniel",
+                                                skor: "200",
+                                              ),
+                                              new _listPertandingan(
+                                                gambar:
+                                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
+                                                nama: "Test Desantha",
+                                                skor: "300",
+                                              ),
+                                              new _listPertandingan(
+                                                gambar:
+                                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
+                                                nama: "Test Desantha 1231231",
+                                                skor: "232323",
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    child: Text(
-                                      matchTime,
-                                      style: new TextStyle(
-                                          fontSize: 12.0, fontFamily: "Avenir"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Card(
-                                child:
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    new _listPertandingan(
-                                      gambar:
-                                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
-                                      nama: "Test daniel",
-                                      skor: "200",
-                                    ),
-                                    new _listPertandingan(
-                                      gambar:
-                                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
-                                      nama: "Test Desantha",
-                                      skor: "300",
-                                    ),new _listPertandingan(
-                                      gambar:
-                                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
-                                      nama: "Test Desantha 1231231",
-                                      skor: "232323",
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                                  ),
+                                );
+                              }),
                         ),
                       );
                     }
-
-                  },
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                ),
-                FutureBuilder(
-                  future: _makePostRequest(url),
-                  builder: (context, snapshot){
-                    String homeName = "-", awayName = "-", homeScore = "-" , awayScore = "-" ,
-                        matchTime = "-" , matchName = "-", homeImage = "-", awayImage = "-";
-
-                    if (!snapshot.hasData || snapshot.data == null) {
-                      return Center(child: CircularProgressIndicator());
-                    }else{
-
-                      return Container(
-                        width: 250.0,
-                        color: Color(0xffffffff),
-                        child: GestureDetector(
-                          onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (BuildContext context) => new Pertandingan())),
-                          child: Column(
-
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  ),
-                                  ImageIcon(
-                                    AssetImage("assets/Lokasi.png"),
-                                    color: Colors.green,
-                                  ),
-                                  Container(
-                                    width: 120.0,
-                                    margin: EdgeInsets.only(left: 8.0),
-                                    child: Text(matchName,
-                                        style: new TextStyle(
-                                            fontSize: 12.0, fontFamily: "Avenir")),
-                                  ),
-                                  new Container(
-                                    margin: const EdgeInsets.only(top:8.0, right: 8.0, bottom: 8.0),
-                                    padding:
-                                    const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.lightBlueAccent),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      color: Colors.lightBlueAccent,
-                                    ),
-                                    child: Text(
-                                      matchTime,
-                                      style: new TextStyle(
-                                          fontSize: 12.0, fontFamily: "Avenir"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Card(
-                                child:
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    new _listPertandingan(
-                                      gambar:homeImage,
-                                      nama: homeName,
-                                      skor: homeScore,
-                                    ),
-                                    new _listPertandingan(
-                                      gambar:awayImage,
-                                      nama: awayName,
-                                      skor: awayScore,
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-
                   },
                 ),
                 Padding(
@@ -439,10 +376,11 @@ class _DashboardState extends State<Dashboard> {
     return liveResponse;
   }
 
-  Future getPlayeDetailRequest() async{
-
+  Future getPlayeDetailRequest() async {
     print("testasdqwas");
-    String apiUrl = "https://liga.lapangbola.com/api/players/detail?phone_number="+globals.phone_number;
+    String apiUrl =
+        "https://liga.lapangbola.com/api/players/detail?phone_number=" +
+            globals.phone_number;
 
     Map<String, String> headers = {"Content-type": "application/json"};
     Map<String, String> mapString = {"phone_number": globals.phone_number};
@@ -450,9 +388,11 @@ class _DashboardState extends State<Dashboard> {
 
     Response response = await get(apiUrl, headers: headers);
 
-    PlayerDetailResponse playerDetailResponse = playerDetailResponseFromJson(response.body);
+    PlayerDetailResponse playerDetailResponse =
+        playerDetailResponseFromJson(response.body);
 
-    String clubUrl = "https://liga.lapangbola.com/api/clubs/" + playerDetailResponse.clubId.toString();
+    String clubUrl = "https://liga.lapangbola.com/api/clubs/" +
+        playerDetailResponse.clubId.toString();
 
     Response httpClubResponse = await get(clubUrl, headers: headers);
     globals.playerDetailReponse = playerDetailResponse;
@@ -461,7 +401,6 @@ class _DashboardState extends State<Dashboard> {
     ClubResponse clubResponse = clubResponseFromJson(httpClubResponse.body);
 
     globals.clubResponse = clubResponse;
-
 
     print("Player Detail Request Donee");
 
