@@ -243,7 +243,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.possHome.toString() + "%",
+                                        matchDetail.goalAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -256,7 +256,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     width: 100.0,
                                     child: Center(
                                       child: Text(
-                                        "Possesions %",
+                                        "Goals",
                                         style: new TextStyle(
                                             fontSize: 12.0,
                                             color: Colors.black,
@@ -270,7 +270,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.possAway.toString() + "%",
+                                        matchDetail.goalHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -286,8 +286,7 @@ class _PertandinganState extends State<Pertandingan> {
                                 child: CustomPaint(
                                   painter: Drawhorizontalline(),
                                 ),
-                              ),
-                              Row(
+                              ),Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
@@ -296,7 +295,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.shootonHome.toString(),
+                                        matchDetail.goalAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -323,13 +322,12 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.shootonAway.toString(),
-                                        textAlign: TextAlign.center,
+                                        matchDetail.goalHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir",),
+                                            fontFamily: "Avenir"),
                                       ),
                                     ),
                                   )
@@ -340,8 +338,7 @@ class _PertandinganState extends State<Pertandingan> {
                                 child: CustomPaint(
                                   painter: Drawhorizontalline(),
                                 ),
-                              ),
-                              Row(
+                              ),Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
@@ -350,7 +347,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.shootoffHome.toString(),
+                                        matchDetail.goalAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -363,7 +360,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     width: 100.0,
                                     child: Center(
                                       child: Text(
-                                        "Shoots",
+                                        "Shoots Of Target",
                                         style: new TextStyle(
                                             fontSize: 12.0,
                                             color: Colors.black,
@@ -377,8 +374,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.shootoffAway.toString(),
-                                        textAlign: TextAlign.center,
+                                        matchDetail.goalHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -404,7 +400,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.interceptHome.toString(),
+                                        matchDetail.goalAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -417,7 +413,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     width: 100.0,
                                     child: Center(
                                       child: Text(
-                                        "Touches",
+                                        "Shoots Blocked",
                                         style: new TextStyle(
                                             fontSize: 12.0,
                                             color: Colors.black,
@@ -431,8 +427,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.interceptAway.toString(),
-                                        textAlign: TextAlign.center,
+                                        matchDetail.goalHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -458,7 +453,59 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.passHome.toString(),
+                                        matchDetail.goalAway.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Possession (%)",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -485,8 +532,33 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.passAway.toString(),
-                                        textAlign: TextAlign.center,
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -495,6 +567,33 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Pass Accuracy (%)",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                               Padding(
@@ -502,7 +601,475 @@ class _PertandinganState extends State<Pertandingan> {
                                 child: CustomPaint(
                                   painter: Drawhorizontalline(),
                                 ),
-                              )
+                              ),Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalAway.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Tackles",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalAway.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Penalty Missed",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalAway.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Own Goals",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalAway.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Fouls",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalAway.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Yellow Cards",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalAway.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Red Cards",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalAway.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Corners",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalAway.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Offsides",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalAway.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.0,
+                                    child: Center(
+                                      child: Text(
+                                        "Crosses",
+                                        style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      child: Text(
+                                        matchDetail.goalHome.toString(),
+                                        style: new TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                              ),
                             ],
                           ),
                         )

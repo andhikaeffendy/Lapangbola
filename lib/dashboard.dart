@@ -246,7 +246,7 @@ class _DashboardState extends State<Dashboard> {
 
 
                         return Container(
-                          width: 320.0,
+                          width: 340.0,
                           child: SingleChildScrollView(
                             child: ListView.builder(
                                 shrinkWrap: true,
@@ -285,25 +285,26 @@ class _DashboardState extends State<Dashboard> {
                                         children: <Widget>[
                                           Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceAround,
                                             crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                             children: <Widget>[
-                                              Padding(
-                                                padding: const EdgeInsets.fromLTRB(
-                                                    0, 0, 0, 0),
-                                              ),
-                                              ImageIcon(
-                                                AssetImage("assets/Lokasi.png"),
-                                                color: Colors.green,
-                                              ),
                                               Container(
-                                                width: 120.0,
-                                                margin: EdgeInsets.only(left: 8.0),
-                                                child: Text(matchName,
-                                                    style: new TextStyle(
-                                                        fontSize: 12.0,
-                                                        fontFamily: "Avenir")),
+                                                margin: EdgeInsets.only(left: 12.0),
+                                                width: 30.0,
+                                                child: ImageIcon(
+                                                  AssetImage("assets/Lokasi.png"),
+                                                  color: Colors.green,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(left: 12.0),
+                                                  child: Text(matchName,textAlign: TextAlign.left,
+                                                      style: new TextStyle(
+                                                          fontSize: 12.0,
+                                                          fontFamily: "Avenir")),
+                                                ),
                                               ),
                                               new Container(
                                                 margin: const EdgeInsets.all(8.0),
@@ -330,6 +331,7 @@ class _DashboardState extends State<Dashboard> {
                                             child: Column(
                                               mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: <Widget>[
                                                 new _listPertandingan(
                                                   gambar: data.homeImage,
@@ -469,13 +471,15 @@ class _listPertandingan extends StatelessWidget {
                       image: new DecorationImage(
                           fit: BoxFit.fill, image: new NetworkImage(gambar))),
                 )),
-            Container(
-              width: 120.0,
-              child: Text(nama,
-                  style: new TextStyle(
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(left: 12.0),
+                child: Text(nama,textAlign: TextAlign.left,
+                    style: new TextStyle(
                       fontSize: 12.0,
                       fontWeight: FontWeight.bold,
-                      fontFamily: "Avenir")),
+                      fontFamily: "Avenir",)),
+              ),
             ),
             Text(skor,
                 style: new TextStyle(

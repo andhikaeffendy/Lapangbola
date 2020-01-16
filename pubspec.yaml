@@ -18,7 +18,7 @@ environment:
   flutter: ">=1.10.0 <2.0.0"
 
 dependencies:
-  shared_preferences: ^0.5.6
+  shared_preferences: ^0.5.4+9
   dio : 3.0.8
   json_annotation: ^2.0.0
   flutter:
@@ -45,7 +45,6 @@ dependencies:
   path_provider: ^1.5.1
   esys_flutter_share: ^1.0.2
   image_cropper: ^1.1.2
-  flutter_image_compress: ^0.6.3
   flutter_android_lifecycle: ^1.0.0
 
 
