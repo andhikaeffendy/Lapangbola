@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart' as dios;
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:http/http.dart';
@@ -11,6 +12,7 @@ import 'package:lapang_bola_flutter/registration.dart';
 import 'lupa_password.dart';
 import 'main.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'models/playerDetail_reponse.dart';
 import 'registration.dart';
 import 'package:lapang_bola_flutter/models/login_response.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
@@ -73,8 +75,65 @@ class _Login_formState extends State<Login_form> {
         false;
   }
 
+  Future<List<String>> getPreferences() async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String username = preferences.getString("username");
+    String password = preferences.getString("password");
+
+    List<String> data= [];
+    data.add(username);
+    data.add(password);
+
+    return data;
+  }
 
 
+  @override
+  void initState() {
+    getSliderResponse().then((slider){
+      getPreferences().then((data){
+        _makePostRequest(url, data[0], data[1]).then((task) async {
+          if(data[0]!=null && data[1]!=null){
+            print("ini asal global : " + globals.auth_token);
+            print("global is_login : " + globals.is_Login.toString());
+            if(task.status=="success"){
+              //respon ketika benar
+
+              globals.auth_token = task.token;
+              globals.is_Login = true;
+              globals.phone_number = "0" + task.phoneNumber.substring(3);
+              globals.email = task.email;
+              globals.name = task.name;
+              globals.photoUrl = task.photoUrl;
+              globals.playerID = task.playerId;
+
+              print("phone number = " + task.phoneNumber + " to " + globals.phone_number);
+              new AlertDialog(
+                content: new Text(task.message),
+              );
+
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString('username', data[0]);
+              prefs.setString('password', data[1]);
+              print("Pref saved");
+
+
+              Navigator.of(context).push(FadeRoute(page: Main()));
+            }else{
+              //respon ketika salah
+              globals.is_Login = false;
+              showDialog(context: context, child:
+              new AlertDialog(
+                content: new Text(task.message),
+              )
+              );
+            }
+          }
+        });
+      });
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -289,6 +348,7 @@ class _Login_formState extends State<Login_form> {
                                     prefs.setString('password', myController2.text);
                                     print("Pref saved");
 
+
                                     Navigator.of(context).push(FadeRoute(page: Main()));
                                   }else{
                                     //respon ketika salah
@@ -333,7 +393,7 @@ class _Login_formState extends State<Login_form> {
 
   }
 
-  getSliderResponse() async {
+  Future getSliderResponse() async {
     String url = "https://app.lapangbola.com/api/sliders";
     dios.Dio dio = new dios.Dio();
 
