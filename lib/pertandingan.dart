@@ -243,7 +243,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.goalHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -270,7 +270,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.goalAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -295,7 +295,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.shootonHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -322,7 +322,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.shootonAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -347,7 +347,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.shootoffHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -374,7 +374,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.shootoffAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -400,7 +400,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.shootblockHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -427,7 +427,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.shootblockAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -453,7 +453,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.possHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -480,7 +480,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.possAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -505,7 +505,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.passHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -532,7 +532,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.passAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -558,7 +558,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.accuracyHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -585,7 +585,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.accuracyAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -610,7 +610,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.tackleHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -637,7 +637,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.tackleAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -662,7 +662,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.shootoffHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -689,7 +689,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.shootoffAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -714,7 +714,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.owngoalHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -741,7 +741,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.owngoalAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -974,7 +974,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.offsideHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -1001,7 +1001,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.offsideAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -1026,7 +1026,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalAway.toString(),
+                                        matchDetail.crossHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -1053,7 +1053,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.goalHome.toString(),
+                                        matchDetail.crossAway.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
