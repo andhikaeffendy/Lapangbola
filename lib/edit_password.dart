@@ -6,6 +6,7 @@ import 'package:lapang_bola_flutter/profile_desc.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 import 'login_form.dart';
+import 'main.dart';
 
 
 
@@ -277,7 +278,8 @@ void _showDialog(BuildContext context, String response) {
           new FlatButton(
               child: new Text("Ok"),
               onPressed: (){
-                Navigator.of(context).pop();
+                Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => new Main()));
               }
           ),
         ],

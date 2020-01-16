@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart' as dios;
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:http/http.dart';
+import 'package:lapang_bola_flutter/models/slider_response.dart';
 import 'package:lapang_bola_flutter/registration.dart';
 import 'lupa_password.dart';
 import 'main.dart';
@@ -80,7 +82,7 @@ class _Login_formState extends State<Login_form> {
     ProgressDialog pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
     pr.style(message: 'Please Wait...');
 
-    //getPreferences();
+    getSliderResponse();
 
 
 
@@ -328,6 +330,21 @@ class _Login_formState extends State<Login_form> {
 
           )),
     );
+
+  }
+
+  getSliderResponse() async {
+    String url = "https://app.lapangbola.com/api/sliders";
+    dios.Dio dio = new dios.Dio();
+
+    dios.Response response = await dio.get(url);
+    SliderResponse sliderResponse = sliderResponseFromJson(response.toString());
+    globals.sliderResponse = sliderResponse;
+    print(globals.sliderResponse.data[0].photoUrl);
+
+    for(int i = 0 ; i < sliderResponse.data.length ; i++){
+      globals.listGambar.add(sliderResponse.data[i].photoUrl);
+    }
 
   }
 

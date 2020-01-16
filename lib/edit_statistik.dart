@@ -279,7 +279,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                                     padding: const EdgeInsets.only(
                                         top: 16.0, right: 16.0),
                                     child: Text(
-                                      playerData.clubName,
+                                      globals.tempHomeName,
                                       style: new TextStyle(
                                           fontSize: 12.0,
                                           color: (enable ? warna : warna),
@@ -290,7 +290,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                                   Padding(
                                     padding: const EdgeInsets.only(right: 16.0),
                                     child: Text(
-                                      "FC Real Madrid 2",
+                                      globals.tempAwayName,
                                       style: new TextStyle(
                                           fontSize: 12.0,
                                           color: (enable ? warna : warna),

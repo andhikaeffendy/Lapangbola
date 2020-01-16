@@ -26,12 +26,7 @@ class _DashboardState extends State<Dashboard> {
 
   CarouselSlider carouselSlider;
   int _currentIndex = 0;
-  List listGambar = [
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxUqcqam5VSexXhOeehxvJO3gpb65R0Lue1g2L6jwd5fcv4JCJTw&s',
-    'https://www.fcbarcelona.com/photo-resources/2019/10/20/0a7ae5e7-887a-491c-a170-121740154469/mini_2019-10-19_FCBfutsalvsPALMA_06.jpg?width=1200&height=750',
-    'https://d10dnch8g6iuzs.cloudfront.net/pictures/480x306/picture/39520190622102933698',
-    'http://sportsgroundproduction.blob.core.windows.net/cms/14884/newsarticles/71167_wo.jpg'
-  ];
+  List listGambar = globals.listGambar;
 
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
@@ -248,6 +243,8 @@ class _DashboardState extends State<Dashboard> {
 
                         print("size allMatch = " + allMatch.length.toString());
 
+
+
                         return Container(
                           width: 320.0,
                           child: SingleChildScrollView(
@@ -261,9 +258,22 @@ class _DashboardState extends State<Dashboard> {
                                   MatchesCollection data = allMatch[index];
                                   matchTime = data.minute.toString();
                                   matchName = data.stadium;
+
+
+                                  myMatch.Datum passData = new myMatch.Datum();
+                                  passData.stadium = data.stadium;
+                                  passData.id = data.id;
+                                  passData.homeName = data.homeName;
+                                  passData.homeImage = data.homeImage;
+                                  passData.homeScore = data.homeScore;
+                                  passData.awayScore = data.awayScore;
+                                  passData.awayName = data.awayName;
+                                  passData.awayImage = data.awayImage;
+                                  passData.shareableStatus = 0;
+
                                   return GestureDetector(
                                     onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                        builder: (BuildContext context) => new Pertandingan())),
+                                        builder: (BuildContext context) => new Pertandingan(matchID: passData))),
                                     child: Container(
                                       width: 300.0,
                                       margin: EdgeInsets.only(bottom: 16.0),

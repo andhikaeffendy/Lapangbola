@@ -34,6 +34,8 @@ class _PertandinganState extends State<Pertandingan> {
           if(!snapshot.hasData || snapshot.data == null){
             return Center(child: CircularProgressIndicator());
           }else{
+            globals.tempHomeName = matchData.homeName;
+            globals.tempAwayName = matchData.awayName;
             return Scaffold(
               backgroundColor: Color(0xffEFFFF0),
               body: Container(
