@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -12,7 +13,11 @@ import 'registration.dart';
 import 'package:lapang_bola_flutter/models/login_response.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+
+var _prefs = SharedPreferences.getInstance();
+String prefUsername, prefPassword;
 
 
 /// This Widget is the main application widget.
@@ -66,11 +71,18 @@ class _Login_formState extends State<Login_form> {
         false;
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
 
     ProgressDialog pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
     pr.style(message: 'Please Wait...');
+
+    //getPreferences();
+
+
 
     return WillPopScope(
       onWillPop: _onWillPop,
@@ -249,7 +261,7 @@ class _Login_formState extends State<Login_form> {
                             pr.show();
                             FutureBuilder<LoginResponse>(
                               // ignore: missing_return
-                                future: _makePostRequest(url, myController.text, myController2.text).then((task){
+                                future: _makePostRequest(url, myController.text, myController2.text).then((task) async {
                                   pr.hide();
                                   pr.dismiss();
                                   print("ini asal global : " + globals.auth_token);
@@ -269,6 +281,12 @@ class _Login_formState extends State<Login_form> {
                                     new AlertDialog(
                                       content: new Text(task.message),
                                     );
+
+                                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                                    prefs.setString('username', myController.text);
+                                    prefs.setString('password', myController2.text);
+                                    print("Pref saved");
+
                                     Navigator.of(context).push(FadeRoute(page: Main()));
                                   }else{
                                     //respon ketika salah
@@ -280,6 +298,7 @@ class _Login_formState extends State<Login_form> {
                                     );
                                   }
                                 }),
+                                // ignore: missing_return
                                 builder: (context, snapshot){
                                   if(snapshot.data.status=="success"){
                                     print("ini statis dari snapshoot : " + snapshot.data.status);

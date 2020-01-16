@@ -237,6 +237,17 @@ class _DashboardState extends State<Dashboard> {
                           style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
                               fontFamily: "Avenir"), textAlign: TextAlign.center,));
                       }else{
+                        List<MatchesCollection> allMatch;
+                        for(var i = 0 ; i<leagueData.length ; i++){
+                          if(i==0){
+                            allMatch = leagueData[i].matchesCollection;
+                          }else{
+                            allMatch = allMatch + leagueData[i].matchesCollection;
+                          }
+                        }
+
+                        print("size allMatch = " + allMatch.length.toString());
+
                         return Container(
                           width: 320.0,
                           child: SingleChildScrollView(
@@ -245,8 +256,11 @@ class _DashboardState extends State<Dashboard> {
                                 scrollDirection: Axis.vertical,
                                 physics: NeverScrollableScrollPhysics(),
                                 padding: EdgeInsets.only(left: 20.0,right: 20.0,bottom: 12.0),
-                                itemCount: isi.length,
+                                itemCount: allMatch.length,
                                 itemBuilder: (context, index) {
+                                  MatchesCollection data = allMatch[index];
+                                  matchTime = data.minute.toString();
+                                  matchName = data.stadium;
                                   return GestureDetector(
                                     onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
                                         builder: (BuildContext context) => new Pertandingan())),
@@ -308,22 +322,14 @@ class _DashboardState extends State<Dashboard> {
                                               MainAxisAlignment.spaceEvenly,
                                               children: <Widget>[
                                                 new _listPertandingan(
-                                                  gambar:
-                                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
-                                                  nama: "Test daniel",
-                                                  skor: "200",
+                                                  gambar: data.homeImage,
+                                                  nama: data.homeName,
+                                                  skor: data.homeScore.toString(),
                                                 ),
                                                 new _listPertandingan(
-                                                  gambar:
-                                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
-                                                  nama: "Test Desantha",
-                                                  skor: "300",
-                                                ),
-                                                new _listPertandingan(
-                                                  gambar:
-                                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
-                                                  nama: "Test Desantha 1231231",
-                                                  skor: "232323",
+                                                  gambar: data.awayImage,
+                                                  nama: data.awayName,
+                                                  skor: data.awayScore.toString(),
                                                 )
                                               ],
                                             ),

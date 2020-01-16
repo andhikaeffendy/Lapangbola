@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'desc_team.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -53,7 +55,7 @@ class _Profile_DescState extends State<Profile_Desc> {
   Widget build(BuildContext context) {
 
 
-    if(globals.playerDetailReponse.status=="Fail"){
+    if(globals.playerDetailReponse.status.toLowerCase()=="fail"){
         return WillPopScope(
           onWillPop: _onWillPop,
           child: Scaffold(
@@ -517,7 +519,7 @@ void _showDialog(BuildContext context) {
           new FlatButton(
             child: new Text("Ya"),
             onPressed: () {
-                _makePostRequest(url, context).then((task){
+                _makePostRequest(url, context).then((task) async {
                   if(task.status=="success"){
                     pr.hide();
                     globals.auth_token = "";
@@ -530,6 +532,12 @@ void _showDialog(BuildContext context) {
                     globals.photoUrl = "";
                     globals.playerID = 0;
                     globals.gender = "";
+                    globals.playerDetailReponse = null;
+                    globals.clubResponse = null;
+
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    prefs.remove("username");
+                    prefs.remove("password");
 
                     showDialog(context: context, child:
                     new AlertDialog(
