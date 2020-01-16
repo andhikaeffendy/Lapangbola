@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:lapang_bola_flutter/models/club_response.dart';
 import 'statistik.dart';
+import 'package:lapang_bola_flutter/global/global.dart' as globals;
 
 class Desc_Team extends StatefulWidget {
   @override
   _Desc_TeamState createState() => _Desc_TeamState();
 }
 
+String checkEmpty(var string){
+  String value = '-';
+  if(string!=null){
+    value = string.toString();
+  }
+  return value;
+}
+
 class _Desc_TeamState extends State<Desc_Team> {
+
+  ClubResponse clubData = globals.clubResponse;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +91,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                             Padding(
                               padding: const EdgeInsets.only(left: 20.0),
                               child: Text(
-                                "Galados ITB",
+                                clubData.clubName,
                                 style: new TextStyle(
                                     fontSize: 20.0,
                                     color: Colors.black,
@@ -89,7 +101,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                             ),Padding(
                               padding: const EdgeInsets.only(left: 20.0),
                               child: Text(
-                                "Saraga ITB",
+                                checkEmpty(clubData.stadion),
                                 style: new TextStyle(
                                     fontSize: 18.0,
                                     color: Colors.black,
@@ -122,7 +134,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Avenir"),
                             ),Text(
-                              "32",
+                              clubData.totalPlay.toString(),
                               style: new TextStyle(
                                   fontSize: 18.0,
                                   color: Colors.white,
@@ -142,7 +154,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Avenir"),
                             ),Text(
-                              "21",
+                              clubData.totalWin.toString(),
                               style: new TextStyle(
                                   fontSize: 18.0,
                                   color: Colors.white,
@@ -162,7 +174,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Avenir"),
                             ),Text(
-                              "1",
+                              clubData.totalDraw.toString(),
                               style: new TextStyle(
                                   fontSize: 18.0,
                                   color: Colors.white,
@@ -182,7 +194,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Avenir"),
                             ),Text(
-                              "10",
+                              clubData.totalLose.toString(),
                               style: new TextStyle(
                                   fontSize: 18.0,
                                   color: Colors.white,
@@ -215,7 +227,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                           onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
                               builder: (BuildContext context) => new Statistik())),
                           child: Text(
-                            "Galados ITB",
+                            clubData.clubName,
                             style: new TextStyle(
                                 fontSize: 16.0,
                                 color: Colors.black,
@@ -232,7 +244,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                                 fontFamily: "Avenir"),
                           ),
                         ),Text(
-                          "Gabungan Alumni dan Dosen ITB",
+                          checkEmpty(clubData.description),
                           style: new TextStyle(
                               fontSize: 16.0,
                               color: Colors.black,
@@ -248,7 +260,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                                 fontFamily: "Avenir"),
                           ),
                         ),Text(
-                          "Saraga ITB",
+                          checkEmpty(clubData.stadion),
                           style: new TextStyle(
                               fontSize: 16.0,
                               color: Colors.black,
@@ -264,7 +276,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                                 fontFamily: "Avenir"),
                           ),
                         ),Text(
-                          "-",
+                          checkEmpty(clubData.tahunBerdiri),
                           style: new TextStyle(
                               fontSize: 16.0,
                               color: Colors.black,
@@ -280,7 +292,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                                 fontFamily: "Avenir"),
                           ),
                         ),Text(
-                          "Rihan Handaulah, Ali Bagus",
+                          checkEmpty(clubData.penanggungJawab),
                           style: new TextStyle(
                               fontSize: 16.0,
                               color: Colors.black,

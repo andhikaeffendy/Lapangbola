@@ -28,6 +28,10 @@ class ClubResponse {
   int totalWin;
   int totalDraw;
   int totalLose;
+  String description;
+  String stadion;
+  String tahunBerdiri;
+  String penanggungJawab;
   String status;
   String message;
 
@@ -51,6 +55,10 @@ class ClubResponse {
     this.totalWin,
     this.totalDraw,
     this.totalLose,
+    this.description,
+    this.stadion,
+    this.tahunBerdiri,
+    this.penanggungJawab,
     this.status,
     this.message,
   });
@@ -75,6 +83,10 @@ class ClubResponse {
     totalWin: json["total_win"],
     totalDraw: json["total_draw"],
     totalLose: json["total_lose"],
+    description: json["description"],
+    stadion: json["Stadion"],
+    tahunBerdiri: json["Tahun Berdiri"],
+    penanggungJawab: json["Penanggung Jawab"],
     status: json["status"],
     message: json["message"],
   );
@@ -99,6 +111,10 @@ class ClubResponse {
     "total_win": totalWin,
     "total_draw": totalDraw,
     "total_lose": totalLose,
+    "description": description,
+    "Stadion": stadion,
+    "Tahun Berdiri": tahunBerdiri,
+    "Penanggung Jawab": penanggungJawab,
     "status": status,
     "message": message,
   };

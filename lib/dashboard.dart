@@ -215,6 +215,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 FutureBuilder(
                   future: _makePostRequest(url),
+                  // ignore: missing_return
                   builder: (context, snapshot) {
                     String homeName = "-",
                         awayName = "-",
@@ -227,9 +228,115 @@ class _DashboardState extends State<Dashboard> {
 
                     if (!snapshot.hasData || snapshot.data == null) {
                       return Center(child: CircularProgressIndicator());
-                    } else {
+                    }else{
                       List<Datum> leagueData = snapshot.data.data;
                       final List<String> isi = <String>['a', 'b', 'c'];
+                      if(leagueData.isEmpty){
+                        print("No Live Matches");
+                        return Center(child: Text("No Live Matches",
+                          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
+                              fontFamily: "Avenir"), textAlign: TextAlign.center,));
+                      }else{
+                        return Container(
+                          width: 320.0,
+                          child: SingleChildScrollView(
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                physics: NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.only(left: 20.0,right: 20.0,bottom: 12.0),
+                                itemCount: isi.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                                        builder: (BuildContext context) => new Pertandingan())),
+                                    child: Container(
+                                      width: 300.0,
+                                      margin: EdgeInsets.only(bottom: 16.0),
+                                      color: Color(0xffffffff),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.fromLTRB(
+                                                    0, 0, 0, 0),
+                                              ),
+                                              ImageIcon(
+                                                AssetImage("assets/Lokasi.png"),
+                                                color: Colors.green,
+                                              ),
+                                              Container(
+                                                width: 120.0,
+                                                margin: EdgeInsets.only(left: 8.0),
+                                                child: Text(matchName,
+                                                    style: new TextStyle(
+                                                        fontSize: 12.0,
+                                                        fontFamily: "Avenir")),
+                                              ),
+                                              new Container(
+                                                margin: const EdgeInsets.all(8.0),
+                                                padding: const EdgeInsets.fromLTRB(
+                                                    16.0, 4.0, 16.0, 4.0),
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color:
+                                                      Colors.lightBlueAccent),
+                                                  borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                                  color: Colors.lightBlueAccent,
+                                                ),
+                                                child: Text(
+                                                  matchTime,
+                                                  style: new TextStyle(
+                                                      fontSize: 12.0,
+                                                      fontFamily: "Avenir"),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Card(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                              children: <Widget>[
+                                                new _listPertandingan(
+                                                  gambar:
+                                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
+                                                  nama: "Test daniel",
+                                                  skor: "200",
+                                                ),
+                                                new _listPertandingan(
+                                                  gambar:
+                                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
+                                                  nama: "Test Desantha",
+                                                  skor: "300",
+                                                ),
+                                                new _listPertandingan(
+                                                  gambar:
+                                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
+                                                  nama: "Test Desantha 1231231",
+                                                  skor: "232323",
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          ),
+                        );
+                      }
+
                       //List<MatchesCollection> ligaTopScoreMatch = leagueData[0].matchesCollection; //cara manggilnya ntar kalo dah pake listview builder tuh ligaTopScoreMatch[index].homeName *misalnya
                       //List<MatchesCollection> friendlyMatch = leagueData[1].matchesCollection;
                       //List<MatchesCollection> matchGabungan = ligaTopScoreMatch+friendlyMatch;
@@ -238,104 +345,7 @@ class _DashboardState extends State<Dashboard> {
                       //print("size friendly = " + friendlyMatch.length.toString());
                       //print("size Gabungan = " + matchGabungan.length.toString());
 
-                      return Container(
-                        width: 320.0,
-                        child: SingleChildScrollView(
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              physics: NeverScrollableScrollPhysics(),
-                              padding: EdgeInsets.only(left: 20.0,right: 20.0,bottom: 12.0),
-                              itemCount: isi.length,
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                      builder: (BuildContext context) => new Pertandingan())),
-                                  child: Container(
-                                    width: 300.0,
-                                    margin: EdgeInsets.only(bottom: 16.0),
-                                    color: Color(0xffffffff),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: const EdgeInsets.fromLTRB(
-                                                  0, 0, 0, 0),
-                                            ),
-                                            ImageIcon(
-                                              AssetImage("assets/Lokasi.png"),
-                                              color: Colors.green,
-                                            ),
-                                            Container(
-                                              width: 120.0,
-                                              margin: EdgeInsets.only(left: 8.0),
-                                              child: Text(matchName,
-                                                  style: new TextStyle(
-                                                      fontSize: 12.0,
-                                                      fontFamily: "Avenir")),
-                                            ),
-                                            new Container(
-                                              margin: const EdgeInsets.all(8.0),
-                                              padding: const EdgeInsets.fromLTRB(
-                                                  16.0, 4.0, 16.0, 4.0),
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color:
-                                                    Colors.lightBlueAccent),
-                                                borderRadius:
-                                                BorderRadius.circular(20.0),
-                                                color: Colors.lightBlueAccent,
-                                              ),
-                                              child: Text(
-                                                matchTime,
-                                                style: new TextStyle(
-                                                    fontSize: 12.0,
-                                                    fontFamily: "Avenir"),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Card(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                            children: <Widget>[
-                                              new _listPertandingan(
-                                                gambar:
-                                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgXEC4DKphv--nNGE-Frc5sm45x3wqCosp6-hwFKBDYa7dOLSJAA&s",
-                                                nama: "Test daniel",
-                                                skor: "200",
-                                              ),
-                                              new _listPertandingan(
-                                                gambar:
-                                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
-                                                nama: "Test Desantha",
-                                                skor: "300",
-                                              ),
-                                              new _listPertandingan(
-                                                gambar:
-                                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PnXLzsPOs9wR5jlnRwEMB_R2ilzoC7oiJA3fgpLAIANtaYsD3g&s",
-                                                nama: "Test Desantha 1231231",
-                                                skor: "232323",
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }),
-                        ),
-                      );
+
                     }
                   },
                 ),

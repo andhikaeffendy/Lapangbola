@@ -114,6 +114,7 @@ class _Profile_DescState extends State<Profile_Desc> {
         );
 
     }else{
+      print("Image URL + Global = " + imageUrl+globals.photoUrl);
         return WillPopScope(
           onWillPop: _onWillPop,
           child: Scaffold(
@@ -222,7 +223,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    "Games",
+                                    "Play",
                                     style: new TextStyle(
                                         fontSize: 12.0,
                                         color: Colors.white,
@@ -242,14 +243,14 @@ class _Profile_DescState extends State<Profile_Desc> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    "Wins",
+                                    "Goal",
                                     style: new TextStyle(
                                         fontSize: 12.0,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontFamily: "Avenir"),
                                   ),Text(
-                                    globals.playerDetailReponse.games.toString(),
+                                    globals.playerDetailReponse.totalGoal.toString(),
                                     style: new TextStyle(
                                         fontSize: 18.0,
                                         color: Colors.white,
@@ -262,14 +263,54 @@ class _Profile_DescState extends State<Profile_Desc> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    "Saves",
+                                    "Assist",
                                     style: new TextStyle(
                                         fontSize: 12.0,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontFamily: "Avenir"),
                                   ),Text(
-                                    globals.playerDetailReponse.totalSave.toString(),
+                                    globals.playerDetailReponse.totalAssist.toString(),
+                                    style: new TextStyle(
+                                        fontSize: 18.0,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Avenir"),
+                                  ),
+                                ],
+                              ),Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    "Red Card",
+                                    style: new TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Avenir"),
+                                  ),Text(
+                                    globals.playerDetailReponse.totalRedCard.toString(),
+                                    style: new TextStyle(
+                                        fontSize: 18.0,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Avenir"),
+                                  ),
+                                ],
+                              ),Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    "Yellow Card",
+                                    style: new TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Avenir"),
+                                  ),Text(
+                                    globals.playerDetailReponse.totalYellowCard.toString(),
                                     style: new TextStyle(
                                         fontSize: 18.0,
                                         color: Colors.white,
@@ -324,7 +365,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                     fontSize: 16.0,
                                     color: Colors.black,
                                     fontFamily: "Avenir"),
-                              ),Padding(
+                              ),/*Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
                                   "Date of Birth",
@@ -356,7 +397,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                     fontSize: 16.0,
                                     color: Colors.black,
                                     fontFamily: "Avenir"),
-                              ),Padding(
+                              ),*/Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
                                   "Height",

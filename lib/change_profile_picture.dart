@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart' as dios;
 
 import 'package:http/http.dart';
+import 'package:lapang_bola_flutter/main.dart';
 import 'package:lapang_bola_flutter/models/upload_response.dart';
 import 'package:lapang_bola_flutter/profile_desc.dart';
 import 'package:path/path.dart';
@@ -366,7 +367,9 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                     pr.show();
                     getUploadImg(imageFile2, heightEditText.text, weightEditText.text, nationalEditText.text).then((temp){
                       getPlayeDetailRequest();
-                      Navigator.of(context).pop();
+                      Navigator.of(context).push(new MaterialPageRoute(
+                          builder: (BuildContext context) => new Main()));
+                      //Navigator.of(context).pop();
                     });
                   },
                   color: Colors.green,
@@ -415,23 +418,42 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
 
     print("auth token = " + globals.auth_token);
     print("getUploadImg jalan . . .");
-    print("Ini image = " + _image.path);
+
 
     String apiUrl = 'https://app.lapangbola.com/api/players/'+globals.playerID.toString();
     String apiUrl2 = 'https://liga.lapangbola.com/api/players/update_data';
 
-    dios.FormData formData = new dios.FormData.fromMap({
-      "auth_token" : globals.auth_token,
-      "photo" : await dios.MultipartFile.fromFile(_image.path)
-    });
+    dios.FormData formData;
+    dios.FormData formData2;
 
-    dios.FormData formData2 = new dios.FormData.fromMap({
+    if(_image!=null){
+      print("masuk if");
+      formData = new dios.FormData.fromMap({
+        "auth_token" : globals.auth_token,
+        "photo" : await dios.MultipartFile.fromFile(_image.path)
+      });
+
+      formData2 = new dios.FormData.fromMap({
         "phone_number" : globals.phone_number,
         "national" : national,
         "weight" : weight,
         "height" : height,
         "picture" : await dios.MultipartFile.fromFile(_image.path)
-    });
+      });
+    }else{
+      print("masuk else");
+      formData = new dios.FormData.fromMap({
+        "auth_token" : globals.auth_token,
+        "photo" : null
+      });
+      formData2 = new dios.FormData.fromMap({
+        "phone_number" : globals.phone_number,
+        "national" : national,
+        "weight" : weight,
+        "height" : height,
+        "picture" : null
+      });
+    }
 
     print(formData2);
 
@@ -448,11 +470,14 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
     dios.Response response = await dio.put(apiUrl, data: formData);
     dios.Response response2 = await dio.put(apiUrl2, data:formData2);
 
-    print("ini response upload dio " + response.toString());
+    print("ini response upload dio : " + response.toString());
+    print("ini response upload dio2 : " + response2.toString());
 
     UploadReponse uploadReponse = uploadReponseFromJson(response.toString());
 
-    globals.photoUrl = uploadReponse.photoUrl;
+    if(uploadReponse.photoUrl!=null){
+      globals.photoUrl = uploadReponse.photoUrl;
+    }
     pr.hide();
 
     return uploadReponse;
