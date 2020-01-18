@@ -560,7 +560,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                             teksJenis3 = playerData.totalDribbleSuccess.toString()+" DRIBLE SUCCES";
                             teksJenis4 = playerData.totalShootOnTarget.toString()+" SHOOTS ON TARGET";
                           } else if (index == 2) {
-                            teksJenis1 = playerData.totalTackle.toString()+" OOAL";
+                            teksJenis1 = playerData.totalTackle.toString()+" GOAL";
                             teksJenis2 = playerData.totalTackle.toString()+" ASSIST";
                             teksJenis3 = playerData.totalBlockCross.toString()+" TACKLE";
                             teksJenis4 = playerData.totalSave.toString()+" INTERCEPT";
