@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:lapang_bola_flutter/models/match_detail_reponse.dart';
 import 'package:lapang_bola_flutter/models/myMatch_response.dart';
+import 'package:lapang_bola_flutter/models/player_match_detail_response.dart';
 import 'package:lapang_bola_flutter/pilih_foto.dart';
 import 'pilih_foto.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
+import 'package:dio/dio.dart' as dios;
 
 class Pertandingan extends StatefulWidget {
   final Datum matchID;
@@ -34,8 +36,8 @@ class _PertandinganState extends State<Pertandingan> {
           if(!snapshot.hasData || snapshot.data == null){
             return Center(child: CircularProgressIndicator());
           }else{
-            globals.tempHomeName = matchData.homeName;
-            globals.tempAwayName = matchData.awayName;
+            globals.tempHomeName = matchData.homeName + " " + matchData.homeScore.toString();
+            globals.tempAwayName = matchData.awayName + " " + matchData.awayScore.toString();
             return Scaffold(
               backgroundColor: Color(0xffEFFFF0),
               body: Container(
@@ -1088,10 +1090,20 @@ class _PertandinganState extends State<Pertandingan> {
   Future<MatchDetailResponse> _makePostRequest(int id) async {
     // set up POST request arguments
     String mainUrl = "https://liga.lapangbola.com/api/lives/";
+    String urlDetailPlayer = "https://liga.lapangbola.com/api/player_matches/";
     String url = mainUrl + id.toString();
+    String playerUrl = urlDetailPlayer + id.toString() + "?phone_number=" + globals.phone_number;
     Map<String, String> headers = {"Content-type": "application/json"};
 
     Response response = await get(url, headers: headers);
+
+    if(matchData.shareableStatus!=0){
+      Response responseDetail = await get(playerUrl, headers: headers);
+      PlayerMatchDetailResponse playerMatchDetailResponse = playerMatchDetailResponseFromJson(responseDetail.body);
+      globals.playerMatchDetailResponse = playerMatchDetailResponse;
+
+    }
+
     print("Masuk kesini");
     print(response.body);
     print(response.statusCode);
@@ -1099,13 +1111,12 @@ class _PertandinganState extends State<Pertandingan> {
     int statusCode = response.statusCode;
     // this API passes back the id of the new item added to the body
     String body = response.body;
-    // {
-    //   "title": "Hello",
-    //   "body": "body text",
-    //   "userId": 1,
-    //   "id": 101
-    // }
+
+
+
+
     MatchDetailResponse loginResponse = matchDetailResponseFromJson(body);
+
     print("Ini status dari response : " + loginResponse.status);
 
     return loginResponse;

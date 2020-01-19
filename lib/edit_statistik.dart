@@ -550,30 +550,30 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                         setState(() {
                           currentIndex = index;
                           if (index == 0) {
-                            teksJenis1 = playerData.totalGoal.toString()+" GOAL";
-                            teksJenis2 = playerData.totalAssist.toString()+" ASSIST";
-                            teksJenis3 = playerData.totalBlockCross.toString()+" CROSSING";
-                            teksJenis4 = playerData.totalGoal.toString()+" SHOOTS ON GOAL";
+                            teksJenis1 = globals.playerMatchDetailResponse.totalGoal.toString()+" GOAL";
+                            teksJenis2 = globals.playerMatchDetailResponse.totalAssist.toString()+" ASSIST";
+                            teksJenis3 = globals.playerMatchDetailResponse.totalBlockCross.toString()+" CROSSING";
+                            teksJenis4 = globals.playerMatchDetailResponse.totalShootOnTarget.toString()+" SHOOTS ON GOAL";
                           } else if (index == 1) {
-                            teksJenis1 = playerData.totalGoal.toString()+" GOAL";
-                            teksJenis2 = playerData.totalAssist.toString()+" ASSIST";
-                            teksJenis3 = playerData.totalDribbleSuccess.toString()+" DRIBLE SUCCES";
-                            teksJenis4 = playerData.totalShootOnTarget.toString()+" SHOOTS ON TARGET";
+                            teksJenis1 = globals.playerMatchDetailResponse.totalGoal.toString()+" GOAL";
+                            teksJenis2 = globals.playerMatchDetailResponse.totalAssist.toString()+" ASSIST";
+                            teksJenis3 = globals.playerMatchDetailResponse.totalDribbleSuccess.toString()+" DRIBLE SUCCES";
+                            teksJenis4 = globals.playerMatchDetailResponse.totalShootOnTarget.toString()+" SHOOTS ON GOAL";
                           } else if (index == 2) {
-                            teksJenis1 = playerData.totalTackle.toString()+" GOAL";
-                            teksJenis2 = playerData.totalTackle.toString()+" ASSIST";
-                            teksJenis3 = playerData.totalBlockCross.toString()+" TACKLE";
-                            teksJenis4 = playerData.totalSave.toString()+" INTERCEPT";
+                            teksJenis1 = globals.playerMatchDetailResponse.totalGoal.toString()+" GOAL";
+                            teksJenis2 = globals.playerMatchDetailResponse.totalAssist.toString()+" ASSIST";
+                            teksJenis3 = globals.playerMatchDetailResponse.totalTackle.toString()+" TACKLE";
+                            teksJenis4 = globals.playerMatchDetailResponse.totalIntercept.toString()+" INTERCEPT";
                           } else if (index == 3) {
-                            teksJenis1 = playerData.totalTackle.toString()+" CLEARENCE";
-                            teksJenis2 = playerData.totalTackle.toString()+" TACKLE";
-                            teksJenis3 = playerData.totalTackle.toString()+" INTERCEPT";
-                            teksJenis4 = playerData.totalTackle.toString()+" FOUL";
+                            teksJenis1 = globals.playerMatchDetailResponse.totalClearance.toString()+" CLEARENCE";
+                            teksJenis2 = globals.playerMatchDetailResponse.totalTackle.toString()+" TACKLE";
+                            teksJenis3 = globals.playerMatchDetailResponse.totalIntercept.toString()+" INTERCEPT";
+                            teksJenis4 = globals.playerMatchDetailResponse.totalFoul.toString()+" FOUL";
                           } else if (index == 4) {
-                            teksJenis1 = playerData.totalSave.toString()+" SAVE";
-                            teksJenis2 = playerData.totalBlockCross.toString()+" BLOCK CROSS";
-                            teksJenis3 = playerData.totalAssist.toString()+" ASSIST";
-                            teksJenis4 = playerData.totalGoal.toString()+" GOAL";
+                            teksJenis1 = globals.playerMatchDetailResponse.totalSave.toString()+" SAVE";
+                            teksJenis2 = globals.playerMatchDetailResponse.totalBlockCross.toString()+" BLOCK CROSS";
+                            teksJenis3 = globals.playerMatchDetailResponse.totalAssist.toString()+" ASSIST";
+                            teksJenis4 = globals.playerMatchDetailResponse.totalGoal.toString()+" GOAL";
                           }
                         });
                       },
