@@ -392,9 +392,10 @@ class _DashboardState extends State<Dashboard> {
                                               }),
                                         ),
                                       ),
+                                      CustomPaint(painter: Drawhorizontalline(),),
                                       Padding(
                                         padding: const EdgeInsets.all(16.0),
-                                      )
+                                      ),
                                     ],
                                   );
                                 })
@@ -526,5 +527,26 @@ class _listPertandingan extends StatelessWidget {
                     fontFamily: "Avenir"))
           ],
         ));
+  }
+}
+
+class Drawhorizontalline extends CustomPainter {
+  Paint _paint;
+
+  Drawhorizontalline() {
+    _paint = Paint()
+      ..color = Colors.black38
+      ..strokeWidth = 2
+      ..strokeCap = StrokeCap.round;
+  }
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.drawLine(Offset(-160.0, 0.0), Offset(160.0, 0.0), _paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
