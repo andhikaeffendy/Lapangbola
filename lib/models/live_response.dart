@@ -35,30 +35,49 @@ class LiveResponse {
 class Datum {
   int id;
   String name;
-  List<MatchesCollection> matchesCollection;
+  List<MatchDate> matchDates;
 
   Datum({
     this.id,
     this.name,
-    this.matchesCollection,
+    this.matchDates,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["id"],
     name: json["name"],
-    matchesCollection: List<MatchesCollection>.from(json["matches_collection"].map((x) => MatchesCollection.fromJson(x))),
+    matchDates: List<MatchDate>.from(json["match_dates"].map((x) => MatchDate.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
+    "match_dates": List<dynamic>.from(matchDates.map((x) => x.toJson())),
+  };
+}
+
+class MatchDate {
+  String matchDate;
+  List<MatchesCollection> matchesCollection;
+
+  MatchDate({
+    this.matchDate,
+    this.matchesCollection,
+  });
+
+  factory MatchDate.fromJson(Map<String, dynamic> json) => MatchDate(
+    matchDate: json["match_date"],
+    matchesCollection: List<MatchesCollection>.from(json["matches_collection"].map((x) => MatchesCollection.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "match_date": matchDate,
     "matches_collection": List<dynamic>.from(matchesCollection.map((x) => x.toJson())),
   };
 }
 
 class MatchesCollection {
   String stadium;
-  String matchDate;
   int id;
   String homeName;
   String homeImage;
@@ -70,7 +89,6 @@ class MatchesCollection {
 
   MatchesCollection({
     this.stadium,
-    this.matchDate,
     this.id,
     this.homeName,
     this.homeImage,
@@ -83,12 +101,11 @@ class MatchesCollection {
 
   factory MatchesCollection.fromJson(Map<String, dynamic> json) => MatchesCollection(
     stadium: json["stadium"],
-    matchDate: json["match_date"] == null ? null : json["match_date"],
     id: json["id"],
     homeName: json["home_name"],
-    homeImage: "https://liga.lapangbola.com"+json["home_image"],
+    homeImage: json["home_image"],
     awayName: json["away_name"],
-    awayImage: "https://liga.lapangbola.com"+json["away_image"],
+    awayImage: json["away_image"],
     homeScore: json["home_score"],
     awayScore: json["away_score"],
     minute: json["minute"],
@@ -96,7 +113,6 @@ class MatchesCollection {
 
   Map<String, dynamic> toJson() => {
     "stadium": stadium,
-    "match_date": matchDate == null ? null : matchDate,
     "id": id,
     "home_name": homeName,
     "home_image": homeImage,

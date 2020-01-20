@@ -186,69 +186,60 @@ class _DashboardState extends State<Dashboard> {
                 Padding(
                   padding: const EdgeInsets.all(6.0),
                 ),
-                ListView.builder(itemBuilder: (context, index){
-                  return Column(
-                    children: <Widget>[
-                      Text(
-                        "Live Matches",
-                        style: new TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
-                            fontFamily: "Avenir"),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          ImageIcon(
-                            AssetImage("assets/Kalender.png"),
-                            color: Colors.amber,
-                          ),
-                          Padding(
-                            padding:
-                            const EdgeInsets.fromLTRB(8.0, 12.0, 0, 12.0),
-                            child: getDate(),
-                          ),
-                        ],
-                      ),
-                      FutureBuilder(
-                        future: _makePostRequest(url),
-                        // ignore: missing_return
-                        builder: (context, snapshot) {
-                          String homeName = "-",
-                              awayName = "-",
-                              homeScore = "-",
-                              awayScore = "-",
-                              matchTime = "-",
-                              matchName = "-",
-                              homeImage = "-",
-                              awayImage = "-";
+                FutureBuilder(
+                  future: _makePostRequest(url),
+                  builder: (context, snapshot){
 
-                          if (!snapshot.hasData || snapshot.data == null) {
-                            return Center(child: CircularProgressIndicator());
-                          }else{
-                            List<Datum> leagueData = snapshot.data.data;
-                            final List<String> isi = <String>['a', 'b', 'c'];
-                            if(leagueData.isEmpty){
-                              print("No Live Matches");
-                              return Center(child: Text("No Live Matches",
-                                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
-                                    fontFamily: "Avenir"), textAlign: TextAlign.center,));
-                            }else{
-                              List<MatchesCollection> allMatch;
-                              for(var i = 0 ; i<leagueData.length ; i++){
-                                if(i==0){
-                                  allMatch = leagueData[i].matchesCollection;
-                                }else{
-                                  allMatch = allMatch + leagueData[i].matchesCollection;
-                                }
-                              }
+                    String homeName = "-",
+                        awayName = "-",
+                        homeScore = "-",
+                        awayScore = "-",
+                        matchTime = "-",
+                        matchName = "-",
+                        homeImage = "-",
+                        awayImage = "-";
 
-                              print("size allMatch = " + allMatch.length.toString());
-
-
-
-                              return Container(
+                    if (!snapshot.hasData || snapshot.data == null){
+                      return Center(child: CircularProgressIndicator());
+                    }else{
+                      LiveResponse liveResponse = snapshot.data;
+                      List<Datum> leagueData = liveResponse.data;
+                      if(leagueData.isEmpty){
+                        print("No Live Matches");
+                        return Center(child: Text("No Live Matches",
+                          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
+                              fontFamily: "Avenir"), textAlign: TextAlign.center,));
+                      }else{
+                        return ListView.builder(
+                          itemCount: leagueData.length,
+                          shrinkWrap: true,
+                          physics: ClampingScrollPhysics(),
+                          itemBuilder: (context, index){
+                          return Column(
+                            children: <Widget>[
+                              Text(
+                                leagueData[index].name,
+                                style: new TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
+                                    fontFamily: "Avenir"),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  ImageIcon(
+                                    AssetImage("assets/Kalender.png"),
+                                    color: Colors.amber,
+                                  ),
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.fromLTRB(8.0, 12.0, 0, 12.0),
+                                    child: getDate(),
+                                  ),
+                                ],
+                              ),
+                              Container(
                                 width: 340.0,
                                 child: SingleChildScrollView(
                                   child: ListView.builder(
@@ -256,9 +247,9 @@ class _DashboardState extends State<Dashboard> {
                                       scrollDirection: Axis.vertical,
                                       physics: NeverScrollableScrollPhysics(),
                                       padding: EdgeInsets.only(left: 20.0,right: 20.0,bottom: 12.0),
-                                      itemCount: allMatch.length,
+                                      itemCount: leagueData.length,
                                       itemBuilder: (context, index) {
-                                        MatchesCollection data = allMatch[index];
+                                        /*MatchesCollection data = allMatch[index];
                                         matchTime = data.minute.toString();
                                         matchName = data.stadium;
 
@@ -272,11 +263,11 @@ class _DashboardState extends State<Dashboard> {
                                         passData.awayScore = data.awayScore;
                                         passData.awayName = data.awayName;
                                         passData.awayImage = data.awayImage;
-                                        passData.shareableStatus = 0;
+                                        passData.shareableStatus = 0;*/
 
                                         return GestureDetector(
                                           onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                              builder: (BuildContext context) => new Pertandingan(matchID: passData))),
+                                              builder: (BuildContext context) => new Pertandingan())),
                                           child: Container(
                                             width: 300.0,
                                             margin: EdgeInsets.only(bottom: 16.0),
@@ -337,14 +328,14 @@ class _DashboardState extends State<Dashboard> {
                                                     crossAxisAlignment: CrossAxisAlignment.center,
                                                     children: <Widget>[
                                                       new _listPertandingan(
-                                                        gambar: data.homeImage,
-                                                        nama: data.homeName,
-                                                        skor: data.homeScore.toString(),
+                                                        gambar: "-",
+                                                        nama: "-",
+                                                        skor: "-",
                                                       ),
                                                       new _listPertandingan(
-                                                        gambar: data.awayImage,
-                                                        nama: data.awayName,
-                                                        skor: data.awayScore.toString(),
+                                                        gambar: "-",
+                                                        nama: "-",
+                                                        skor: "-",
                                                       )
                                                     ],
                                                   ),
@@ -355,30 +346,18 @@ class _DashboardState extends State<Dashboard> {
                                         );
                                       }),
                                 ),
-                              );
-                            }
-
-                            //List<MatchesCollection> ligaTopScoreMatch = leagueData[0].matchesCollection; //cara manggilnya ntar kalo dah pake listview builder tuh ligaTopScoreMatch[index].homeName *misalnya
-                            //List<MatchesCollection> friendlyMatch = leagueData[1].matchesCollection;
-                            //List<MatchesCollection> matchGabungan = ligaTopScoreMatch+friendlyMatch;
-
-                            //print("size top score = " + ligaTopScoreMatch.length.toString());
-                            //print("size friendly = " + friendlyMatch.length.toString());
-                            //print("size Gabungan = " + matchGabungan.length.toString());
-
-
-                          }
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                              )
+                            ],
+                          );
                         },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                      )
-                    ],
-                  );
-                },
-                  itemCount: 4,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
+
+                        );
+                      }
+                    }
+                  },
                 )],
             ),
           ),
