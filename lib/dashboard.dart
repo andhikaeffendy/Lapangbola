@@ -36,7 +36,7 @@ class _DashboardState extends State<Dashboard> {
     return result;
   }
 
-  Widget getDate() {
+  Widget getDate(String matchDate) {
     var date = new DateTime.now();
     var day = DateFormat('EEEE').format(date);
     var fomatter = DateFormat('yMMMMEEEEd').format(date);
@@ -45,7 +45,7 @@ class _DashboardState extends State<Dashboard> {
     var berlinWallFell = new DateTime.utc(1989, 11, 9);
     var moonLanding = DateTime.parse("1969-07-20 20:18:04Z"); // 8:18pm
 
-    return Text(realDate, style: new TextStyle(fontFamily: "Avenir"));
+    return Text(matchDate, style: new TextStyle(fontFamily: "Avenir"));
   }
 
   @override
@@ -220,6 +220,7 @@ class _DashboardState extends State<Dashboard> {
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
                           itemBuilder: (context, index) {
+                            List<MatchDate> matchDateList = leagueData[index].matchDates;
                             return Column(
                               children: <Widget>[
                                 Text(
@@ -230,10 +231,11 @@ class _DashboardState extends State<Dashboard> {
                                       fontFamily: "Avenir"),
                                 ),
                                 ListView.builder(
-                                  itemCount: 2,
+                                  itemCount: matchDateList.length,
                                   shrinkWrap: true,
                                   physics: ClampingScrollPhysics(),
                                   itemBuilder: (context, index){
+                                    List<MatchesCollection> matchesCollection = matchDateList[index].matchesCollection;
                                   return Column(
                                     children: <Widget>[
                                       Row(
@@ -247,7 +249,7 @@ class _DashboardState extends State<Dashboard> {
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(
                                                 8.0, 12.0, 0, 12.0),
-                                            child: getDate(),
+                                            child: getDate(matchDateList[index].matchDate),
                                           ),
                                         ],
                                       ),
@@ -262,30 +264,31 @@ class _DashboardState extends State<Dashboard> {
                                                   left: 20.0,
                                                   right: 20.0,
                                                   bottom: 12.0),
-                                              itemCount: leagueData.length,
+                                              itemCount: matchesCollection.length,
                                               itemBuilder: (context, index) {
-                                                /*MatchesCollection data = allMatch[index];
-                                        matchTime = data.minute.toString();
-                                        matchName = data.stadium;
+
+                                                MatchesCollection data = matchesCollection[index];
+                                                  matchTime = data.minute.toString();
+                                                  matchName = data.stadium;
 
 
-                                        myMatch.Datum passData = new myMatch.Datum();
-                                        passData.stadium = data.stadium;
-                                        passData.id = data.id;
-                                        passData.homeName = data.homeName;
-                                        passData.homeImage = data.homeImage;
-                                        passData.homeScore = data.homeScore;
-                                        passData.awayScore = data.awayScore;
-                                        passData.awayName = data.awayName;
-                                        passData.awayImage = data.awayImage;
-                                        passData.shareableStatus = 0;*/
+                                                  myMatch.Datum passData = new myMatch.Datum();
+                                                  passData.stadium = data.stadium;
+                                                  passData.id = data.id;
+                                                  passData.homeName = data.homeName;
+                                                  passData.homeImage = data.homeImage;
+                                                  passData.homeScore = data.homeScore;
+                                                  passData.awayScore = data.awayScore;
+                                                  passData.awayName = data.awayName;
+                                                  passData.awayImage = data.awayImage;
+                                                  passData.shareableStatus = 0;
 
                                                 return GestureDetector(
                                                   onTap: () => Navigator.of(context)
                                                       .push(new MaterialPageRoute(
                                                       builder: (BuildContext
                                                       context) =>
-                                                      new Pertandingan())),
+                                                      new Pertandingan(matchID: passData,))),
                                                   child: Container(
                                                     width: 300.0,
                                                     margin:
@@ -373,14 +376,14 @@ class _DashboardState extends State<Dashboard> {
                                                                 .center,
                                                             children: <Widget>[
                                                               new _listPertandingan(
-                                                                gambar: "-",
-                                                                nama: "-",
-                                                                skor: "-",
+                                                                gambar: data.homeImage,
+                                                                nama: data.homeName,
+                                                                skor: data.homeScore.toString(),
                                                               ),
                                                               new _listPertandingan(
-                                                                gambar: "-",
-                                                                nama: "-",
-                                                                skor: "-",
+                                                                gambar: data.awayImage,
+                                                                nama: data.awayName,
+                                                                skor: data.awayScore.toString(),
                                                               )
                                                             ],
                                                           ),
