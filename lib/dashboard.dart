@@ -188,8 +188,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 FutureBuilder(
                   future: _makePostRequest(url),
-                  builder: (context, snapshot){
-
+                  builder: (context, snapshot) {
                     String homeName = "-",
                         awayName = "-",
                         homeScore = "-",
@@ -199,57 +198,73 @@ class _DashboardState extends State<Dashboard> {
                         homeImage = "-",
                         awayImage = "-";
 
-                    if (!snapshot.hasData || snapshot.data == null){
+                    if (!snapshot.hasData || snapshot.data == null) {
                       return Center(child: CircularProgressIndicator());
-                    }else{
+                    } else {
                       LiveResponse liveResponse = snapshot.data;
                       List<Datum> leagueData = liveResponse.data;
-                      if(leagueData.isEmpty){
+                      if (leagueData.isEmpty) {
                         print("No Live Matches");
-                        return Center(child: Text("No Live Matches",
-                          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
-                              fontFamily: "Avenir"), textAlign: TextAlign.center,));
-                      }else{
+                        return Center(
+                            child: Text(
+                          "No Live Matches",
+                          style: new TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                              fontFamily: "Avenir"),
+                          textAlign: TextAlign.center,
+                        ));
+                      } else {
                         return ListView.builder(
                           itemCount: leagueData.length,
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
-                          itemBuilder: (context, index){
-                          return Column(
-                            children: <Widget>[
-                              Text(
-                                leagueData[index].name,
-                                style: new TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
-                                    fontFamily: "Avenir"),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  ImageIcon(
-                                    AssetImage("assets/Kalender.png"),
-                                    color: Colors.amber,
-                                  ),
-                                  Padding(
-                                    padding:
-                                    const EdgeInsets.fromLTRB(8.0, 12.0, 0, 12.0),
-                                    child: getDate(),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                width: 340.0,
-                                child: SingleChildScrollView(
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      padding: EdgeInsets.only(left: 20.0,right: 20.0,bottom: 12.0),
-                                      itemCount: leagueData.length,
-                                      itemBuilder: (context, index) {
-                                        /*MatchesCollection data = allMatch[index];
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: <Widget>[
+                                Text(
+                                  leagueData[index].name,
+                                  style: new TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0,
+                                      fontFamily: "Avenir"),
+                                ),
+                                ListView.builder(
+                                  itemCount: 2,
+                                  shrinkWrap: true,
+                                  physics: ClampingScrollPhysics(),
+                                  itemBuilder: (context, index){
+                                  return Column(
+                                    children: <Widget>[
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          ImageIcon(
+                                            AssetImage("assets/Kalender.png"),
+                                            color: Colors.amber,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                8.0, 12.0, 0, 12.0),
+                                            child: getDate(),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        width: 340.0,
+                                        child: SingleChildScrollView(
+                                          child: ListView.builder(
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              physics: NeverScrollableScrollPhysics(),
+                                              padding: EdgeInsets.only(
+                                                  left: 20.0,
+                                                  right: 20.0,
+                                                  bottom: 12.0),
+                                              itemCount: leagueData.length,
+                                              itemBuilder: (context, index) {
+                                                /*MatchesCollection data = allMatch[index];
                                         matchTime = data.minute.toString();
                                         matchName = data.stadium;
 
@@ -265,100 +280,133 @@ class _DashboardState extends State<Dashboard> {
                                         passData.awayImage = data.awayImage;
                                         passData.shareableStatus = 0;*/
 
-                                        return GestureDetector(
-                                          onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                              builder: (BuildContext context) => new Pertandingan())),
-                                          child: Container(
-                                            width: 300.0,
-                                            margin: EdgeInsets.only(bottom: 16.0),
-                                            color: Color(0xffffffff),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                              children: <Widget>[
-                                                Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Container(
-                                                      margin: EdgeInsets.only(left: 12.0),
-                                                      width: 30.0,
-                                                      child: ImageIcon(
-                                                        AssetImage("assets/Lokasi.png"),
-                                                        color: Colors.green,
-                                                      ),
+                                                return GestureDetector(
+                                                  onTap: () => Navigator.of(context)
+                                                      .push(new MaterialPageRoute(
+                                                      builder: (BuildContext
+                                                      context) =>
+                                                      new Pertandingan())),
+                                                  child: Container(
+                                                    width: 300.0,
+                                                    margin:
+                                                    EdgeInsets.only(bottom: 16.0),
+                                                    color: Color(0xffffffff),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                          crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                          children: <Widget>[
+                                                            Container(
+                                                              margin: EdgeInsets.only(
+                                                                  left: 12.0),
+                                                              width: 30.0,
+                                                              child: ImageIcon(
+                                                                AssetImage(
+                                                                    "assets/Lokasi.png"),
+                                                                color: Colors.green,
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Padding(
+                                                                padding:
+                                                                EdgeInsets.only(
+                                                                    left: 12.0),
+                                                                child: Text(matchName,
+                                                                    textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                    style: new TextStyle(
+                                                                        fontSize:
+                                                                        12.0,
+                                                                        fontFamily:
+                                                                        "Avenir")),
+                                                              ),
+                                                            ),
+                                                            new Container(
+                                                              margin: const EdgeInsets
+                                                                  .all(8.0),
+                                                              padding:
+                                                              const EdgeInsets
+                                                                  .fromLTRB(
+                                                                  16.0,
+                                                                  4.0,
+                                                                  16.0,
+                                                                  4.0),
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .lightBlueAccent),
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    20.0),
+                                                                color: Colors
+                                                                    .lightBlueAccent,
+                                                              ),
+                                                              child: Text(
+                                                                matchTime,
+                                                                style: new TextStyle(
+                                                                    fontSize: 12.0,
+                                                                    fontFamily:
+                                                                    "Avenir"),
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Card(
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                            crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                            children: <Widget>[
+                                                              new _listPertandingan(
+                                                                gambar: "-",
+                                                                nama: "-",
+                                                                skor: "-",
+                                                              ),
+                                                              new _listPertandingan(
+                                                                gambar: "-",
+                                                                nama: "-",
+                                                                skor: "-",
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding: EdgeInsets.only(left: 12.0),
-                                                        child: Text(matchName,textAlign: TextAlign.left,
-                                                            style: new TextStyle(
-                                                                fontSize: 12.0,
-                                                                fontFamily: "Avenir")),
-                                                      ),
-                                                    ),
-                                                    new Container(
-                                                      margin: const EdgeInsets.all(8.0),
-                                                      padding: const EdgeInsets.fromLTRB(
-                                                          16.0, 4.0, 16.0, 4.0),
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                            color:
-                                                            Colors.lightBlueAccent),
-                                                        borderRadius:
-                                                        BorderRadius.circular(20.0),
-                                                        color: Colors.lightBlueAccent,
-                                                      ),
-                                                      child: Text(
-                                                        matchTime,
-                                                        style: new TextStyle(
-                                                            fontSize: 12.0,
-                                                            fontFamily: "Avenir"),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Card(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    children: <Widget>[
-                                                      new _listPertandingan(
-                                                        gambar: "-",
-                                                        nama: "-",
-                                                        skor: "-",
-                                                      ),
-                                                      new _listPertandingan(
-                                                        gambar: "-",
-                                                        nama: "-",
-                                                        skor: "-",
-                                                      )
-                                                    ],
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                              )
-                            ],
-                          );
-                        },
-
+                                                );
+                                              }),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                      )
+                                    ],
+                                  );
+                                })
+                              ],
+                            );
+                          },
                         );
                       }
                     }
                   },
-                )],
+                )
+              ],
             ),
           ),
         ),
@@ -462,11 +510,13 @@ class _listPertandingan extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(left: 12.0),
-                child: Text(nama,textAlign: TextAlign.left,
+                child: Text(nama,
+                    textAlign: TextAlign.left,
                     style: new TextStyle(
                       fontSize: 12.0,
                       fontWeight: FontWeight.bold,
-                      fontFamily: "Avenir",)),
+                      fontFamily: "Avenir",
+                    )),
               ),
             ),
             Text(skor,
