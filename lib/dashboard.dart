@@ -186,191 +186,200 @@ class _DashboardState extends State<Dashboard> {
                 Padding(
                   padding: const EdgeInsets.all(6.0),
                 ),
-                Text(
-                  "Live Matches",
-                  style: new TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                      fontFamily: "Avenir"),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    ImageIcon(
-                      AssetImage("assets/Kalender.png"),
-                      color: Colors.amber,
-                    ),
-                    Padding(
-                      padding:
-                      const EdgeInsets.fromLTRB(8.0, 12.0, 0, 12.0),
-                      child: getDate(),
-                    ),
-                  ],
-                ),
-                FutureBuilder(
-                  future: _makePostRequest(url),
-                  // ignore: missing_return
-                  builder: (context, snapshot) {
-                    String homeName = "-",
-                        awayName = "-",
-                        homeScore = "-",
-                        awayScore = "-",
-                        matchTime = "-",
-                        matchName = "-",
-                        homeImage = "-",
-                        awayImage = "-";
+                ListView.builder(itemBuilder: (context, index){
+                  return Column(
+                    children: <Widget>[
+                      Text(
+                        "Live Matches",
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                            fontFamily: "Avenir"),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          ImageIcon(
+                            AssetImage("assets/Kalender.png"),
+                            color: Colors.amber,
+                          ),
+                          Padding(
+                            padding:
+                            const EdgeInsets.fromLTRB(8.0, 12.0, 0, 12.0),
+                            child: getDate(),
+                          ),
+                        ],
+                      ),
+                      FutureBuilder(
+                        future: _makePostRequest(url),
+                        // ignore: missing_return
+                        builder: (context, snapshot) {
+                          String homeName = "-",
+                              awayName = "-",
+                              homeScore = "-",
+                              awayScore = "-",
+                              matchTime = "-",
+                              matchName = "-",
+                              homeImage = "-",
+                              awayImage = "-";
 
-                    if (!snapshot.hasData || snapshot.data == null) {
-                      return Center(child: CircularProgressIndicator());
-                    }else{
-                      List<Datum> leagueData = snapshot.data.data;
-                      final List<String> isi = <String>['a', 'b', 'c'];
-                      if(leagueData.isEmpty){
-                        print("No Live Matches");
-                        return Center(child: Text("No Live Matches",
-                          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
-                              fontFamily: "Avenir"), textAlign: TextAlign.center,));
-                      }else{
-                        List<MatchesCollection> allMatch;
-                        for(var i = 0 ; i<leagueData.length ; i++){
-                          if(i==0){
-                            allMatch = leagueData[i].matchesCollection;
+                          if (!snapshot.hasData || snapshot.data == null) {
+                            return Center(child: CircularProgressIndicator());
                           }else{
-                            allMatch = allMatch + leagueData[i].matchesCollection;
-                          }
-                        }
+                            List<Datum> leagueData = snapshot.data.data;
+                            final List<String> isi = <String>['a', 'b', 'c'];
+                            if(leagueData.isEmpty){
+                              print("No Live Matches");
+                              return Center(child: Text("No Live Matches",
+                                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,
+                                    fontFamily: "Avenir"), textAlign: TextAlign.center,));
+                            }else{
+                              List<MatchesCollection> allMatch;
+                              for(var i = 0 ; i<leagueData.length ; i++){
+                                if(i==0){
+                                  allMatch = leagueData[i].matchesCollection;
+                                }else{
+                                  allMatch = allMatch + leagueData[i].matchesCollection;
+                                }
+                              }
 
-                        print("size allMatch = " + allMatch.length.toString());
-
-
-
-                        return Container(
-                          width: 340.0,
-                          child: SingleChildScrollView(
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                physics: NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.only(left: 20.0,right: 20.0,bottom: 12.0),
-                                itemCount: allMatch.length,
-                                itemBuilder: (context, index) {
-                                  MatchesCollection data = allMatch[index];
-                                  matchTime = data.minute.toString();
-                                  matchName = data.stadium;
+                              print("size allMatch = " + allMatch.length.toString());
 
 
-                                  myMatch.Datum passData = new myMatch.Datum();
-                                  passData.stadium = data.stadium;
-                                  passData.id = data.id;
-                                  passData.homeName = data.homeName;
-                                  passData.homeImage = data.homeImage;
-                                  passData.homeScore = data.homeScore;
-                                  passData.awayScore = data.awayScore;
-                                  passData.awayName = data.awayName;
-                                  passData.awayImage = data.awayImage;
-                                  passData.shareableStatus = 0;
 
-                                  return GestureDetector(
-                                    onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                        builder: (BuildContext context) => new Pertandingan(matchID: passData))),
-                                    child: Container(
-                                      width: 300.0,
-                                      margin: EdgeInsets.only(bottom: 16.0),
-                                      color: Color(0xffffffff),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              Container(
-                                                margin: EdgeInsets.only(left: 12.0),
-                                                width: 30.0,
-                                                child: ImageIcon(
-                                                  AssetImage("assets/Lokasi.png"),
-                                                  color: Colors.green,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(left: 12.0),
-                                                  child: Text(matchName,textAlign: TextAlign.left,
-                                                      style: new TextStyle(
-                                                          fontSize: 12.0,
-                                                          fontFamily: "Avenir")),
-                                                ),
-                                              ),
-                                              new Container(
-                                                margin: const EdgeInsets.all(8.0),
-                                                padding: const EdgeInsets.fromLTRB(
-                                                    16.0, 4.0, 16.0, 4.0),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color:
-                                                      Colors.lightBlueAccent),
-                                                  borderRadius:
-                                                  BorderRadius.circular(20.0),
-                                                  color: Colors.lightBlueAccent,
-                                                ),
-                                                child: Text(
-                                                  matchTime,
-                                                  style: new TextStyle(
-                                                      fontSize: 12.0,
-                                                      fontFamily: "Avenir"),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          Card(
+                              return Container(
+                                width: 340.0,
+                                child: SingleChildScrollView(
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      padding: EdgeInsets.only(left: 20.0,right: 20.0,bottom: 12.0),
+                                      itemCount: allMatch.length,
+                                      itemBuilder: (context, index) {
+                                        MatchesCollection data = allMatch[index];
+                                        matchTime = data.minute.toString();
+                                        matchName = data.stadium;
+
+
+                                        myMatch.Datum passData = new myMatch.Datum();
+                                        passData.stadium = data.stadium;
+                                        passData.id = data.id;
+                                        passData.homeName = data.homeName;
+                                        passData.homeImage = data.homeImage;
+                                        passData.homeScore = data.homeScore;
+                                        passData.awayScore = data.awayScore;
+                                        passData.awayName = data.awayName;
+                                        passData.awayImage = data.awayImage;
+                                        passData.shareableStatus = 0;
+
+                                        return GestureDetector(
+                                          onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                                              builder: (BuildContext context) => new Pertandingan(matchID: passData))),
+                                          child: Container(
+                                            width: 300.0,
+                                            margin: EdgeInsets.only(bottom: 16.0),
+                                            color: Color(0xffffffff),
                                             child: Column(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                               children: <Widget>[
-                                                new _listPertandingan(
-                                                  gambar: data.homeImage,
-                                                  nama: data.homeName,
-                                                  skor: data.homeScore.toString(),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Container(
+                                                      margin: EdgeInsets.only(left: 12.0),
+                                                      width: 30.0,
+                                                      child: ImageIcon(
+                                                        AssetImage("assets/Lokasi.png"),
+                                                        color: Colors.green,
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Padding(
+                                                        padding: EdgeInsets.only(left: 12.0),
+                                                        child: Text(matchName,textAlign: TextAlign.left,
+                                                            style: new TextStyle(
+                                                                fontSize: 12.0,
+                                                                fontFamily: "Avenir")),
+                                                      ),
+                                                    ),
+                                                    new Container(
+                                                      margin: const EdgeInsets.all(8.0),
+                                                      padding: const EdgeInsets.fromLTRB(
+                                                          16.0, 4.0, 16.0, 4.0),
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color:
+                                                            Colors.lightBlueAccent),
+                                                        borderRadius:
+                                                        BorderRadius.circular(20.0),
+                                                        color: Colors.lightBlueAccent,
+                                                      ),
+                                                      child: Text(
+                                                        matchTime,
+                                                        style: new TextStyle(
+                                                            fontSize: 12.0,
+                                                            fontFamily: "Avenir"),
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
-                                                new _listPertandingan(
-                                                  gambar: data.awayImage,
-                                                  nama: data.awayName,
-                                                  skor: data.awayScore.toString(),
+                                                Card(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.spaceEvenly,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      new _listPertandingan(
+                                                        gambar: data.homeImage,
+                                                        nama: data.homeName,
+                                                        skor: data.homeScore.toString(),
+                                                      ),
+                                                      new _listPertandingan(
+                                                        gambar: data.awayImage,
+                                                        nama: data.awayName,
+                                                        skor: data.awayScore.toString(),
+                                                      )
+                                                    ],
+                                                  ),
                                                 )
                                               ],
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                }),
-                          ),
-                        );
-                      }
+                                          ),
+                                        );
+                                      }),
+                                ),
+                              );
+                            }
 
-                      //List<MatchesCollection> ligaTopScoreMatch = leagueData[0].matchesCollection; //cara manggilnya ntar kalo dah pake listview builder tuh ligaTopScoreMatch[index].homeName *misalnya
-                      //List<MatchesCollection> friendlyMatch = leagueData[1].matchesCollection;
-                      //List<MatchesCollection> matchGabungan = ligaTopScoreMatch+friendlyMatch;
+                            //List<MatchesCollection> ligaTopScoreMatch = leagueData[0].matchesCollection; //cara manggilnya ntar kalo dah pake listview builder tuh ligaTopScoreMatch[index].homeName *misalnya
+                            //List<MatchesCollection> friendlyMatch = leagueData[1].matchesCollection;
+                            //List<MatchesCollection> matchGabungan = ligaTopScoreMatch+friendlyMatch;
 
-                      //print("size top score = " + ligaTopScoreMatch.length.toString());
-                      //print("size friendly = " + friendlyMatch.length.toString());
-                      //print("size Gabungan = " + matchGabungan.length.toString());
+                            //print("size top score = " + ligaTopScoreMatch.length.toString());
+                            //print("size friendly = " + friendlyMatch.length.toString());
+                            //print("size Gabungan = " + matchGabungan.length.toString());
 
 
-                    }
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                )
-              ],
+                          }
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                      )
+                    ],
+                  );
+                },
+                  itemCount: 4,
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                )],
             ),
           ),
         ),
