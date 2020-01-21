@@ -23,10 +23,10 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
   bool teksChange = false;
   bool enable = false;
   int currentIndex = 0;
-  String teksJenis1 = "1 GOAL";
-  String teksJenis2 = "2 ASSIST";
-  String teksJenis3 = "4 CROSSING";
-  String teksJenis4 = "2 SHOOTS ON GOAL";
+  String teksJenis1 = globals.playerMatchDetailResponse.totalGoal.toString()+" GOAL";
+  String teksJenis2 = globals.playerMatchDetailResponse.totalAssist.toString()+" ASSIST";
+  String teksJenis3 = globals.playerMatchDetailResponse.totalBlockCross.toString()+" CROSSING";
+  String teksJenis4 = globals.playerMatchDetailResponse.totalShootOnTarget.toString()+" SHOOTS ON GOAL";
   List<String> jenisStatistik = [
     "Attack  1",
     "Attack  2",
