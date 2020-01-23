@@ -562,7 +562,7 @@ class _listPertandingan extends StatelessWidget {
                   decoration: new BoxDecoration(
                       shape: BoxShape.circle,
                       image: new DecorationImage(
-                          fit: BoxFit.fill, image: new NetworkImage(gambar))),
+                          fit: BoxFit.fitHeight, image: new NetworkImage(gambar))),
                 )),
             Expanded(
               child: Padding(

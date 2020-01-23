@@ -27,11 +27,14 @@ class ChangeProfilePicture extends StatefulWidget {
 
 class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
 
-  final _cekKosong = TextEditingController();
-  bool _validasi = false;
+  final _text = TextEditingController();
+  bool _validate1 = false;
+  bool _validate2 = false;
+  bool _validate3 = false;
 
-  void dispose(){
-    _cekKosong.dispose();
+  @override
+  void dispose() {
+    _text.dispose();
     super.dispose();
   }
 
@@ -230,6 +233,10 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
     );
   }
 
+
+  final heightEditText = TextEditingController();
+  final weightEditText = TextEditingController();
+  final nationalEditText = TextEditingController();
   @override
   Widget build(BuildContext context) {
     print("photo url : "+globals.photoUrl);
@@ -237,9 +244,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
     pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
     pr.style(message: "Uploading...");
 
-    final heightEditText = TextEditingController();
-    final weightEditText = TextEditingController();
-    final nationalEditText = TextEditingController();
+
 
     return Scaffold(
       backgroundColor: Color(0xffEFFFF0),
@@ -304,9 +309,9 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                         const EdgeInsets.only(top: 12.0, bottom: 12.0),
                         child: TextField(
                           controller: weightEditText,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            labelText: 'isi aja udah',
-                              errorText: _validasi ? 'cant be empty' : null,
+                            errorText: _validate1 ? 'cant be empty' : null,
                               contentPadding: EdgeInsets.all(12.0),
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -332,7 +337,9 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                         const EdgeInsets.only(top: 12.0, bottom: 12.0),
                         child: TextField(
                           controller: heightEditText,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
+                            errorText: _validate2 ? 'Cant be Empty' : null,
                               contentPadding: EdgeInsets.all(12.0),
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -359,6 +366,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                         child: TextField(
                           controller: nationalEditText,
                           decoration: InputDecoration(
+                            errorText: _validate3?'cant be empty':null,
                               contentPadding: EdgeInsets.all(12.0),
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -375,13 +383,21 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                 child: RaisedButton(
                   onPressed: (){
                     //upload disini
-                    pr.show();
-                    getUploadImg(imageFile2, heightEditText.text, weightEditText.text, nationalEditText.text).then((temp){
-                      getPlayeDetailRequest();
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (BuildContext context) => new Main()));
-                      //Navigator.of(context).pop();
-                    });
+                    if(weightEditText.text.isEmpty||heightEditText.text.isEmpty||nationalEditText.text.isEmpty){
+                      setState(() {
+                        weightEditText.text.isEmpty ? _validate1 = true : _validate1 = false;
+                        heightEditText.text.isEmpty ? _validate2 = true : _validate2 = false;
+                        nationalEditText.text.isEmpty ? _validate3 = true : _validate3 = false;
+                      });
+                    }else{
+                      pr.show();
+                      getUploadImg(imageFile2, heightEditText.text, weightEditText.text, nationalEditText.text).then((temp){
+                        getPlayeDetailRequest();
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) => new Main()));
+                        //Navigator.of(context).pop();
+                      });
+                    }
                   },
                   color: Colors.green,
                   shape: RoundedRectangleBorder(
@@ -396,7 +412,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                         fontSize: 18.0),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
