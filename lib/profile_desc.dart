@@ -188,13 +188,16 @@ class _Profile_DescState extends State<Profile_Desc> {
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.only(left: 20.0),
-                                    child: Text(
-                                      globals.name,
-                                      style: new TextStyle(
-                                          fontSize: 20.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "Avenir"),
+                                    child: Container(
+                                      width: 200.0,
+                                      child: Text(
+                                        globals.name,
+                                        style: new TextStyle(
+                                            fontSize: 20.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Avenir"),
+                                      ),
                                     ),
                                   ),Padding(
                                     padding: const EdgeInsets.only(left: 20.0),

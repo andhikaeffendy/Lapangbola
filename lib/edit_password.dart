@@ -26,13 +26,14 @@ class _Edit_PasswordState extends State<Edit_Password> {
       _isHidePassword = !_isHidePassword;
     });
   }
+  final newPasswordEditText = TextEditingController();
+  final confirmPasswordEditText = TextEditingController();
+  final currentPasswordEditText = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
 
-    final newPasswordEditText = TextEditingController();
-    final confirmPasswordEditText = TextEditingController();
-    final currentPasswordEditText = TextEditingController();
+
     ProgressDialog progressDialog;
     progressDialog = new ProgressDialog(context,type: ProgressDialogType.Download);
 

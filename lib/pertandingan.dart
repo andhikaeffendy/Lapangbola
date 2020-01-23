@@ -104,7 +104,7 @@ class _PertandinganState extends State<Pertandingan> {
                                           decoration: new BoxDecoration(
                                               shape: BoxShape.circle,
                                               image: new DecorationImage(
-                                                  fit: BoxFit.fill,
+                                                  fit: BoxFit.fitHeight,
                                                   image: new NetworkImage(
                                                       matchData.homeImage))),
                                         )),
@@ -146,7 +146,7 @@ class _PertandinganState extends State<Pertandingan> {
                                           decoration: new BoxDecoration(
                                               shape: BoxShape.circle,
                                               image: new DecorationImage(
-                                                  fit: BoxFit.fill,
+                                                  fit: BoxFit.fitHeight,
                                                   image: new NetworkImage(
                                                       matchData.awayImage))),
                                         )),
@@ -267,18 +267,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.goalAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.goalAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -319,18 +317,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.shootonAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.shootonAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -371,18 +367,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.shootoffAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.shootoffAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -424,18 +418,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.shootblockAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.shootblockAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -477,18 +469,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.possAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.possAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -529,18 +519,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.passAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.passAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -582,18 +570,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.accuracyAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.accuracyAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -634,18 +620,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.tackleAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.tackleAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -664,7 +648,7 @@ class _PertandinganState extends State<Pertandingan> {
                                     child: Container(
                                       width: 50.0,
                                       child: Text(
-                                        matchDetail.shootoffHome.toString(),
+                                        matchDetail.penaltymissHome.toString(),
                                         style: new TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.black,
@@ -686,18 +670,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.shootoffAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.penaltymissAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -738,18 +720,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.owngoalAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.owngoalAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -790,18 +770,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.foulAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.foulAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -842,18 +820,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.yellowAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.yellowAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -894,18 +870,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.redAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.redAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -946,18 +920,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.cornerAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.cornerAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -998,18 +970,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.offsideAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.offsideAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],
@@ -1050,18 +1020,16 @@ class _PertandinganState extends State<Pertandingan> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Container(
-                                      width: 50.0,
-                                      child: Text(
-                                        matchDetail.crossAway.toString(),
-                                        style: new TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "Avenir"),
-                                      ),
+                                  Container(
+                                    width: 50.0,
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      matchDetail.crossAway.toString(),
+                                      style: new TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
                                     ),
                                   )
                                 ],

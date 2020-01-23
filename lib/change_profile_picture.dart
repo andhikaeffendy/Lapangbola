@@ -26,6 +26,15 @@ class ChangeProfilePicture extends StatefulWidget {
 }
 
 class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
+
+  final _cekKosong = TextEditingController();
+  bool _validasi = false;
+
+  void dispose(){
+    _cekKosong.dispose();
+    super.dispose();
+  }
+
   Future<File> imageFile;
   File imageFile2;
   dios.Dio dio = new dios.Dio();
@@ -296,6 +305,8 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                         child: TextField(
                           controller: weightEditText,
                           decoration: InputDecoration(
+                            labelText: 'isi aja udah',
+                              errorText: _validasi ? 'cant be empty' : null,
                               contentPadding: EdgeInsets.all(12.0),
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(

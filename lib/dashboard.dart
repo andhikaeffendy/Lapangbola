@@ -220,7 +220,8 @@ class _DashboardState extends State<Dashboard> {
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
                           itemBuilder: (context, index) {
-                            List<MatchDate> matchDateList = leagueData[index].matchDates;
+                            List<MatchDate> matchDateList =
+                                leagueData[index].matchDates;
                             return Column(
                               children: <Widget>[
                                 Text(
@@ -231,177 +232,229 @@ class _DashboardState extends State<Dashboard> {
                                       fontFamily: "Avenir"),
                                 ),
                                 ListView.builder(
-                                  itemCount: matchDateList.length,
-                                  shrinkWrap: true,
-                                  physics: ClampingScrollPhysics(),
-                                  itemBuilder: (context, index){
-                                    List<MatchesCollection> matchesCollection = matchDateList[index].matchesCollection;
-                                  return Column(
-                                    children: <Widget>[
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                    itemCount: matchDateList.length,
+                                    shrinkWrap: true,
+                                    physics: ClampingScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      List<MatchesCollection>
+                                          matchesCollection =
+                                          matchDateList[index]
+                                              .matchesCollection;
+                                      return Column(
                                         children: <Widget>[
-                                          ImageIcon(
-                                            AssetImage("assets/Kalender.png"),
-                                            color: Colors.amber,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              ImageIcon(
+                                                AssetImage(
+                                                    "assets/Kalender.png"),
+                                                color: Colors.amber,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        8.0, 12.0, 0, 12.0),
+                                                child: getDate(
+                                                    matchDateList[index]
+                                                        .matchDate),
+                                              ),
+                                            ],
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                8.0, 12.0, 0, 12.0),
-                                            child: getDate(matchDateList[index].matchDate),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 340.0,
-                                        child: SingleChildScrollView(
-                                          child: ListView.builder(
-                                              shrinkWrap: true,
-                                              scrollDirection: Axis.vertical,
-                                              physics: NeverScrollableScrollPhysics(),
-                                              padding: EdgeInsets.only(
-                                                  left: 20.0,
-                                                  right: 20.0,
-                                                  bottom: 12.0),
-                                              itemCount: matchesCollection.length,
-                                              itemBuilder: (context, index) {
+                                          Container(
+                                            width: 340.0,
+                                            child: SingleChildScrollView(
+                                              child: ListView.builder(
+                                                  shrinkWrap: true,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  padding: EdgeInsets.only(
+                                                    left: 20.0,
+                                                    right: 20.0,
+                                                  ),
+                                                  itemCount:
+                                                      matchesCollection.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    MatchesCollection data =
+                                                        matchesCollection[
+                                                            index];
+                                                    matchTime =
+                                                        data.minute.toString();
+                                                    matchName = data.stadium;
 
-                                                MatchesCollection data = matchesCollection[index];
-                                                  matchTime = data.minute.toString();
-                                                  matchName = data.stadium;
+                                                    myMatch.Datum passData =
+                                                        new myMatch.Datum();
+                                                    passData.stadium =
+                                                        data.stadium;
+                                                    passData.id = data.id;
+                                                    passData.homeName =
+                                                        data.homeName;
+                                                    passData.homeImage =
+                                                        data.homeImage;
+                                                    passData.homeScore =
+                                                        data.homeScore;
+                                                    passData.awayScore =
+                                                        data.awayScore;
+                                                    passData.awayName =
+                                                        data.awayName;
+                                                    passData.awayImage =
+                                                        data.awayImage;
+                                                    passData.shareableStatus =
+                                                        0;
 
-
-                                                  myMatch.Datum passData = new myMatch.Datum();
-                                                  passData.stadium = data.stadium;
-                                                  passData.id = data.id;
-                                                  passData.homeName = data.homeName;
-                                                  passData.homeImage = data.homeImage;
-                                                  passData.homeScore = data.homeScore;
-                                                  passData.awayScore = data.awayScore;
-                                                  passData.awayName = data.awayName;
-                                                  passData.awayImage = data.awayImage;
-                                                  passData.shareableStatus = 0;
-
-                                                return GestureDetector(
-                                                  onTap: () => Navigator.of(context)
-                                                      .push(new MaterialPageRoute(
-                                                      builder: (BuildContext
-                                                      context) =>
-                                                      new Pertandingan(matchID: passData,))),
-                                                  child: Container(
-                                                    width: 300.0,
-                                                    margin:
-                                                    EdgeInsets.only(bottom: 16.0),
-                                                    color: Color(0xffffffff),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                      crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                      children: <Widget>[
-                                                        Row(
+                                                    return GestureDetector(
+                                                      onTap: () => Navigator.of(context).push(
+                                                          new MaterialPageRoute(
+                                                              builder: (BuildContext
+                                                                      context) =>
+                                                                  new Pertandingan(
+                                                                    matchID:
+                                                                        passData,
+                                                                  ))),
+                                                      child: Container(
+                                                        width: 300.0,
+                                                        margin: EdgeInsets.only(
+                                                            bottom: 16.0),
+                                                        color:
+                                                            Color(0xffffffff),
+                                                        child: Column(
                                                           mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
+                                                              MainAxisAlignment
+                                                                  .start,
                                                           crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
+                                                              CrossAxisAlignment
+                                                                  .center,
                                                           children: <Widget>[
-                                                            Container(
-                                                              margin: EdgeInsets.only(
-                                                                  left: 12.0),
-                                                              width: 30.0,
-                                                              child: ImageIcon(
-                                                                AssetImage(
-                                                                    "assets/Lokasi.png"),
-                                                                color: Colors.green,
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Padding(
-                                                                padding:
-                                                                EdgeInsets.only(
-                                                                    left: 12.0),
-                                                                child: Text(matchName,
-                                                                    textAlign:
-                                                                    TextAlign
-                                                                        .left,
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceAround,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: <
+                                                                  Widget>[
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          left:
+                                                                              12.0),
+                                                                  width: 30.0,
+                                                                  child:
+                                                                      ImageIcon(
+                                                                    AssetImage(
+                                                                        "assets/Lokasi.png"),
+                                                                    color: Colors
+                                                                        .green,
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsets
+                                                                        .only(
+                                                                            left:
+                                                                                12.0),
+                                                                    child: Text(
+                                                                        matchName,
+                                                                        textAlign:
+                                                                            TextAlign
+                                                                                .left,
+                                                                        style: new TextStyle(
+                                                                            fontSize:
+                                                                                12.0,
+                                                                            fontFamily:
+                                                                                "Avenir")),
+                                                                  ),
+                                                                ),
+                                                                new Container(
+                                                                  margin:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          8.0),
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .fromLTRB(
+                                                                          16.0,
+                                                                          4.0,
+                                                                          16.0,
+                                                                          4.0),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    border: Border.all(
+                                                                        color: Colors
+                                                                            .lightBlueAccent),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            20.0),
+                                                                    color: Colors
+                                                                        .lightBlueAccent,
+                                                                  ),
+                                                                  child: Text(
+                                                                    matchTime,
                                                                     style: new TextStyle(
                                                                         fontSize:
-                                                                        12.0,
+                                                                            12.0,
                                                                         fontFamily:
-                                                                        "Avenir")),
-                                                              ),
+                                                                            "Avenir"),
+                                                                  ),
+                                                                )
+                                                              ],
                                                             ),
-                                                            new Container(
-                                                              margin: const EdgeInsets
-                                                                  .all(8.0),
-                                                              padding:
-                                                              const EdgeInsets
-                                                                  .fromLTRB(
-                                                                  16.0,
-                                                                  4.0,
-                                                                  16.0,
-                                                                  4.0),
-                                                              decoration:
-                                                              BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: Colors
-                                                                        .lightBlueAccent),
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    20.0),
-                                                                color: Colors
-                                                                    .lightBlueAccent,
-                                                              ),
-                                                              child: Text(
-                                                                matchTime,
-                                                                style: new TextStyle(
-                                                                    fontSize: 12.0,
-                                                                    fontFamily:
-                                                                    "Avenir"),
+                                                            Card(
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceEvenly,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: <
+                                                                    Widget>[
+                                                                  new _listPertandingan(
+                                                                    gambar: data
+                                                                        .homeImage,
+                                                                    nama: data
+                                                                        .homeName,
+                                                                    skor: data
+                                                                        .homeScore
+                                                                        .toString(),
+                                                                  ),
+                                                                  new _listPertandingan(
+                                                                    gambar: data
+                                                                        .awayImage,
+                                                                    nama: data
+                                                                        .awayName,
+                                                                    skor: data
+                                                                        .awayScore
+                                                                        .toString(),
+                                                                  )
+                                                                ],
                                                               ),
                                                             )
                                                           ],
                                                         ),
-                                                        Card(
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                            children: <Widget>[
-                                                              new _listPertandingan(
-                                                                gambar: data.homeImage,
-                                                                nama: data.homeName,
-                                                                skor: data.homeScore.toString(),
-                                                              ),
-                                                              new _listPertandingan(
-                                                                gambar: data.awayImage,
-                                                                nama: data.awayName,
-                                                                skor: data.awayScore.toString(),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                );
-                                              }),
-                                        ),
-                                      ),
-                                      CustomPaint(painter: Drawhorizontalline(),),
-                                      Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                      ),
-                                    ],
-                                  );
-                                })
+                                                      ),
+                                                    );
+                                                  }),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    }),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                ),CustomPaint(
+                                  painter: Drawhorizontalline(),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                ),
                               ],
                             );
                           },
