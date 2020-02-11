@@ -1,4 +1,4 @@
-package com.wiradipa.lapang_bola_flutter
+package com.lapangbola.apps
 
 import android.os.Bundle
 
