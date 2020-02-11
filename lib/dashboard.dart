@@ -287,25 +287,16 @@ class _DashboardState extends State<Dashboard> {
                                                         data.minute.toString();
                                                     matchName = data.stadium;
 
-                                                    myMatch.Datum passData =
-                                                        new myMatch.Datum();
-                                                    passData.stadium =
-                                                        data.stadium;
+                                                    myMatch.Datum passData = new myMatch.Datum();
+                                                    passData.stadium = data.stadium;
                                                     passData.id = data.id;
-                                                    passData.homeName =
-                                                        data.homeName;
-                                                    passData.homeImage =
-                                                        data.homeImage;
-                                                    passData.homeScore =
-                                                        data.homeScore;
-                                                    passData.awayScore =
-                                                        data.awayScore;
-                                                    passData.awayName =
-                                                        data.awayName;
-                                                    passData.awayImage =
-                                                        data.awayImage;
-                                                    passData.shareableStatus =
-                                                        0;
+                                                    passData.homeName = data.homeName;
+                                                    passData.homeImage = data.homeImage;
+                                                    passData.homeScore = data.homeScore;
+                                                    passData.awayScore = data.awayScore;
+                                                    passData.awayName = data.awayName;
+                                                    passData.awayImage = data.awayImage;
+                                                    passData.shareableStatus = 0;
 
                                                     return GestureDetector(
                                                       onTap: () => Navigator.of(context).push(

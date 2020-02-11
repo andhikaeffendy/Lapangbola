@@ -48,7 +48,7 @@ class Login_form extends StatefulWidget {
 }
 
 class _Login_formState extends State<Login_form> {
-  String url = "http://app.lapangbola.com/api/players/sign_in";
+  String url = "https://app.lapangbola.com/api/players/sign_in";
 
   final myController = TextEditingController();
   final myController2 = TextEditingController();
