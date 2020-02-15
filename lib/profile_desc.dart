@@ -498,7 +498,7 @@ class _Profile_DescState extends State<Profile_Desc> {
 }
 
 void _showDialog(BuildContext context) {
-  String url = "http://app.lapangbola.com/api/players/sign_out";
+  String url = "https://app.lapangbola.com/api/players/sign_out";
 
   pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
 
