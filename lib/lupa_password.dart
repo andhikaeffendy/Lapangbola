@@ -12,7 +12,7 @@ class LupaPassword extends StatefulWidget {
 
 class _LupaPasswordState extends State<LupaPassword> {
 
-  String url = "http://app.lapangbola.com/api/players/forgot_password";
+  String url = "https://app.lapangbola.com/api/players/forgot_password";
 
   final phoneNumberTextController = TextEditingController();
 

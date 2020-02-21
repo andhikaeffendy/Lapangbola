@@ -19,7 +19,7 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'edit_password.dart';
 
 ProgressDialog pr;
-String imageUrl = "http://app.lapangbola.com";
+String imageUrl = "https://app.lapangbola.com";
 
 
 class Profile_Desc extends StatefulWidget {

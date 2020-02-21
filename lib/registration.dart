@@ -21,7 +21,7 @@ class _RegistrationState extends State<Registration> {
     });
   }
 
-  String url = 'http://app.lapangbola.com/api/players';
+  String url = 'https://app.lapangbola.com/api/players';
 
   final nameEditText = TextEditingController();
   final emailEditText = TextEditingController();

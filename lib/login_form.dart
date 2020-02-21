@@ -9,6 +9,7 @@ import 'package:async/async.dart';
 import 'package:http/http.dart';
 import 'package:lapang_bola_flutter/models/slider_response.dart';
 import 'package:lapang_bola_flutter/registration.dart';
+import 'package:lapang_bola_flutter/resend_verification.dart';
 import 'lupa_password.dart';
 import 'main.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -257,22 +258,21 @@ class _Login_formState extends State<Login_form> {
                                           BorderRadius.circular(15.0))),
                                 ),
                               ),
-                              Row(
+                              Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   GestureDetector(
                                     onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                        builder: (BuildContext context) => new Registration())),
+                                        builder: (BuildContext context) => new ResendVerification())),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.end,
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: <Widget>[
                                         Padding(
                                           padding: const EdgeInsets.only(
-                                              top: 8.0, bottom: 8.0),
+                                              top: 8.0),
                                           child: Text(
-                                            "Register",
+                                            "Aktivasi Akun",
                                             style: new TextStyle(
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.bold,
@@ -282,32 +282,59 @@ class _Login_formState extends State<Login_form> {
                                         )
                                       ],
                                     ),
-                                  ),Padding(
-                                    padding: const EdgeInsets.only(right: 16.0),
-                                  ),GestureDetector(
-                                    onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                                        builder: (BuildContext context) => new LupaPassword())),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 8.0, bottom: 8.0),
-                                          child: Text(
-                                            "Lupa Password?",
-                                            style: new TextStyle(
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.green,
-                                                fontFamily: "Avenir"),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
+                                  ),Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      GestureDetector(
+                                        onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                                            builder: (BuildContext context) => new Registration())),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0, bottom: 8.0),
+                                              child: Text(
+                                                "Register",
+                                                style: new TextStyle(
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.green,
+                                                    fontFamily: "Avenir"),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),Padding(
+                                        padding: const EdgeInsets.only(right: 16.0),
+                                      ),GestureDetector(
+                                        onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
+                                            builder: (BuildContext context) => new LupaPassword())),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0, bottom: 8.0),
+                                              child: Text(
+                                                "Lupa Password?",
+                                                style: new TextStyle(
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.green,
+                                                    fontFamily: "Avenir"),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                 ],
-                              )
+                              ),
                             ],
                           )),
                       Padding(

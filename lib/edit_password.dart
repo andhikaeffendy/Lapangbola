@@ -240,7 +240,7 @@ class _Edit_PasswordState extends State<Edit_Password> {
     print("auth token = " + globals.auth_token);
     print("Edit Password jalan . . .");
 
-    String apiUrl = 'http://app.lapangbola.com/api/players/update_password';
+    String apiUrl = 'https://app.lapangbola.com/api/players/update_password';
 
     dios.FormData formData = new dios.FormData.fromMap({
       "auth_token" : globals.auth_token,
@@ -261,7 +261,7 @@ class _Edit_PasswordState extends State<Edit_Password> {
 }
 
 void _showDialog(BuildContext context, String response) {
-  String url = "http://app.lapangbola.com/api/players/sign_out";
+  String url = "https://app.lapangbola.com/api/players/sign_out";
 
   pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
 

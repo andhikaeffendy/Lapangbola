@@ -13,7 +13,7 @@ class VerificationCode extends StatefulWidget {
 }
 
 class _VerificationCodeState extends State<VerificationCode> {
-  String url = 'http://app.lapangbola.com/api/players/activate_account';
+  String url = 'https://app.lapangbola.com/api/players/activate_account';
   String verificationNumber = "";
 
   final verifNumEditText1 = TextEditingController();
@@ -71,7 +71,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                       padding: const EdgeInsets.all(30.0),
                       color: Colors.white,
                       width: 320.0,
-                      height: 250.0,
+                      height: 200.0,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,12 +81,20 @@ class _VerificationCodeState extends State<VerificationCode> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Text(
-                                "Masukkan Kode Angka",
-                                style: new TextStyle(
-                                    fontSize: 16.0, color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "Avenir"),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    width: 180.0,
+                                    child: Text(
+                                      "Silahkan input kode aktivasi yang telah dikirim ke email kamu",textAlign: TextAlign.center,
+                                      style: new TextStyle(
+                                          fontSize: 12.0, color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Avenir"),
+                                    ),
+                                  )
+                                ],
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
