@@ -156,9 +156,9 @@ class _LupaPasswordState extends State<LupaPassword> {
                                       //respon ketika benar
                                       Navigator.of(context).push(FadeRoute(page: Login_form()));
                                       showDialog(context: context, child:
-                                        new AlertDialog(
-                                          content: new Text("New password has been sent"),
-                                        )
+                                      new AlertDialog(
+                                        content: new Text("New password has been sent"),
+                                      )
                                       );
 
                                     }else{

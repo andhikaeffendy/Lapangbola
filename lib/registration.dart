@@ -301,12 +301,15 @@ class _RegistrationState extends State<Registration> {
                                   )
                                   );
                                 }
+                                return null;
                               }),
                               builder: (context, snapshot){
                                 if(snapshot.data.status=="success"){
                                   print("ini statis dari snapshoot : " + snapshot.data.status);
                                 }
+                                return null;
                               }
+
                           );
                         },
                         color: Colors.green,

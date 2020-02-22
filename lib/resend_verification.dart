@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:lapang_bola_flutter/models/verif_response.dart';
 import 'package:lapang_bola_flutter/verification_code.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 class ResendVerification extends StatefulWidget {
   @override
@@ -11,8 +14,12 @@ class _ResendVerificationState extends State<ResendVerification> {
 
   final myController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
+    ProgressDialog progressDialog = new ProgressDialog(context,type: ProgressDialogType.Normal);
+    progressDialog.style(message: 'Please Wait...');
+
     return Scaffold(
       backgroundColor: Color(0xffEFFFF0),
       body: Center(
@@ -83,6 +90,7 @@ class _ResendVerificationState extends State<ResendVerification> {
                         padding: const EdgeInsets.only(
                             top: 12.0, bottom: 12.0),
                         child: TextField(
+                          controller: myController,
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(12.0),
                               border: OutlineInputBorder(
@@ -100,8 +108,28 @@ class _ResendVerificationState extends State<ResendVerification> {
                   width: 320.0,
                   height: 45.0,
                   child: RaisedButton(
-                    onPressed: ()=> Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (BuildContext context) => new VerificationCode())),
+                    onPressed: (){
+                      FutureBuilder<VerifResponse>(
+                        future: _makePostRequest(myController.text, progressDialog).then((task){
+                          progressDialog.dismiss();
+                          if(task.status=="success"){
+
+                            Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new VerificationCode()));
+                            new AlertDialog(
+                              content: new Text("Verification code has been sent"),
+                            );
+                          }else{
+                            showDialog(context: context, child:
+                            new AlertDialog(
+                              content: new Text(task.message),
+                            )
+                            );
+                          }
+                          return null;
+                        }),
+                      );
+                    },
+
                     color: Colors.green,
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(12.0),
@@ -123,4 +151,34 @@ class _ResendVerificationState extends State<ResendVerification> {
       )
     );
   }
+
+   Future<VerifResponse> _makePostRequest(String email, ProgressDialog progressDialog) async {
+    // set up POST request arguments
+     progressDialog.show();
+    String url = "https://app.lapangbola.com/api/players/resend_activation_number?username="+email;
+    Map<String, String> headers = {"Content-type": "application/json"};
+    // String json = '{"username": "ddesantha", "password": "opwbo123"}';
+    // make POST request
+
+    Response response = await post(url, headers: headers);
+    print("Masuk kesini");
+    print(response.body);
+    print(response.statusCode);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    // {
+    //   "title": "Hello",
+    //   "body": "body text",
+    //   "userId": 1,
+    //   "id": 101
+    // }
+    VerifResponse verifResponse = verifResponseFromJson(body);
+    print("Ini status dari response : " + verifResponse.status);
+    print("ini reponse : " + response.body);
+
+    return verifResponse;
+  }
 }
+
