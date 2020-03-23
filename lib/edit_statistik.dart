@@ -313,7 +313,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                               Padding(
                                 padding: EdgeInsets.only(left: 12.0),
                                 child: Text(
-                                  playerData.playerName,
+                                  globals.playerMatchDetailResponse.playerName,
                                   style: new TextStyle(
                                       fontSize: 14.0,
                                       color: (enable ? warna : warna),
@@ -324,7 +324,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                               Padding(
                                 padding: EdgeInsets.only(left: 12.0),
                                 child: Text(
-                                  playerData.positionName,
+                                  globals.playerMatchDetailResponse.positionName,
                                   style: new TextStyle(
                                       fontSize: 12.0,
                                       color: (enable ? warna : warna),
@@ -335,7 +335,7 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
                               Padding(
                                 padding: EdgeInsets.only(left: 12.0),
                                 child: Text(
-                                  clubData.clubName,
+                                  globals.playerMatchDetailResponse.clubName,
                                   style: new TextStyle(
                                       fontSize: 12.0,
                                       color: (enable ? warna : warna),
