@@ -348,7 +348,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                 onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(
                                     builder: (BuildContext context) => new Desc_Team())),
                                 child: Text(
-                                  globals.clubResponse.clubName,
+                                  globals.playerDetailReponse.clubName,
                                   style: new TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.black,
