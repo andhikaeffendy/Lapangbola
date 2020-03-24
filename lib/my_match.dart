@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:http/http.dart';
 import 'package:lapang_bola_flutter/models/myMatch_response.dart';
 import 'package:lapang_bola_flutter/pertandingan.dart';
@@ -16,7 +15,7 @@ class MyMatch extends StatefulWidget {
 }
 
 class _MyMatchState extends State<MyMatch> {
-  String masterUrl = "https://liga.lapangbola.com/api/player_matches";
+  String masterUrl = "https://live.lapangbola.com/api/player_matches";
 
   Future<bool> _onWillPop() {
     return showDialog(
@@ -71,7 +70,6 @@ class _MyMatchState extends State<MyMatch> {
                       child: FutureBuilder(
                         future: _makePostRequest(masterUrl, globals.phone_number),
                         builder: (context, snapshot){
-                          MyMatchResponse myMatchResponse = snapshot.data;
 
                           if(globals.playerDetailReponse.status=="Fail"){
                             print("snapshot child kesini");

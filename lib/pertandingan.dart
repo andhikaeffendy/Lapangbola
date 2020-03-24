@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -8,7 +7,6 @@ import 'package:lapang_bola_flutter/models/player_match_detail_response.dart';
 import 'package:lapang_bola_flutter/pilih_foto.dart';
 import 'pilih_foto.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
-import 'package:dio/dio.dart' as dios;
 
 class Pertandingan extends StatefulWidget {
   final Datum matchID;
@@ -1057,8 +1055,8 @@ class _PertandinganState extends State<Pertandingan> {
 
   Future<MatchDetailResponse> _makePostRequest(int id) async {
     // set up POST request arguments
-    String mainUrl = "https://liga.lapangbola.com/api/lives/";
-    String urlDetailPlayer = "https://liga.lapangbola.com/api/player_matches/";
+    String mainUrl = "https://live.lapangbola.com/api/lives/";
+    String urlDetailPlayer = "https://live.lapangbola.com/api/player_matches/";
     String url = mainUrl + id.toString();
     String playerUrl = urlDetailPlayer + id.toString() + "?phone_number=" + globals.phone_number;
     Map<String, String> headers = {"Content-type": "application/json"};
@@ -1076,7 +1074,6 @@ class _PertandinganState extends State<Pertandingan> {
     print(response.body);
     print(response.statusCode);
     // check the status code for the result
-    int statusCode = response.statusCode;
     // this API passes back the id of the new item added to the body
     String body = response.body;
 

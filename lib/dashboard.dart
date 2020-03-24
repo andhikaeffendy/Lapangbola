@@ -6,11 +6,9 @@ import 'package:lapang_bola_flutter/models/myMatch_response.dart' as myMatch;
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:http/http.dart';
 import 'package:lapang_bola_flutter/models/live_response.dart';
 import 'package:lapang_bola_flutter/models/playerDetail_reponse.dart';
-import 'package:lapang_bola_flutter/pilih_foto.dart';
 import 'pertandingan.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:intl/intl.dart';
@@ -22,7 +20,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  String url = "https://liga.lapangbola.com/api/lives";
+  String url = "https://live.lapangbola.com/api/lives";
 
   CarouselSlider carouselSlider;
   int _currentIndex = 0;
@@ -491,7 +489,7 @@ class _DashboardState extends State<Dashboard> {
   Future getPlayeDetailRequest() async {
     print("testasdqwas");
     String apiUrl =
-        "https://liga.lapangbola.com/api/players/detail?phone_number=" +
+        "https://live.lapangbola.com/api/players/detail?phone_number=" +
             globals.phone_number;
 
     Map<String, String> headers = {"Content-type": "application/json"};
@@ -503,7 +501,7 @@ class _DashboardState extends State<Dashboard> {
     PlayerDetailResponse playerDetailResponse =
         playerDetailResponseFromJson(response.body);
 
-    String clubUrl = "https://liga.lapangbola.com/api/clubs/" +
+    String clubUrl = "https://live.lapangbola.com/api/clubs/" +
         playerDetailResponse.clubId.toString();
 
     Response httpClubResponse = await get(clubUrl, headers: headers);

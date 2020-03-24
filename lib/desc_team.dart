@@ -59,7 +59,7 @@ class _Desc_TeamState extends State<Desc_Team> {
                                       image: new DecorationImage(
                                           fit: BoxFit.fill,
                                           image: new NetworkImage(
-                                              "https://liga.lapangbola.com/documents/clubs/galados-edit_original_412.png?1545968116"))),
+                                              "https://live.lapangbola.com/documents/clubs/galados-edit_original_412.png?1545968116"))),
                                 )),
 //                            Positioned(
 //                              bottom: 0,

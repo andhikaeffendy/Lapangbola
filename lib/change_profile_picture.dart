@@ -5,13 +5,9 @@ import 'package:dio/dio.dart' as dios;
 import 'package:http/http.dart';
 import 'package:lapang_bola_flutter/main.dart';
 import 'package:lapang_bola_flutter/models/upload_response.dart';
-import 'package:lapang_bola_flutter/profile_desc.dart';
-import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:async/async.dart';
 import 'dart:io';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:progress_dialog/progress_dialog.dart';
@@ -420,26 +416,6 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
     );
   }
 
-  _makePutRequest(Image imageFile) async {
-    // set up PUT request arguments
-    String url = 'https://app.lapangbola.com/api/players/'+globals.playerID.toString();
-    Map<String, String> headers = {"Content-type": "application/json"};
-
-    Map<String, String> mapString = {"auth_token": globals.auth_token, "photo" : "photo"};
-    String json = jsonEncode(mapString);
-    // make PUT request
-    //Response response = await put(url, headers: headers, body: json);
-    // check the status code for the result
-    //int statusCode = response.statusCode;
-    // this API passes back the updated item with the id added
-    //String body = response.body;
-    // {
-    //   "title": "Hello",
-    //   "body": "body text",
-    //   "userId": 1,
-    //   "id": 1
-    // }
-  }
 
    getUploadImg(File _image, String height, String weight, String national) async {
 
@@ -448,7 +424,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
 
 
     String apiUrl = 'https://app.lapangbola.com/api/players/'+globals.playerID.toString();
-    String apiUrl2 = 'https://liga.lapangbola.com/api/players/update_data';
+    String apiUrl2 = 'https://live.lapangbola.com/api/players/update_data';
 
     dios.FormData formData;
     dios.FormData formData2;
@@ -519,7 +495,6 @@ Future getPlayeDetailRequest() async{
 
   Map<String, String> headers = {"Content-type": "application/json"};
   Map<String, String> mapString = {"phone_number": globals.phone_number};
-  String json = jsonEncode(mapString);
 
   Response response = await get(apiUrl, headers: headers);
 
