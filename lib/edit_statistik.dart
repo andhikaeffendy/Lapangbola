@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -6,6 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_picker_saver/image_picker_saver.dart';
+import 'package:share_extend/share_extend.dart';
 import 'package:lapang_bola_flutter/global/global.dart' as globals;
 import 'package:path_provider/path_provider.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
@@ -35,24 +39,45 @@ class _Edit_StatistikState extends State<Edit_Statistik> {
     "Goal Keeper",
   ];
 
-
   ScreenShot() async{
     try{
       RenderRepaintBoundary boundary = screen.currentContext.findRenderObject();
       ui.Image image = await boundary.toImage(pixelRatio: 3);
+      // ByteData data = ByteData(0);
+      // ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      // final Uint8List list = byteData.buffer.asUint8List();
+      // final encode = base64.encode(byteData.buffer.asUint8List());
+      // setState(() {
+      //   data = byteData;
+      // });
+      // final tempDir = await getTemporaryDirectory();
+      // final file = await new File('${tempDir.path}/lapangbola.png').create();
+      // file.writeAsBytesSync(list);
 
-//      var filePath = await ImagePickerSaver.saveFile(fileData: byteData.buffer.asUint8List());
-//      setState(() {
-//        _imageFile = filePath as File;
-//      });
+      // final File newimg = await file.copy('${tempDir.path}/lapangbola.png');
+      // setState(() {
+      //   _imageFile = newimg;
+      // });
 
-//      print("file path = " + filePath);
-//      final String dir = (await getApplicationDocumentsDirectory()).path;
-//      String BASE64_IMAGE = filePath;
-//      ByteData bytes = await rootBundle.load(BASE64_IMAGE);
-//      final String path = {'$dir/':filePath} as String;
-      Share.file('Lapang Bola', 'LapangBola.jpg', byteData.buffer.asUint8List(), 'img/jpg');
+    //  var filePath = await ImagePickerSaver.saveFile(fileData: byteData.buffer.asUint8List());
+    
+      // String base = filePath;
+      // final ByteData bite = await rootBundle.load('${tempDir.path}/lapangbola.png');
+      // ShareExtend.share('${tempDir.path}/lapangbola.png', 'dasdasd');
+      Share.files('esyimg',{
+        'esy.png' : byteData.buffer.asUint8List()
+      },'*/*',text: 'dasdasd');
+
+     
+
+    //  print("file path = " + filePath);
+    //  final String dir = (await getApplicationDocumentsDirectory()).path;
+    //  String BASE64_IMAGE = filePath;
+    //  ByteData bytes = await rootBundle.load(BASE64_IMAGE);
+    //  final String path = {'$dir/':filePath} as String;
+
+      
     }catch(e){
       print(e.toString());
     }

@@ -111,7 +111,7 @@ class _ResendVerificationState extends State<ResendVerification> {
                     onPressed: (){
                       FutureBuilder<VerifResponse>(
                         future: _makePostRequest(myController.text, progressDialog).then((task){
-                          progressDialog.dismiss();
+                          progressDialog.hide();
                           if(task.status=="success"){
 
                             Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new VerificationCode()));

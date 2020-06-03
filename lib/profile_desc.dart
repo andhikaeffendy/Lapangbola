@@ -189,7 +189,7 @@ class _Profile_DescState extends State<Profile_Desc> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 20.0),
                                     child: Container(
-                                      width: 200.0,
+                                      width: MediaQuery.of(context).size.width*0.60,
                                       child: Text(
                                         globals.name,
                                         style: new TextStyle(
@@ -201,12 +201,15 @@ class _Profile_DescState extends State<Profile_Desc> {
                                     ),
                                   ),Padding(
                                     padding: const EdgeInsets.only(left: 20.0),
-                                    child: Text(
-                                      globals.email,
-                                      style: new TextStyle(
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                          fontFamily: "Avenir"),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width*0.60,
+                                      child: Text(
+                                        globals.email,
+                                        style: new TextStyle(
+                                            fontSize: 16.0,
+                                            color: Colors.black,
+                                            fontFamily: "Avenir"),
+                                      ),
                                     ),
                                   ),
                                 ],
